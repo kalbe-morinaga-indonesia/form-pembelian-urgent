@@ -38,8 +38,11 @@ Auth::routes([
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 // Back
-Route::group(['prefix' => 'back'], function () {
-    Route::controller(DashboardController::class)->group(function () {
-        Route::get('/dashboard', 'index')->name('dashboard');
-    });
-});
+Route::group(
+    ['middleware' => ['auth'], 'prefix' => 'back'],
+    function () {
+        Route::controller(DashboardController::class)->group(function () {
+            Route::get('/dashboard', 'index')->name('dashboard');
+        });
+    }
+);
