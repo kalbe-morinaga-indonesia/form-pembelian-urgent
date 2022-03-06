@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="{{ asset('theme/dist/css/adminlte.min.css') }}">
 </head>
 
-<body>
+<body class="hold-transition">
     <div class="wrapper">
 
         <div class="preloader flex-column justify-content-center align-items-center">
