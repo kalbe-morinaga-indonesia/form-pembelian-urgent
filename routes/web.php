@@ -25,6 +25,6 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::group(['prefix' => 'back'], function () {
     Route::controller(DashboardController::class)->group(function () {
-        Route::get('/dashboard', 'index');
+        Route::get('/dashboard', 'index')->name('dashboard');
     });
 });
