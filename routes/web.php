@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Back\DashboardController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -22,6 +23,8 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/m', function () {
-    return view('layouts.back');
+Route::group(['prefix' => 'back'], function () {
+    Route::controller(DashboardController::class)->group(function () {
+        Route::get('/dashboard', 'index');
+    });
 });
