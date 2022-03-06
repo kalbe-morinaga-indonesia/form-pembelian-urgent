@@ -26,10 +26,10 @@
                         @enderror
                     </div>
                     <div class="input-group mb-3">
-                        <input id="txtPassword" type="password"
-                            class="form-control @error('txtPassword') is-invalid @enderror" name="txtPassword"
+                        <input id="password" type="password"
+                            class="form-control @error('password') is-invalid @enderror" name="password"
                             placeholder="Password">
-                        @error('txtPassword')
+                        @error('password')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
@@ -38,12 +38,16 @@
                     <div class="row">
                         <div class="col-8">
                             <div class="icheck-primary">
-                                <input type="checkbox" name="remember" id="remember"
-                                    {{ old('remember') ? 'checked' : '' }}>
-
+                                <input type="checkbox" class="@error('remember') is-invalid @enderror" name="remember"
+                                    id="remember" {{ old('remember') ? 'checked' : '' }}>
                                 <label for="remember">
                                     {{ __('Remember Me') }}
                                 </label>
+                                @error('remember')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                             </div>
                         </div>
                         <!-- /.col -->
