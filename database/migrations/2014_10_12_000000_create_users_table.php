@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('txtTempatLahir');
             $table->date('dtmTanggalLahir');
             $table->string('txtUsername')->unique();
-            $table->string('password');
+            $table->string('txtPassword');
             $table->text('txtAlamat');
             $table->rememberToken();
             $table->timestamps();

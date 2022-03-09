@@ -21,7 +21,7 @@ class UserFactory extends Factory
             'txtTempatLahir' => $this->faker->city(),
             'dtmTanggalLahir' => $this->faker->date(),
             'txtUsername' => $this->faker->unique()->userName(),
-            'password' => bcrypt(123456),
+            'txtPassword' => bcrypt(123456),
             'txtAlamat' => $this->faker->address(),
         ];
     }

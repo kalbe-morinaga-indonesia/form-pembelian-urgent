@@ -43,18 +43,4 @@ class LoginController extends Controller
     {
         return 'txtUsername';
     }
-
-    public function validateLogin(Request $request)
-    {
-        $request->validate([
-            $this->username() => 'required|string',
-            'password' => 'required|string',
-            'remember' => 'required'
-        ]);
-    }
-
-    public function credentials(Request $request)
-    {
-        return $request->only($this->username(), 'password');
-    }
 }
