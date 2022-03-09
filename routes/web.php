@@ -1,8 +1,12 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Back\AssignPermissionController;
+use App\Http\Controllers\Back\AssignUserController;
 use App\Http\Controllers\Back\DashboardController;
 use App\Http\Controllers\Back\DepartmentController;
+use App\Http\Controllers\Back\PermissionController;
+use App\Http\Controllers\Back\RoleController;
 use App\Http\Controllers\Front\HomeController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -50,5 +54,29 @@ Route::group(
 
         // Departemen Controller
         Route::resource('departments', DepartmentController::class);
+
+        // Role and Permsissions
+        Route::group([
+            'prefix' => 'role-and-permissions'
+        ], function () {
+
+            // Role
+            Route::resource('roles', RoleController::class);
+
+            // Permission
+            Route::resource('permissions', PermissionController::class);
+
+            // Assign Permission
+            Route::resource(
+                'assign-permissions',
+                AssignPermissionController::class
+            );
+
+            // Assign User
+            Route::resource(
+                'assign-users',
+                AssignUserController::class
+            );
+        });
     }
 );
