@@ -14,7 +14,7 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-striped">
+                    <table class="table table-striped" id="departmentTable">
                         <thead>
                             <tr>
                                 <th>#</th>
@@ -50,5 +50,15 @@
         </div>
     </div>
 </div>
+
+@push('script-datatable')
+    <script>
+  $(function () {
+    $("#departmentTable").DataTable({
+      "responsive": true, "lengthChange": false, "autoWidth": false,
+    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+  });
+</script>
+@endpush
 
 @endsection
