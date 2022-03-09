@@ -23,6 +23,7 @@ class UserFactory extends Factory
             'txtUsername' => $this->faker->unique()->userName(),
             'txtPassword' => bcrypt(123456),
             'txtAlamat' => $this->faker->address(),
+            'mdepartment_id' => $this->faker->numberBetween(1, 3)
         ];
     }
 
