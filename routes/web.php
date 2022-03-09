@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Back\DashboardController;
+use App\Http\Controllers\Back\DepartmentController;
 use App\Http\Controllers\Front\HomeController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -41,8 +42,13 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::group(
     ['middleware' => ['auth'], 'prefix' => 'back'],
     function () {
+
+        // Dashboard Controller
         Route::controller(DashboardController::class)->group(function () {
             Route::get('/dashboard', 'index')->name('dashboard');
         });
+
+        // Departemen Controller
+        Route::resource('departments', DepartmentController::class);
     }
 );
