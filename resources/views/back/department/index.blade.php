@@ -4,9 +4,6 @@
 @section('content')
 <div class="row">
     <div class="col-12">
-        @component('layouts.alert')
-        {{ session()->get('message') }}
-        @endcomponent
         <div class="card">
             <div class="card-header">
                 <div class="d-flex justify-content-between">
@@ -26,7 +23,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($departments as $department)
+                            @forelse ($departments as $department)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $department->txtNamaDept }}</td>
@@ -36,12 +33,16 @@
                                         <form action="{{ route('departments.destroy',['department' => $department->id]) }}" method="POST">
                                         @method('delete')
                                         @csrf
-                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                        <button type="submit" class="btn btn-danger btn-hapus" title="Hapus Department" data-name="{{ $department->txtNamaDept }}" data-table="department">Delete</button>
                                         </form>
                                     </div>
                                 </td>
                             </tr>
-                            @endforeach
+                            @empty
+                            <tr>
+                                <td colspan="3">Tidak ada data...</td>
+                            </tr>
+                            @endforelse
                         </tbody>
                     </table>
                 </div>
