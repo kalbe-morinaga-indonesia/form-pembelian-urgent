@@ -32,8 +32,12 @@
                                 <td>{{ $department->txtNamaDept }}</td>
                                 <td>
                                     <div class="btn-group">
-                                        <a href="#" class="btn btn-warning">Edit</a>
-                                        <a href="#" class="btn btn-danger">Delete</a>
+                                        <a href="{{ route('departments.edit',['department' => $department->id]) }}" class="btn btn-warning">Edit</a>
+                                        <form action="{{ route('departments.destroy',['department' => $department->id]) }}" method="POST">
+                                        @method('delete')
+                                        @csrf
+                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                        </form>
                                     </div>
                                 </td>
                             </tr>
