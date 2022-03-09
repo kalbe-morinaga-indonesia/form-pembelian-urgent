@@ -85,5 +85,7 @@
 <script src="{{ asset('theme/plugins/summernote/summernote-bs4.min.js') }}"></script>
 <script src="{{ asset('theme/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
 <script src="{{ asset('theme/dist/js/adminlte.js') }}"></script>
+<script src="{{ asset('js/app.js') }}"></script>
+@include('sweetalert::alert')
 </body>
 </html>
