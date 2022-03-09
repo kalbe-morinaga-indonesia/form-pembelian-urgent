@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class LoginController extends Controller
 {
@@ -20,7 +21,9 @@ class LoginController extends Controller
     |
     */
 
-    use AuthenticatesUsers;
+    use AuthenticatesUsers {
+        redirectPath as laravelRedirectPath;
+    }
 
     /**
      * Where to redirect users after login.
@@ -42,5 +45,11 @@ class LoginController extends Controller
     public function username()
     {
         return 'txtUsername';
+    }
+
+    public function redirectPath()
+    {
+        Alert::success("Berhasil", "Anda berhasil login");
+        return $this->laravelRedirectPath();
     }
 }
