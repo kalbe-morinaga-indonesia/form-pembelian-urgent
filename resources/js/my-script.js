@@ -14,6 +14,22 @@ function konfirmasi(event){
       teksAlert  = 'Semua data <b>user</b> untuk department ini juga akan '+
                    'terhapus!';
     break;
+    case 'role':
+        judulAlert = 'Apakah anda yakin?';
+        teksAlert  = 'Hapus Role '+tombol.getAttribute('data-name');
+    break;
+    case 'permission':
+        judulAlert = 'Apakah anda yakin?';
+        teksAlert  = 'Hapus Permission '+tombol.getAttribute('data-name');
+    break;
+    case 'assign-permission':
+        judulAlert = 'Apakah anda yakin?';
+        teksAlert  = 'Hapus Assign Permission '+tombol.getAttribute('data-name');
+    break;
+    case 'assign-user':
+        judulAlert = 'Apakah anda yakin?';
+        teksAlert  = 'Hapus Assign User '+tombol.getAttribute('data-name');
+    break;
     default:
       judulAlert = 'Apakah anda yakin?';
       teksAlert  = 'Hapus data <b>'+tombol.getAttribute('data-name')+'</b>';
