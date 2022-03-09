@@ -47,6 +47,39 @@
               </p>
             </a>
           </li>
+          <li class="nav-header">Role and Permissions</li>
+          <li class="nav-item">
+            <a href="{{ route('roles.index') }}" class="nav-link">
+              <i class="nav-icon fas fa-cog"></i>
+              <p>
+                Role
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ route('permissions.index') }}" class="nav-link">
+              <i class="nav-icon fas fa-gavel"></i>
+              <p>
+                Permission
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ route('assign-permissions.index') }}" class="nav-link">
+              <i class="nav-icon fas fa-unlock"></i>
+              <p>
+                Assign Permission
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ route('assign-users.index') }}" class="nav-link">
+              <i class="nav-icon fas fa-door-open"></i>
+              <p>
+                Assign User
+              </p>
+            </a>
+          </li>
           <li class="nav-item">
             <a href="{{ route('logout') }}" class="nav-link" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
