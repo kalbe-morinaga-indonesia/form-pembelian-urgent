@@ -16,7 +16,10 @@ class CreateMdepartmentsTable extends Migration
         Schema::create('mdepartments', function (Blueprint $table) {
             $table->id();
             $table->string('txtNamaDept');
-            $table->timestamps();
+            $table->string('txtInsertedBy')->nullable();
+            $table->string('txtUpdatedBy')->nullable();
+            $table->dateTime('dtmInsertedBy');
+            $table->dateTime('dtmUpdatedBy');
         });
     }
 
