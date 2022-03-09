@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Back;
 use App\Models\Department;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class DepartmentController extends Controller
@@ -34,7 +35,13 @@ class DepartmentController extends Controller
             'txtNamaDept.required' => 'Nama Department wajib diisi'
         ]);
 
-        Department::create($validateData);
+        $namaUser = Auth()->user()->txtNama;
+
+        Department::create([
+            'txtNamaDept' => $validateData['txtNamaDept'],
+            'txtInsertedBy' => $namaUser,
+            'txtUpdatedBy' => $namaUser
+        ]);
 
         Alert::success('Berhasil', "Department $request->txtNamaDept telah di tambah");
         return redirect()->route('departments.index');
@@ -56,7 +63,12 @@ class DepartmentController extends Controller
             'txtNamaDept.required' => 'Nama Department wajib diisi'
         ]);
 
-        Department::where('id', $department->id)->update($validateData);
+        $namaUser = Auth()->user()->txtNama;
+
+        Department::where('id', $department->id)->update([
+            'txtNamaDept' => $validateData['txtNamaDept'],
+            'txtUpdatedBy' => $namaUser
+        ]);
 
         Alert::success('Berhasil', "Department $department->txtNamaDept telah di ubah");
         return redirect()->route('departments.index');
