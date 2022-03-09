@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Back;
 
-use App\Http\Controllers\Controller;
 use App\Models\Department;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class DepartmentController extends Controller
 {
@@ -35,8 +36,8 @@ class DepartmentController extends Controller
 
         Department::create($validateData);
 
-        return redirect()->route('departments.index')
-            ->with('message', "Data Department Berhasil Ditambahkan");
+        Alert::success('Berhasil', "Department $request->txtNamaDept telah di tambah");
+        return redirect()->route('departments.index');
     }
 
     public function edit(Department $department)
@@ -57,14 +58,14 @@ class DepartmentController extends Controller
 
         Department::where('id', $department->id)->update($validateData);
 
-        return redirect()->route('departments.index')
-            ->with('message', "Data Department Berhasil Diubah");
+        Alert::success('Berhasil', "Department $department->txtNamaDept telah di ubah");
+        return redirect()->route('departments.index');
     }
 
     public function destroy(Department $department)
     {
         $department->delete();
-        return redirect()->route('departments.index')
-            ->with('message', "Data Department Berhasil Dihapus");
+        Alert::success('Berhasil', "Department $department->txtNamaDept telah di hapus");
+        return redirect()->route('departments.index');
     }
 }
