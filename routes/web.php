@@ -67,16 +67,34 @@ Route::group(
             Route::resource('permissions', PermissionController::class);
 
             // Assign Permission
-            Route::resource(
-                'assign-permissions',
-                AssignPermissionController::class
-            );
+            Route::controller(AssignPermissionController::class)
+                ->group(function () {
+                    Route::get('assign-permissions/', 'index')
+                        ->name('assign-permissions.index');
+                    Route::get('assign-permissions/create', 'create')
+                        ->name('assign-permissions.create');
+                    Route::post('assign-permissions/create', 'store')
+                        ->name('assign-permissions.store');
+                    Route::get('assign-permissions/edit/{role}', 'edit')
+                        ->name('assign-permissions.edit');
+                    Route::put('assign-permissions/edit/{role}', 'update')
+                        ->name('assign-permissions.update');
+                });
 
             // Assign User
-            Route::resource(
-                'assign-users',
-                AssignUserController::class
-            );
+            Route::controller(AssignUserController::class)
+                ->group(function () {
+                    Route::get('assign-users/', 'index')
+                        ->name('assign-users.index');
+                    Route::get('assign-users/create', 'create')
+                        ->name('assign-users.create');
+                    Route::post('assign-users/create', 'store')
+                        ->name('assign-users.store');
+                    Route::get('assign-users/edit/{user}', 'edit')
+                        ->name('assign-users.edit');
+                    Route::put('assign-users/edit/{user}', 'update')
+                        ->name('assign-users.update');
+                });
         });
     }
 );
