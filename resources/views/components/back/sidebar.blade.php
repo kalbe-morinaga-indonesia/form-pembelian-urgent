@@ -22,7 +22,8 @@
               </p>
             </a>
           </li>
-          <li class="nav-header">Master</li>
+          @can('user:admin')
+            <li class="nav-header">Master</li>
           <li class="nav-item">
             <a href="{{ route('departments.index') }}" class="nav-link">
               <i class="nav-icon fas fa-building"></i>
@@ -80,6 +81,7 @@
               </p>
             </a>
           </li>
+          @endcan
           <li class="nav-item">
             <a href="{{ route('logout') }}" class="nav-link" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
