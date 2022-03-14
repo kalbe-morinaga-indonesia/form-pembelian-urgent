@@ -7,6 +7,7 @@ use App\Http\Controllers\Back\DashboardController;
 use App\Http\Controllers\Back\DepartmentController;
 use App\Http\Controllers\Back\PermissionController;
 use App\Http\Controllers\Back\RoleController;
+use App\Http\Controllers\Back\UserController;
 use App\Http\Controllers\Front\HomeController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -96,5 +97,8 @@ Route::group(
                         ->name('assign-users.update');
                 });
         });
+
+        // User
+        Route::resource('users', UserController::class);
     }
 );
