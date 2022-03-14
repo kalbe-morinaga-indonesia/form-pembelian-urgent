@@ -8,7 +8,7 @@
             <div class="card-header">
                 <div class="d-flex justify-content-between">
                     <h3 class="card-title">Data User</h3>
-                    <a href="#" class="btn btn-sm btn-primary">
+                    <a href="{{ route('users.create') }}" class="btn btn-sm btn-primary">
                         <i class="fas fa-plus mr-2"></i>Tambah User</a>
                 </div>
             </div>
@@ -39,11 +39,11 @@
                                     <td>{{ $user->mdepartment->txtNamaDept }}</td>
                                     <td>
                                         <div class="btn-group">
-                                            <a href="#" class="btn btn-warning btn-sm text-white mr-2" title="Edit Data">
+                                            <a href="{{ route('users.edit',['user' => $user->id]) }}" class="btn btn-warning btn-sm text-white mr-2" title="Edit Data">
                                                 <i class="fas fa-pen"></i>
                                                 Edit
                                             </a>
-                                            <form action="#" method="POST">
+                                            <form action="{{ route('users.destroy',['user' => $user->id]) }}" method="POST">
                                                 @method('delete')
                                                 @csrf
                                                 <button type="submit" class="btn btn-danger btn-sm btn-hapus" data-name="{{ $user->txtNama }}" data-table="user">
