@@ -14,4 +14,9 @@ class Department extends Model
 
     const CREATED_AT = "dtmInsertedBy";
     const UPDATED_AT = "dtmUpdatedBy";
+
+    public function users()
+    {
+        return $this->hasMany('App\Models\User');
+    }
 }
