@@ -52,4 +52,9 @@ class User extends Authenticatable
     {
         return $this->txtPassword;
     }
+
+    public function mdepartment()
+    {
+        return $this->belongsTo("App\Models\Department");
+    }
 }
