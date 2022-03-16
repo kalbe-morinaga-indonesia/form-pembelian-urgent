@@ -24,9 +24,9 @@ class UomRequest extends FormRequest
     public function rules()
     {
         return [
-            'txtItemCode' => 'required',
-            // 'dtmTanggalKebutuhan' => 'required',
-            // 'intJumlahKebutuhan' => 'required|numeric'
+            'txtItemCode' => "required",
+            'dtmTanggalKebutuhan' => 'required|unique:muoms,txtItemCode',
+            'intJumlahKebutuhan' => 'required|numeric'
         ];
     }
 
@@ -34,9 +34,9 @@ class UomRequest extends FormRequest
     {
         return [
             'txtItemCode.required' => 'Item code harus diisi',
-            // 'dtmTanggalKebutuhan.required' => 'Tanggal kebutuhan harus diisi',
-            // 'intJumlahKebutuhan.required' => 'Jumlah Kebutuhan harus diisi',
-            // 'intJumlahKebutuhan.numeric' => 'Jumlah kebutuhan harus angka'
+            'dtmTanggalKebutuhan.required' => 'Tanggal kebutuhan harus diisi',
+            'intJumlahKebutuhan.required' => 'Jumlah Kebutuhan harus diisi',
+            'intJumlahKebutuhan.numeric' => 'Jumlah kebutuhan harus angka'
         ];
     }
 }
