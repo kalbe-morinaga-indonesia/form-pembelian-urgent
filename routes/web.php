@@ -6,6 +6,7 @@ use App\Http\Controllers\Back\AssignUserController;
 use App\Http\Controllers\Back\DashboardController;
 use App\Http\Controllers\Back\DepartmentController;
 use App\Http\Controllers\Back\PermissionController;
+use App\Http\Controllers\Back\PurchaseRequestController;
 use App\Http\Controllers\Back\RoleController;
 use App\Http\Controllers\Back\UomController;
 use App\Http\Controllers\Back\UserController;
@@ -48,23 +49,19 @@ Route::group(
     ['middleware' => ['auth']],
     function () {
 
-        Route::resources([
-            'departments' => DepartmentController::class,
-            'users' => UserController::class,
-            'uoms' => UomController::class
-        ], [
-            'except' => ['show']
-        ]);
-
         Route::controller(DashboardController::class)->group(function () {
             Route::get('/dashboard', 'index')->name('dashboard');
         });
-        
-        // Role
-        Route::resource('roles', RoleController::class);
 
-        // Permission
-        Route::resource('permissions', PermissionController::class);
+        Route::resources([
+            'departments' => DepartmentController::class,
+            'users' => UserController::class,
+            'uoms' => UomController::class,
+            'roles' => RoleController::class,
+            'permissions' => PermissionController::class
+        ], [
+            'except' => ['show']
+        ]);
 
         // Assign Permission
         Route::controller(AssignPermissionController::class)
@@ -95,6 +92,11 @@ Route::group(
                 Route::put('assign-users/edit/{user}', 'update')
                     ->name('assign-users.update');
             });
+
+        Route::controller(PurchaseRequestController::class)->group(function () {
+            Route::get('purchase-requests/create', 'create')
+                ->name('purchase-requests.create');
+        });
     }
 );
 
