@@ -33,9 +33,8 @@
                                 <td>{{ $uom->intJumlahKebutuhan }}</td>
                                 <td>
                                     <div class="btn-group">
-                                        <a href="#" class="btn btn-warning edit" id="btnEdit"
-                                            data-target="#modal-edit{{ $uom->id }}" data-toggle="modal">Edit</a>
-                                        <form action="#" method="POST">
+                                        <a href="{{ route('uoms.edit',['uom' => $uom->id]) }}" class="btn btn-warning edit">Edit</a>
+                                        <form action="{{ route('uoms.destroy',['uom' => $uom->id]) }}" method="POST">
                                             @method('delete')
                                             @csrf
                                             <button type="submit" class="btn btn-danger btn-hapus"
@@ -44,7 +43,6 @@
                                         </form>
                                     </div>
                                 </td>
-                                @include('back.uom.edit')
                             </tr>
                             @empty
                             <tr>
