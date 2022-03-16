@@ -9,6 +9,12 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class UomController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('role:admin');
+    }
+
     public function index()
     {
         $uoms = Uom::get();
