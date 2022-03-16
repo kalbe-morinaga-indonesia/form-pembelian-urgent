@@ -26,7 +26,7 @@ class UomController extends Controller
         ]);
     }
 
-    public function store(UomRequest $request, Uom $uom)
+    public function store(UomRequest $request)
     {
         $nama_user = Auth()->user()->txtNama;
 
@@ -52,13 +52,6 @@ class UomController extends Controller
 
     public function update(Uom $uom, UomRequest $request)
     {
-
-        $request->validate([
-            'txtItemCode' => "required|unique:muoms,txtItemCode," . $uom->id,
-        ], [
-            'txtItemCode.unique' => 'Item code sudah ada',
-        ]);
-
         $nama_user = Auth()->user()->txtNama;
 
         Uom::where('id', $uom->id)->update([
