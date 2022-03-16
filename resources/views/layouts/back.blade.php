@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="_token" content="{{csrf_token()}}" />
   <title>@yield('title','Form Pembelian Urgent')</title>
 
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -30,7 +31,7 @@
   <x-back.navbar></x-back.navbar>
 
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
-    <a href="index3.html" class="brand-link">
+    <a href="{{ route('dashboard') }}" class="brand-link">
       <img src="{{ asset('theme/dist/img/logo-kalbe-white.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-light">Kalbe Morinaga</span>
     </a>
@@ -73,6 +74,7 @@
 </div>
 
 <script src="{{ asset('theme/plugins/jquery/jquery.min.js') }}"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
 <script src="{{ asset('theme/plugins/jquery-ui/jquery-ui.min.js') }}"></script>
 <script>
   $.widget.bridge('uibutton', $.ui.button)
