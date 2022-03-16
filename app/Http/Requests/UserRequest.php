@@ -28,7 +28,7 @@ class UserRequest extends FormRequest
             'txtNoHp' => 'required|max:13',
             'txtTempatLahir' => 'required',
             'dtmTanggalLahir' => 'required',
-            'txtUsername' => "required|min:6|alpha_dash|unique:musers,txtUsername,{$this->user->id}",
+            'txtUsername' => "required|min:6|alpha_dash|unique:musers,txtUsername",
             'txtPassword' => 'sometimes|required|min:8|confirmed',
             'txtPassword_confirmation' => 'sometimes|required_with:txtPassword|same:txtPassword',
             'txtAlamat' => 'required',
