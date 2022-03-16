@@ -67,10 +67,6 @@ class UserController extends Controller
     public function update(UserRequest $request, User $user)
     {
 
-        $request->validate([
-            'txtUsername' => "required|min:6|alpha_dash|unique:musers,txtUsername," . $user->id
-        ]);
-
         User::where('id', $user->id)->update([
             'txtNama' =>  $request->txtNama,
             'txtNoHp' =>  $request->txtNoHp,
