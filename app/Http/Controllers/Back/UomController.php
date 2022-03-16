@@ -3,11 +3,9 @@
 namespace App\Http\Controllers\Back;
 
 use App\Models\Uom;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UomRequest;
 use RealRashid\SweetAlert\Facades\Alert;
-use Illuminate\Support\Facades\Validator;
 
 class UomController extends Controller
 {
@@ -20,26 +18,64 @@ class UomController extends Controller
         ]);
     }
 
-    public function create()
+    public function create(Uom $uom)
     {
         return view('back.uom.create', [
-            'title' => 'Uom'
+            'title' => 'Uom',
+            'uom' => $uom
         ]);
     }
 
-    public function store(UomRequest $request)
+    public function store(UomRequest $request, Uom $uom)
     {
+        $nama_user = Auth()->user()->txtNama;
+
         Uom::create([
             'txtItemCode' => $request->txtItemCode,
             'dtmTanggalKebutuhan' => $request->dtmTanggalKebutuhan,
             'intJumlahKebutuhan' => $request->intJumlahKebutuhan,
+            'txtInsertedBy' => $nama_user,
+            'txtUpdatedBy' => $nama_user
         ]);
 
-        Alert::success("Berhasil", "Data uom berhasil ditambahkan");
+        Alert::success("Berhasil", "Data uom $request->txtItemCode berhasil ditambahkan");
+        return redirect()->route('uoms.index');
     }
 
-    public function edit(Request $request)
+    public function edit(Uom $uom)
     {
+        return view('back.uom.edit', [
+            'title' => "Uom",
+            'uom' => $uom
+        ]);
+    }
+
+    public function update(Uom $uom, UomRequest $request)
+    {
+
+        $request->validate([
+            'txtItemCode' => "required|unique:muoms,txtItemCode," . $uom->id,
+        ], [
+            'txtItemCode.unique' => 'Item code sudah ada',
+        ]);
+
+        $nama_user = Auth()->user()->txtNama;
+
+        Uom::where('id', $uom->id)->update([
+            'txtItemCode' => $request->txtItemCode,
+            'dtmTanggalKebutuhan' => $request->dtmTanggalKebutuhan,
+            'intJumlahKebutuhan' => $request->intJumlahKebutuhan,
+            'txtUpdatedBy' => $nama_user
+        ]);
+
+        Alert::success("Berhasil", "Data uom $request->txtItemCode berhasil diubah");
+        return redirect()->route('uoms.index');
+    }
+
+    public function destroy(Uom $uom)
+    {
+        $uom->delete();
+        Alert::success("Berhasil", "Data uom $uom->txtItemCode berhasil dihapus");
         return redirect()->route('uoms.index');
     }
 }
