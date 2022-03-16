@@ -20,16 +20,6 @@ class User extends Authenticatable
      */
 
     protected $table = "musers";
-    // protected $fillable = [
-    //     'txtNama',
-    //     'txtNoHp',
-    //     'txtTempatLahir',
-    //     'dtmTanggalLahir',
-    //     'txtUsername',
-    //     'txtPassword',
-    //     'txtAlamat',
-    //     'mdepartment_id'
-    // ];
 
     protected $guarded = [];
 
