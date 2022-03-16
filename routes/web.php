@@ -7,6 +7,7 @@ use App\Http\Controllers\Back\DashboardController;
 use App\Http\Controllers\Back\DepartmentController;
 use App\Http\Controllers\Back\PermissionController;
 use App\Http\Controllers\Back\RoleController;
+use App\Http\Controllers\Back\UomController;
 use App\Http\Controllers\Back\UserController;
 use App\Http\Controllers\Front\HomeController;
 use Illuminate\Support\Facades\Auth;
@@ -43,62 +44,60 @@ Auth::routes([
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-// Back
 Route::group(
-    ['middleware' => ['auth'], 'prefix' => 'back'],
+    ['middleware' => ['auth']],
     function () {
 
-        // Dashboard Controller
+        Route::resources([
+            'departments' => DepartmentController::class,
+            'users' => UserController::class,
+            'uoms' => UomController::class
+        ], [
+            'except' => ['show']
+        ]);
+
         Route::controller(DashboardController::class)->group(function () {
             Route::get('/dashboard', 'index')->name('dashboard');
         });
+        
+        // Role
+        Route::resource('roles', RoleController::class);
 
-        // Departemen Controller
-        Route::resource('departments', DepartmentController::class);
+        // Permission
+        Route::resource('permissions', PermissionController::class);
 
-        // Role and Permsissions
-        Route::group([
-            'prefix' => 'role-and-permissions'
-        ], function () {
+        // Assign Permission
+        Route::controller(AssignPermissionController::class)
+            ->group(function () {
+                Route::get('assign-permissions/', 'index')
+                    ->name('assign-permissions.index');
+                Route::get('assign-permissions/create', 'create')
+                    ->name('assign-permissions.create');
+                Route::post('assign-permissions/create', 'store')
+                    ->name('assign-permissions.store');
+                Route::get('assign-permissions/edit/{role}', 'edit')
+                    ->name('assign-permissions.edit');
+                Route::put('assign-permissions/edit/{role}', 'update')
+                    ->name('assign-permissions.update');
+            });
 
-            // Role
-            Route::resource('roles', RoleController::class);
-
-            // Permission
-            Route::resource('permissions', PermissionController::class);
-
-            // Assign Permission
-            Route::controller(AssignPermissionController::class)
-                ->group(function () {
-                    Route::get('assign-permissions/', 'index')
-                        ->name('assign-permissions.index');
-                    Route::get('assign-permissions/create', 'create')
-                        ->name('assign-permissions.create');
-                    Route::post('assign-permissions/create', 'store')
-                        ->name('assign-permissions.store');
-                    Route::get('assign-permissions/edit/{role}', 'edit')
-                        ->name('assign-permissions.edit');
-                    Route::put('assign-permissions/edit/{role}', 'update')
-                        ->name('assign-permissions.update');
-                });
-
-            // Assign User
-            Route::controller(AssignUserController::class)
-                ->group(function () {
-                    Route::get('assign-users/', 'index')
-                        ->name('assign-users.index');
-                    Route::get('assign-users/create', 'create')
-                        ->name('assign-users.create');
-                    Route::post('assign-users/create', 'store')
-                        ->name('assign-users.store');
-                    Route::get('assign-users/edit/{user}', 'edit')
-                        ->name('assign-users.edit');
-                    Route::put('assign-users/edit/{user}', 'update')
-                        ->name('assign-users.update');
-                });
-        });
-
-        // User
-        Route::resource('users', UserController::class);
+        // Assign User
+        Route::controller(AssignUserController::class)
+            ->group(function () {
+                Route::get('assign-users/', 'index')
+                    ->name('assign-users.index');
+                Route::get('assign-users/create', 'create')
+                    ->name('assign-users.create');
+                Route::post('assign-users/create', 'store')
+                    ->name('assign-users.store');
+                Route::get('assign-users/edit/{user}', 'edit')
+                    ->name('assign-users.edit');
+                Route::put('assign-users/edit/{user}', 'update')
+                    ->name('assign-users.update');
+            });
     }
 );
+
+Route::fallback(function () {
+    abort(404);
+});
