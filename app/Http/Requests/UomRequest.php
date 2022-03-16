@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UomRequest extends FormRequest
 {
@@ -24,8 +25,12 @@ class UomRequest extends FormRequest
     public function rules()
     {
         return [
-            'txtItemCode' => "required",
-            'dtmTanggalKebutuhan' => 'required|unique:muoms,txtItemCode',
+            'txtItemCode' => [
+                'required',
+                Rule::unique('muoms', 'txtItemCode')
+                    ->ignore($this->muom)
+            ],
+            'dtmTanggalKebutuhan' => 'required',
             'intJumlahKebutuhan' => 'required|numeric'
         ];
     }
@@ -34,6 +39,7 @@ class UomRequest extends FormRequest
     {
         return [
             'txtItemCode.required' => 'Item code harus diisi',
+            'txtItemCode.unique' => 'Item code sudah ada',
             'dtmTanggalKebutuhan.required' => 'Tanggal kebutuhan harus diisi',
             'intJumlahKebutuhan.required' => 'Jumlah Kebutuhan harus diisi',
             'intJumlahKebutuhan.numeric' => 'Jumlah kebutuhan harus angka'
