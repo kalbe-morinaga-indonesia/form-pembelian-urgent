@@ -24,7 +24,8 @@ class CreateMusersTable extends Migration
             $table->text('txtAlamat');
             $table->foreignId('mdepartment_id')->constrained()->onDelete('cascade');
             $table->rememberToken();
-            $table->timestamps();
+            $table->dateTime('dtmInsertedBy');
+            $table->dateTime('dtmUpdatedBy');
         });
     }
 
