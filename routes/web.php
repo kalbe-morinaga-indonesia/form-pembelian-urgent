@@ -43,7 +43,7 @@ Auth::routes([
     'register' => false
 ]);
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::group(
     ['middleware' => ['auth']],
@@ -94,8 +94,12 @@ Route::group(
             });
 
         Route::controller(PurchaseRequestController::class)->group(function () {
+            Route::get('purchase-requests/', 'index')
+                ->name('purchase-requests.index');
             Route::get('purchase-requests/create', 'create')
                 ->name('purchase-requests.create');
+            Route::post('purchase-requests/create', 'store')
+                ->name('purchase-requests.store');
         });
     }
 );
