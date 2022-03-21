@@ -22,7 +22,8 @@ class User extends Authenticatable
     protected $table = "musers";
 
     protected $guarded = [];
-
+    const CREATED_AT = "dtmInsertedBy";
+    const UPDATED_AT = "dtmUpdatedBy";
     /**
      * The attributes that should be hidden for serialization.
      *
