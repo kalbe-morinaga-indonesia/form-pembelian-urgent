@@ -96,7 +96,15 @@
 <script src="{{ asset('theme/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
 <script src="{{ asset('theme/plugins/datatables-responsive/js/dataTables.responsive.min.js')}}"></script>
 <script src="{{ asset('theme/plugins/datatables-responsive/js/responsive.bootstrap4.min.js')}}"></script>
+
+<script src="{{ asset('theme/plugins/bs-custom-file-input/bs-custom-file-input.min.js') }}"></script>
 @include('sweetalert::alert')
 @stack('script-datatable')
+@stack('script-purchasew')
+<script>
+$(function () {
+  bsCustomFileInput.init();
+});
+</script>
 </body>
 </html>
