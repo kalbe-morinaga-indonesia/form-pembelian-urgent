@@ -5,7 +5,7 @@
           <div class="col-lg-4 col-6">
             <div class="small-box bg-info">
               <div class="inner">
-                <h3>12</h3>
+                <h3>{{ $daily_request->count() }}</h3>
                 <p>Daily Request</p>
               </div>
               <div class="icon">
@@ -16,7 +16,7 @@
           <div class="col-lg-4 col-6">
             <div class="small-box bg-success">
               <div class="inner">
-                <h3>220</h3>
+                <h3>{{ $monthly_request->count() }}</h3>
                 <p>Monthly Request</p>
               </div>
               <div class="icon">
@@ -27,7 +27,7 @@
           <div class="col-lg-4 col-6">
             <div class="small-box bg-warning">
               <div class="inner">
-                <h3>1350</h3>
+                <h3>{{ $yearly_request->count() }}</h3>
                 <p>Yearly Request</p>
               </div>
               <div class="icon">

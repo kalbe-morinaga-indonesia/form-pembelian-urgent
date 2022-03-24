@@ -36,7 +36,9 @@
                                     <td>{{ $purchase->dtmUpdatedBy->diffForHumans() }}</td>
                                 </tr>
                             @empty
-
+                                <tr>
+                                    <td colspan="5">Tidak ada data</td>
+                                </tr>
                             @endforelse
                         </tbody>
                     </table>
