@@ -7,6 +7,7 @@ use App\Http\Controllers\Back\DashboardController;
 use App\Http\Controllers\Back\DepartmentController;
 use App\Http\Controllers\Back\PermissionController;
 use App\Http\Controllers\Back\PurchaseRequestController;
+use App\Http\Controllers\Back\ReportController;
 use App\Http\Controllers\Back\RoleController;
 use App\Http\Controllers\Back\UomController;
 use App\Http\Controllers\Back\UserController;
@@ -98,8 +99,15 @@ Route::group(
                 ->name('purchase-requests.index');
             Route::get('purchase-requests/create', 'create')
                 ->name('purchase-requests.create');
+            Route::get('purchase-requests/{purchase}', 'show')
+                ->name('purchase-requests.show');
             Route::post('purchase-requests/create', 'store')
                 ->name('purchase-requests.store');
+        });
+
+        Route::controller(ReportController::class)->group(function () {
+            Route::get('reports/', 'index')
+                ->name('reports.index');
         });
     }
 );
