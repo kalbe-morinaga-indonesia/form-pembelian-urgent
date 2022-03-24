@@ -8,13 +8,14 @@ use App\Models\Barang;
 use App\Models\Department;
 use App\Models\Purchase;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PurchaseRequestController extends Controller
 {
 
     public function index()
     {
-        $purchases = Purchase::get();
+        $purchases = Purchase::where('muser_id', Auth::user()->id)->get();
         return view('back.purchase.index', [
             'title' => 'List Request',
             'purchases' => $purchases
