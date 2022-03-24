@@ -15,4 +15,19 @@ class Purchase extends Model
 
     const CREATED_AT = "dtmInsertedBy";
     const UPDATED_AT = "dtmUpdatedBy";
+
+    public function muser()
+    {
+        return $this->belongsTo('App\Models\User');
+    }
+
+    public function mdepartment()
+    {
+        return $this->belongsTo('App\Models\Department');
+    }
+
+    public function mbarangs()
+    {
+        return $this->hasMany('App\Models\Barang');
+    }
 }
