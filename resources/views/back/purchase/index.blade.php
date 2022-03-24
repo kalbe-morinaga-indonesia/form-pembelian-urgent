@@ -20,6 +20,25 @@
                                 <th>Last Update</th>
                             </tr>
                         </thead>
+                        <tbody>
+                            @forelse ($purchases as $purchase)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>
+                                        <a href="{{ route('purchase-requests.show',['purchase' => $purchase->id]) }}">{{ $purchase->txtNoPurchaseRequest }}</a>
+                                    </td>
+                                    <td>{{ $purchase->txtReason }}</td>
+                                    <td>
+                                        @if($purchase->status)
+                                            <span class="badge p-1 bg-warning">{{ $purchase->status }}</span>
+                                        @endif
+                                    </td>
+                                    <td>{{ $purchase->dtmUpdatedBy->diffForHumans() }}</td>
+                                </tr>
+                            @empty
+
+                            @endforelse
+                        </tbody>
                     </table>
                 </div>
             </div>

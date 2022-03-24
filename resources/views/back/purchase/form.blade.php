@@ -103,9 +103,9 @@
             @enderror
         </div>
         <div class="form-check">
-            <input class="form-check-input" type="radio" name="txtReason" id="jadwal_produksi" value="Jadwal Produksi">
-            <label class="form-check-label" for="jadwal_produksi">
-                Jadwal Produksi
+            <input class="form-check-input" type="radio" name="txtReason" id="iddle_produksi" value="Iddle Produksi">
+            <label class="form-check-label" for="iddle_produksi">
+                Iddle Produksi
             </label>
             @error('txtReason')
             <div class="text-danger">{{ $message }}</div>
