@@ -14,8 +14,19 @@ class PurchaseRequestController extends Controller
 
     public function index()
     {
+        $purchases = Purchase::get();
         return view('back.purchase.index', [
-            'title' => 'List Request'
+            'title' => 'List Request',
+            'purchases' => $purchases
+        ]);
+    }
+
+    public function show(Purchase $purchase)
+    {
+
+        return view('back.purchase.show', [
+            'title' => 'Purchase Request',
+            'purchase' => $purchase
         ]);
     }
 
