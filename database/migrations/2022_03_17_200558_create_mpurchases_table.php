@@ -17,6 +17,7 @@ class CreateMpurchasesTable extends Migration
             $table->id();
             $table->foreignId('muser_id')->constrained()->onDelete('cascade');
             $table->foreignId('mdepartment_id')->constrained()->onDelete('cascade');
+            $table->string('txtNoDok');
             $table->string('txtNoPurchaseRequest');
             $table->date('dtmDateCreated');
             $table->date('dtmDateRequired');
