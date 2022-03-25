@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Department;
 use Illuminate\Database\Seeder;
 
 class DepartmentSeeder extends Seeder
@@ -13,6 +14,15 @@ class DepartmentSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\Department::factory()->count(3)->create();
+
+        $departments = ["BDA", "IOS", "HC", "ENG", "QA", "MDP", "WH", "PRD"];
+
+        foreach ($departments as $department) {
+            Department::create([
+                'txtNamaDept' => $department,
+                'txtInsertedBy' => 'System',
+                'txtUpdatedBy' => 'System'
+            ]);
+        }
     }
 }
