@@ -24,12 +24,48 @@ class UserSeeder extends Seeder
         app()[PermissionRegistrar::class]->forgetCachedPermissions();
 
         // create permissions
+        Permission::create(['name' => 'dashboard']);
+        Permission::create(['name' => 'logout']);
 
         // department
         Permission::create(['name' => 'view_department']);
         Permission::create(['name' => 'add_department']);
         Permission::create(['name' => 'edit_department']);
         Permission::create(['name' => 'delete_department']);
+
+        // users
+        Permission::create(['name' => 'view_user']);
+        Permission::create(['name' => 'add_user']);
+        Permission::create(['name' => 'edit_user']);
+        Permission::create(['name' => 'delete_user']);
+
+        // uom
+        Permission::create(['name' => 'view_uom']);
+        Permission::create(['name' => 'add_uom']);
+        Permission::create(['name' => 'edit_uom']);
+        Permission::create(['name' => 'delete_uom']);
+
+        // role
+        Permission::create(['name' => 'view_role']);
+        Permission::create(['name' => 'add_role']);
+        Permission::create(['name' => 'edit_role']);
+        Permission::create(['name' => 'delete_role']);
+
+        // permission
+        Permission::create(['name' => 'view_permission']);
+        Permission::create(['name' => 'add_permission']);
+        Permission::create(['name' => 'edit_permission']);
+        Permission::create(['name' => 'delete_permission']);
+
+        // assign permission
+        Permission::create(['name' => 'view_assign_permission']);
+        Permission::create(['name' => 'add_assign_permission']);
+        Permission::create(['name' => 'sync_assign_permission']);
+
+        // assign user
+        Permission::create(['name' => 'view_assign_user']);
+        Permission::create(['name' => 'add_assign_user']);
+        Permission::create(['name' => 'sync_assign_user']);
 
         // create role
         $role1 = Role::create(['name' => 'admin']);
@@ -130,10 +166,34 @@ class UserSeeder extends Seeder
         ]);
 
         // assign permission role
+        $role1->givePermissionTo('dashboard');
+        $role1->givePermissionTo('logout');
         $role1->givePermissionTo('view_department');
         $role1->givePermissionTo('add_department');
         $role1->givePermissionTo('edit_department');
         $role1->givePermissionTo('delete_department');
+        $role1->givePermissionTo('view_user');
+        $role1->givePermissionTo('add_user');
+        $role1->givePermissionTo('edit_user');
+        $role1->givePermissionTo('delete_user');
+        $role1->givePermissionTo('view_uom');
+        $role1->givePermissionTo('add_uom');
+        $role1->givePermissionTo('edit_uom');
+        $role1->givePermissionTo('delete_uom');
+        $role1->givePermissionTo('view_role');
+        $role1->givePermissionTo('add_role');
+        $role1->givePermissionTo('edit_role');
+        $role1->givePermissionTo('delete_role');
+        $role1->givePermissionTo('view_permission');
+        $role1->givePermissionTo('add_permission');
+        $role1->givePermissionTo('edit_permission');
+        $role1->givePermissionTo('delete_permission');
+        $role1->givePermissionTo('view_assign_permission');
+        $role1->givePermissionTo('add_assign_permission');
+        $role1->givePermissionTo('sync_assign_permission');
+        $role1->givePermissionTo('view_assign_user');
+        $role1->givePermissionTo('add_assign_user');
+        $role1->givePermissionTo('sync_assign_user');
 
         // Assign role user
         $user1->assignRole($role1);
