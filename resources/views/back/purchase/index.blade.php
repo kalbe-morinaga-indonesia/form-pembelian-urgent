@@ -6,10 +6,12 @@
     <div class="col-md-12">
         <div class="card">
             <div class="card-header">
-                <div class="d-flex justify-content-between">
-                    <h3 class="card-title">List Request</h3>
-                    <a href="{{ route('purchase-requests.create') }}" class="btn btn-primary">Tambah
-                        Purchase Request</a>
+                <h3 class="card-title">List Request</h3>
+                <div class="card-tools">
+                    <a href="{{ route('purchase-requests.create') }}" class="btn btn-primary">Purchase Request</a>
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                        <i class="fas fa-minus"></i>
+                    </button>
                 </div>
             </div>
             <div class="card-body">

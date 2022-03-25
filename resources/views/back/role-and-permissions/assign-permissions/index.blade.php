@@ -26,22 +26,24 @@
                         </thead>
                         <tbody>
                             @forelse ($roles as $role)
-                                <tr>
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $role->name }}</td>
-                                    <td>{{ $role->guard_name }}</td>
-                                    <td>{{ $role->getPermissionNames()->toArray() ? implode(', ', $role->getPermissionNames()->toArray()) : "N/a" }}</td>
-                                    <td>
-                                            <a href="{{ route('assign-permissions.edit',['role' => $role->id]) }}" class="btn btn-warning btn-sm text-white mr-2" title="Edit Data">
-                                                <i class="fas fa-fan mr-2"></i>
-                                                Sync
-                                            </a>
-                                    </td>
-                                </tr>
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $role->name }}</td>
+                                <td>{{ $role->guard_name }}</td>
+                                <td>{{ $role->getPermissionNames()->toArray() ? implode(', ', $role->getPermissionNames()->toArray()) : "N/a" }}
+                                </td>
+                                <td>
+                                    <a href="{{ route('assign-permissions.edit',['role' => $role->id]) }}"
+                                        class="btn btn-warning btn-sm text-white mr-2" title="Edit Data">
+                                        <i class="fas fa-fan mr-2"></i>
+                                        Sync
+                                    </a>
+                                </td>
+                            </tr>
                             @empty
-                                <tr>
-                                    <td colspan="4">Tidak ada data</td>
-                                </tr>
+                            <tr>
+                                <td colspan="4">Tidak ada data</td>
+                            </tr>
                             @endforelse
                         </tbody>
                     </table>
@@ -52,12 +54,15 @@
 </div>
 
 @push('script-datatable')
-    <script>
-  $(function () {
-    $("#assignPermissionTable").DataTable({
-      "responsive": true, "lengthChange": false, "autoWidth": false,
-    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-  });
+<script>
+    $(function () {
+        $("#assignPermissionTable").DataTable({
+            "responsive": true,
+            "lengthChange": false,
+            "autoWidth": false,
+        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+    });
+
 </script>
 @endpush
 
