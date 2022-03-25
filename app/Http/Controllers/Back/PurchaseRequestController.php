@@ -2,20 +2,27 @@
 
 namespace App\Http\Controllers\Back;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\PurchaseRequest;
+use App\Models\User;
 use App\Models\Barang;
-use App\Models\Department;
 use App\Models\Purchase;
+use App\Models\Department;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\PurchaseRequest;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class PurchaseRequestController extends Controller
 {
-
     public function index()
     {
-        $purchases = Purchase::where('muser_id', Auth::user()->id)->get();
+        if (Auth()->user()->hasRole('user')) {
+            $purchases = Purchase::where('muser_id', Auth::user()->id)->get();
+        } else {
+            $purchases = Purchase::orderBy('dtmInsertedBy','desc')->get();
+        }
+
         return view('back.purchase.index', [
             'title' => 'List Request',
             'purchases' => $purchases
@@ -36,7 +43,7 @@ class PurchaseRequestController extends Controller
         $departments = Department::get();
         return view('back.purchase.create', [
             'title' => 'Purchase Request',
-            'departments' => $departments
+            'departments' => $departments,
         ]);
     }
 
@@ -66,7 +73,7 @@ class PurchaseRequestController extends Controller
 
             foreach ($request->barang as $key => $value) {
                 $dataBarang = new Barang();
-                $dataBarang->mpurchase_id = $purchase_id->id;
+                $dataBarang->purchase_id = $purchase_id->id;
                 $dataBarang->txtNamaBarang = $value['txtNamaBarang'];
                 $dataBarang->intJumlah = $value['intJumlah'];
                 $dataBarang->txtSatuan = $value['txtSatuan'];
@@ -74,7 +81,18 @@ class PurchaseRequestController extends Controller
                 $dataBarang->save();
             }
 
-            return back();
+            Alert::success("Berhasil", "Request dengan nomor $request->txtNoPurchaseRequest berhasil ditambahkan");
+            return redirect()->route('purchase-requests.index');
         }
+    }
+
+    public function approve(Purchase $purchase)
+    {
+        $departments = Department::get();
+        return view('back.purchase.approve', [
+            'title' => 'Approve',
+            'purchase' => $purchase,
+            'departments' => $departments
+        ]);
     }
 }
