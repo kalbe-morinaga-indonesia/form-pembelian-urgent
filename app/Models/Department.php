@@ -10,7 +10,7 @@ class Department extends Model
     use HasFactory;
 
     protected $table = "mdepartments";
-    protected $fillable = ['txtNamaDept', 'txtInsertedBy', 'txtUpdatedBy'];
+    protected $fillable = ['txtNamaDept'];
 
     const CREATED_AT = "dtmInsertedBy";
     const UPDATED_AT = "dtmUpdatedBy";
