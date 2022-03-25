@@ -15,15 +15,18 @@ class CreateMusersTable extends Migration
     {
         Schema::create('musers', function (Blueprint $table) {
             $table->id();
+            $table->string('txtNik')->unique();
             $table->string('txtNama');
-            $table->string('txtNoHp');
-            $table->string('txtTempatLahir');
-            $table->date('dtmTanggalLahir');
+            $table->string('txtNoHp')->nullable();
+            $table->string('txtTempatLahir')->nullable();
+            $table->date('dtmTanggalLahir')->nullable();
             $table->string('txtUsername')->unique();
             $table->string('txtPassword');
-            $table->text('txtAlamat');
+            $table->text('txtAlamat')->nullable();
             $table->foreignId('mdepartment_id')->constrained()->onDelete('cascade');
             $table->rememberToken();
+            $table->string('txtInsertedBy')->nullable();
+            $table->string('txtUpdatedBy')->nullable();
             $table->dateTime('dtmInsertedBy');
             $table->dateTime('dtmUpdatedBy');
         });
