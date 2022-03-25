@@ -28,7 +28,7 @@ class UomRequest extends FormRequest
             'txtItemCode' => [
                 'required',
                 Rule::unique('muoms', 'txtItemCode')
-                    ->ignore($this->muom)
+                    ->ignore($this->uom)
             ],
             'dtmTanggalKebutuhan' => 'required',
             'intJumlahKebutuhan' => 'required|numeric'

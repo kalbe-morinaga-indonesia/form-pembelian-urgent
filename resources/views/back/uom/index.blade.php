@@ -6,10 +6,13 @@
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <div class="d-flex justify-content-between">
-                    <h3 class="card-title">Data UOM</h3>
-                    <a href="{{ route('uoms.create') }}" class="btn btn-primary">Tambah
+                <h3 class="card-title">Data UOM</h3>
+                <div class="card-tools">
+                    <a href="{{ route('uoms.create') }}" class="btn btn-sm btn-primary">Tambah
                         UOM</a>
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                        <i class="fas fa-minus"></i>
+                    </button>
                 </div>
             </div>
             <div class="card-body">
@@ -33,7 +36,8 @@
                                 <td>{{ $uom->intJumlahKebutuhan }}</td>
                                 <td>
                                     <div class="btn-group">
-                                        <a href="{{ route('uoms.edit',['uom' => $uom->id]) }}" class="btn btn-warning edit">Edit</a>
+                                        <a href="{{ route('uoms.edit',['uom' => $uom->id]) }}"
+                                            class="btn btn-warning edit">Edit</a>
                                         <form action="{{ route('uoms.destroy',['uom' => $uom->id]) }}" method="POST">
                                             @method('delete')
                                             @csrf
