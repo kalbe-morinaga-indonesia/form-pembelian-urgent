@@ -11,18 +11,26 @@ class ReportController extends Controller
 {
     public function index()
     {
-        $approve = Purchase::where([
-            ['muser_id', Auth::user()->id],
-            ['status', 'approved by dept head']
-        ])->get();
-        $not_approve = Purchase::where([
-            ['muser_id', Auth::user()->id],
-            ['status', 'rejected by dept head']
-        ])->get();
-        $need_to_approve = Purchase::where([
-            ['muser_id', Auth::user()->id],
-            ['status', 'in process']
-        ])->get();
+
+        if (Auth()->user()->hasRole('user')) {
+            $approve = Purchase::where([
+                ['muser_id', Auth::user()->id],
+                ['status', 'approved by dept head']
+            ])->get();
+            $not_approve = Purchase::where([
+                ['muser_id', Auth::user()->id],
+                ['status', 'rejected by dept head']
+            ])->get();
+            $need_to_approve = Purchase::where([
+                ['muser_id', Auth::user()->id],
+                ['status', 'in process']
+            ])->get();
+        } else {
+            $approve = Purchase::where('status', 'approved by dept head')->get();
+            $not_approve = Purchase::where('status', 'rejected by dept head')->get();
+            $need_to_approve = Purchase::where('status', 'in process')->get();
+        }
+
         return view('back.report.index', [
             'title' => 'Report',
             'approve' => $approve,
