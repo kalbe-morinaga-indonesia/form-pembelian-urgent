@@ -103,6 +103,8 @@ Route::group(
                 ->name('purchase-requests.show');
             Route::post('purchase-requests/create', 'store')
                 ->name('purchase-requests.store');
+            Route::get('purchase-requests/approve/{purchase}', 'approve')
+                ->name('purchase-requests.approve');
         });
 
         Route::controller(ReportController::class)->group(function () {
