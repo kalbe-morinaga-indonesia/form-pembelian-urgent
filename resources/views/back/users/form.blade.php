@@ -1,5 +1,13 @@
     <div class="form-group">
-        <label for="txtNama">Nama Lengkap</label>
+        <label for="txtNik">NIK (Nomor Induk Kependudukan) <span class="text-danger">*</span></label>
+        <input type="text" class="form-control @error('txtNik') is-invalid  @enderror" name="txtNik" id="txtNik"
+            placeholder="Masukkan NIK" value="{{ old('txtNik') ?? $user->txtNik }}" autofocus @if($user->txtNik) readonly @endif>
+        @error('txtNik')
+        <div class="text-danger">{{ $message }}</div>
+        @enderror
+    </div>
+    <div class="form-group">
+        <label for="txtNama">Nama Lengkap <span class="text-danger">*</span></label>
         <input type="text" class="form-control @error('txtNama') is-invalid  @enderror" name="txtNama" id="txtNama"
             placeholder="Masukkan Nama User" value="{{ old('txtNama') ?? $user->txtNama }}">
         @error('txtNama')
@@ -39,7 +47,7 @@
         </div>
     </div>
     <div class="form-group">
-        <label for="txtUsername">Username</label>
+        <label for="txtUsername">Username <span class="text-danger">*</span></label>
         <input type="text" class="form-control @error('txtUsername') is-invalid  @enderror" name="txtUsername"
             id="txtUsername" placeholder="Masukkan Username" value="{{ old('txtUsername') ?? $user->txtUsername }}">
         @error('txtUsername')
@@ -50,7 +58,7 @@
         <div class="row">
         <div class="col-md-6">
             <div class="form-group">
-                <label for="txtPassword">Password</label>
+                <label for="txtPassword">Password <span class="text-danger">*</span></label>
                 <input type="password" class="form-control @error('txtPassword') is-invalid  @enderror" name="txtPassword"
                     id="txtPassword" placeholder="Masukkan Password"
                     value="{{ old('txtPassword') ?? $user->txtPassword }}">
@@ -61,7 +69,7 @@
         </div>
         <div class="col-md-6">
             <div class="form-group">
-                <label for="txtPassword_confirmation">Konfirmasi Password</label>
+                <label for="txtPassword_confirmation">Konfirmasi Password <span class="text-danger">*</span></label>
                 <input type="password" class="form-control @error('txtPassword_confirmation') is-invalid  @enderror" name="txtPassword_confirmation"
                     id="txtPassword" placeholder="Masukkan Konfirmasi Password" value="{{ old('txtPassword_confirmation') ?? $user->txtPassword }}">
                 @error('txtPassword_confirmation')
@@ -72,7 +80,7 @@
     </div>
     @endif
     <div class="form-group">
-        <label for="txtAlamat">Alamat</label>
+        <label for="txtAlamat">Alamat </label>
         <textarea class="form-control @error('txtAlamat') is-invalid  @enderror" name="txtAlamat" id="txtAlamat"
             placeholder="Masukkan Alamat">{{ old('txtAlamat') ?? $user->txtAlamat }}</textarea>
         @error('txtAlamat')
@@ -80,8 +88,8 @@
         @enderror
     </div>
     <div class="form-group">
-        <label for="mdepartment_id">Departmen</label>
-        <select name="mdepartment_id" id="mdepartment_id" class="form-control">
+        <label for="mdepartment_id">Departmen <span class="text-danger">*</span></label>
+        <select name="mdepartment_id" id="mdepartment_id" class="form-control select2bs4" style="width: 100%;">
             @forelse ($departments as $department)
                 <option value="{{ $department->id }}" {{ old('mdepartment_id') ?? $user->mdepartment_id == $department->id ? 'selected' : '' }}>{{ $department->txtNamaDept }}</option>
             @empty

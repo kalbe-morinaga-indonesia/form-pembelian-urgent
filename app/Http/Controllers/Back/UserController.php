@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Back;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\UserRequest;
-use App\Models\Department;
 use App\Models\User;
+use App\Models\Department;
 use Illuminate\Http\Request;
+use App\Http\Requests\UserRequest;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -40,6 +41,7 @@ class UserController extends Controller
     public function store(UserRequest $request)
     {
         User::create([
+            'txtNik' =>  $request->txtNik,
             'txtNama' =>  $request->txtNama,
             'txtNoHp' =>  $request->txtNoHp,
             'txtTempatLahir' =>  $request->txtTempatLahir,
@@ -48,6 +50,8 @@ class UserController extends Controller
             'txtPassword' =>  Hash::make($request->txtPassword),
             'txtAlamat' =>  $request->txtAlamat,
             'mdepartment_id' =>  $request->mdepartment_id,
+            'txtInsertedBy' => Auth::user()->txtNama,
+            'txtUpdatedBy' => Auth::User()->txtNama
         ]);
 
         Alert::success("Berhasil", "Data user $request->txtNama berhasil ditambahkan");

@@ -25,19 +25,22 @@ class UserRequest extends FormRequest
     public function rules()
     {
         return [
+            'txtNik' => [
+                'required',
+                'max:16',
+                Rule::unique('musers', 'txtNik')
+                    ->ignore($this->user)
+            ],
             'txtNama' => 'required',
-            'txtNoHp' => 'required|max:13',
-            'txtTempatLahir' => 'required',
-            'dtmTanggalLahir' => 'required',
+            'txtNoHp' => 'max:13',
             'txtUsername' =>
             [
                 'required',
                 Rule::unique('musers', 'txtusername')
-                    ->ignore($this->muser)
+                    ->ignore($this->user)
             ],
             'txtPassword' => 'sometimes|required|min:8|confirmed',
             'txtPassword_confirmation' => 'sometimes|required_with:txtPassword|same:txtPassword',
-            'txtAlamat' => 'required',
             'mdepartment_id' => 'required',
         ];
     }
@@ -47,17 +50,15 @@ class UserRequest extends FormRequest
         return [
             // required
             'txtNama.required' => "Nama Lengkap harus diisi",
-            'txtNoHp.required' => "Nomor Handphone harus diisi",
-            'txtTempatLahir.required' => "Tempat Lahir harus diisi",
-            'dtmTanggalLahir.required' => "Tanggal Lahir harus diisi",
+            'txtNik.required' => "NIK harus diisi",
             'txtUsername.required' => "Username harus diisi",
             'txtPassword.required' => "Password harus diisi",
             'txtPassword_confirmation.required' => "Konfirmasi Password harus diisi",
-            'txtAlamat.required' => "Alamat harus diisi",
             'mdepartment_id.required' => "Department harus diisi",
 
             // unique
             'txtUsername.unique' => "Username tidak boleh sama",
+            'txtNik.unique' => "NIK tidak boleh sama",
 
             // min
             'txtUsername.min' => "Username minimal 6 karakter",
@@ -65,6 +66,7 @@ class UserRequest extends FormRequest
 
             // max
             'txtNoHp.max' => "Nomor handphone maksimal 13 karakter",
+            'txtNik.max' => "NIK maksimal 16 karakter",
 
             // no space
             'txtUsername.alpha_dash' => "Username tidak boleh menggunakan spasi",

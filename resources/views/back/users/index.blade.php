@@ -6,59 +6,70 @@
     <div class="col-md-12">
         <div class="card">
             <div class="card-header">
-                <div class="d-flex justify-content-between">
-                    <h3 class="card-title">Data User</h3>
+                <h3 class="card-title">Data User</h3>
+                <div class="card-tools">
                     <a href="{{ route('users.create') }}" class="btn btn-sm btn-primary">
                         <i class="fas fa-plus mr-2"></i>Tambah User</a>
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                        <i class="fas fa-minus"></i>
+                    </button>
                 </div>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-striped" id="userTable">
-                        <thead>
+                    <table class="table table-striped table-hover" id="userTable">
+                        <thead class="">
                             <tr>
                                 <th>#</th>
+                                <th>NIK</th>
                                 <th>Username</th>
                                 <th>Nama</th>
                                 <th>Nomor Handphone</th>
                                 <th>Tempat, Tanggal Lahir</th>
-                                <th>Alamat</th>
                                 <th>Department</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
                             @forelse ($users as $user)
-                                <tr>
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $user->txtUsername }}</td>
-                                    <td>{{ $user->txtNama }}</td>
-                                    <td>{{ $user->txtNoHp }}</td>
-                                    <td>{{ $user->txtTempatLahir .", ". date('d-m-Y', strtotime($user->dtmTanggalLahir)) }}</td>
-                                    <td>{{ $user->txtAlamat }}</td>
-                                    <td>{{ $user->mdepartment->txtNamaDept }}</td>
-                                    <td>
-                                        <div class="btn-group">
-                                            <a href="{{ route('users.edit',['user' => $user->id]) }}" class="btn btn-warning btn-sm text-white mr-2" title="Edit Data">
-                                                <i class="fas fa-pen"></i>
-                                                Edit
-                                            </a>
-                                            <form action="{{ route('users.destroy',['user' => $user->id]) }}" method="POST">
-                                                @method('delete')
-                                                @csrf
-                                                <button type="submit" class="btn btn-danger btn-sm btn-hapus" data-name="{{ $user->txtNama }}" data-table="user">
-                                                    <i class="fas fa-trash"></i>
-                                                    Hapus</button>
-                                            </form>
-                                        </div>
-                                    </td>
-                                </tr>
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $user->txtNik }}</td>
+                                <td>{{ $user->txtUsername }}</td>
+                                <td>{{ $user->txtNama }}</td>
+                                <td>{{ $user->txtNoHp ? $user->txtNoHp : 'n/a'  }}</td>
+                                <td>
+                                    {{ $user->txtTempatLahir || $user->txtTanggalLahir ? $user->txtTempatLahir .", ". date('d-m-Y', strtotime($user->dtmTanggalLahir)) : "n/a" }}
+                                </td>
+                                <td>{{ $user->mdepartment->txtNamaDept }}</td>
+                                <td>
+                                    <div class="btn-group">
+                                        <a class="btn btn-app btn-sm bg-warning"
+                                            href="{{ route('users.edit',['user' => $user->id]) }}">
+                                            <i class="fas fa-edit"></i> Edit
+                                        </a>
+                                        <form action="{{ route('users.destroy',['user' => $user->id]) }}" method="POST">
+                                            @method('delete')
+                                            @csrf
+                                            <button type="submit" class="btn btn-app btn-sm btn-sm bg-danger btn-hapus"
+                                                data-name="{{ $user->txtNama }}" data-table="user">
+                                                <i class="fas fa-trash"></i>
+                                                Hapus</button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
                             @empty
-                                <tr>
-                                    <td colspan="4">Tidak ada data</td>
-                                </tr>
+                            <tr>
+                                <td colspan="4">Tidak ada data</td>
+                            </tr>
                             @endforelse
                         </tbody>
+                        <tfoot>
+                            <tr>
+                                <th colspan="8">Jumlah User : <code>{{ $users->count() }}</code></th>
+                            </tr>
+                        </tfoot>
                     </table>
                 </div>
             </div>
@@ -67,12 +78,15 @@
 </div>
 
 @push('script-datatable')
-    <script>
-  $(function () {
-    $("#userTable").DataTable({
-      "responsive": true, "lengthChange": false, "autoWidth": false,
-    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-  });
+<script>
+    $(function () {
+        $("#userTable").DataTable({
+            "responsive": true,
+            "lengthChange": false,
+            "autoWidth": false,
+        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+    });
+
 </script>
 @endpush
 
