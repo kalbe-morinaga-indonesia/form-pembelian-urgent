@@ -82,14 +82,33 @@
         @endhasrole
 
         @hasrole('user')
-        <li class="nav-item">
+        {{-- <li class="nav-item">
             <a href="{{ route('purchase-requests.create') }}" class="nav-link">
                 <i class="nav-icon fas fa-cart-plus"></i>
                 <p>
                     Purchase Request
                 </p>
             </a>
+        </li> --}}
+        <li class="nav-item">
+            <a href="{{ route('purchase-requests.index') }}" class="nav-link">
+                <i class="nav-icon fas fa-list"></i>
+                <p>
+                    List Request
+                </p>
+            </a>
         </li>
+        <li class="nav-item">
+            <a href="{{ route('reports.index') }}" class="nav-link">
+                <i class="nav-icon fas fa-file-alt"></i>
+                <p>
+                    Report
+                </p>
+            </a>
+        </li>
+        @endhasrole
+
+        @hasrole('dept_head')
         <li class="nav-item">
             <a href="{{ route('purchase-requests.index') }}" class="nav-link">
                 <i class="nav-icon fas fa-list"></i>

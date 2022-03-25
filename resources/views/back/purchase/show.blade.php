@@ -9,6 +9,29 @@
                 <h3 class="card-title">Request <code>{{ $purchase->txtNoPurchaseRequest }}</code></h3>
             </div>
             <div class="card-body">
+                <div class="row border-bottom mb-3">
+                    <div class="col-md-6">
+                        <h2 class="my-auto">Form Pembelian Urgent</h2>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="d-flex justify-content-between mb-0">
+                            <p>No. Dok</p>
+                            <p></p>
+                        </div>
+                        <div class="d-flex justify-content-between mb-0">
+                            <p>No. Rev</p>
+                            <p></p>
+                        </div>
+                        <div class="d-flex justify-content-between mb-0">
+                            <p>Tanggal Berlaku</p>
+                            <p></p>
+                        </div>
+                        <div class="d-flex justify-content-between mb-0">
+                            <p>Halaman</p>
+                            <p></p>
+                        </div>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-md-4">
                         <div class="d-flex justify-content-between">

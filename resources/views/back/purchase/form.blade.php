@@ -1,15 +1,15 @@
     <div class="form-group">
         <label for="txtNama">Requester Name</label>
-        <input type="text" class="form-control @error('muser_id') is-invalid @enderror"
-            placeholder="Masukkan Requester Name" value="{{ Auth::user()->txtNama }}" readonly>
+        <input type="text" class="form-control @error('muser_id') is-invalid @enderror" value="{{ Auth::user()->txtNama }}" readonly>
         <input type="hidden" name="muser_id" value="{{ Auth::user()->id }}">
     </div>
     <div class="form-group">
+        {{-- {{ dd($users->mdepartment) }} --}}
         <label for="mdepartment_id">Department</label>
         <select class="form-control @error('mdepartment_id') is-invalid @enderror" name="mdepartment_id"
             id="mdepartment_id">
             @forelse ($departments as $department)
-            <option value="{{ $department->id }}">{{ $department->txtNamaDept }}</option>
+            <option value="{{ $department->id }}" {{ Auth::user()->mdepartment_id == $department->id ? 'selected' : '' }}>{{ $department->txtNamaDept }}</option>
             @empty
             <option>Tidak ada data</option>
             @endforelse
@@ -57,7 +57,7 @@
                 <tr>
                     <td>
                         <input type="text" class="form-control" placeholder="Nama Barang"
-                            name="barang[0][txtNamaBarang]" value="{{ old('barang[0][txtNamaBarang]') }}" required>
+                            name="barang[0][txtNamaBarang]" required>
                     </td>
                     <td><input type="number" class="form-control" placeholder="Jumlah" name="barang[0][intJumlah]" required></td>
                     <td><input type="text" class="form-control" placeholder="Satuan" name="barang[0][txtSatuan]" required></td>

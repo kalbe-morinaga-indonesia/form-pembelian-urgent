@@ -100,7 +100,7 @@
 <script src="{{ asset('theme/plugins/bs-custom-file-input/bs-custom-file-input.min.js') }}"></script>
 @include('sweetalert::alert')
 @stack('script-datatable')
-@stack('script-purchasew')
+@stack('script-purchase')
 <script>
 $(function () {
   bsCustomFileInput.init();
