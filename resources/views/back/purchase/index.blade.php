@@ -25,7 +25,7 @@
                                 <th>Reason</th>
                                 <th>Status</th>
                                 <th>Last Update</th>
-                                @hasrole('dept_head')
+                                @hasrole('dept_head|user')
                                 <th>Action</th>
                                 @endhasrole
                             </tr>
@@ -34,32 +34,41 @@
                             @forelse ($purchases as $purchase)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td></td>
                                 <td>
-                                    <a
-                                        href="{{ route('purchase-requests.show',['purchase' => $purchase->id]) }}">{{ $purchase->txtNoPurchaseRequest }}</a>
+                                    <a class="text-dark" href="{{ route('purchase-requests.show',['purchase' => $purchase->txtSlug]) }}">{{ $purchase->txtNoDok }}</a>
                                 </td>
+                                <td>{{ $purchase->txtNoPurchaseRequest }}</td>
                                 <td>{{ $purchase->txtReason }}</td>
                                 <td>
                                     @if($purchase->status == "in process")
                                     <span class="badge p-1 bg-warning">{{ $purchase->status }}</span>
                                     @elseif($purchase->status == "approved by dept head")
                                     <span class="badge p-1 bg-success">{{ $purchase->status }}</span>
+                                    @elseif($purchase->status == "rejected by dept head")
+                                    <span class="badge p-1 bg-danger">{{ $purchase->status }}</span>
                                     @endif
                                 </td>
                                 <td>{{ $purchase->dtmUpdatedBy->diffForHumans() }}</td>
                                 @hasrole('dept_head')
                                 <td>
                                     @if($purchase->status == "in process")
-                                    <a href="{{ route('purchase-requests.approve',['purchase' => $purchase->id]) }}"
-                                        class="btn btn-primary" disabled>Approve</a>
+                                    <a href="{{ route('purchase-requests.approve',['purchase' => $purchase->txtSlug]) }}" class="btn btn-primary" disabled>Approve</a>
+                                    @endif
+                                </td>
+                                @endhasrole
+                                @hasrole('user')
+                                <td>
+                                    @if ($purchase->status == "rejected by dept head")
+                                        <a href="#" class="btn btn-warning btn-sm">Edit</a>
+                                    @else
+                                        <button class="btn btn-warning btn-sm" disabled>Edit</button>
                                     @endif
                                 </td>
                                 @endhasrole
                             </tr>
                             @empty
                             <tr>
-                                <td colspan="5">Tidak ada data</td>
+                                <td colspan="6">Tidak ada data</td>
                             </tr>
                             @endforelse
                         </tbody>

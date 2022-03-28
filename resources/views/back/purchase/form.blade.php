@@ -4,21 +4,6 @@
         <input type="hidden" name="muser_id" value="{{ Auth::user()->id }}">
     </div>
     <div class="form-group">
-        {{-- {{ dd($users->mdepartment) }} --}}
-        <label for="mdepartment_id">Department</label>
-        <select class="form-control @error('mdepartment_id') is-invalid @enderror" name="mdepartment_id"
-            id="mdepartment_id">
-            @forelse ($departments as $department)
-            <option value="{{ $department->id }}" {{ Auth::user()->mdepartment_id == $department->id ? 'selected' : '' }}>{{ $department->txtNamaDept }}</option>
-            @empty
-            <option>Tidak ada data</option>
-            @endforelse
-        </select>
-        @error('mdepartment_id')
-        <div class="text-danger">{{ $message }}</div>
-        @enderror
-    </div>
-    <div class="form-group">
         <label for="txtNoPurchaseRequest">No PR/WO</label>
         <input type="text" name="txtNoPurchaseRequest" id="txtNoPurchaseRequest"
             class="form-control @error('txtNoPurchaseRequest') is-invalid @enderror" placeholder="Masukkan No PR/WO" value="{{ old('txtNoPurchaseRequest') }}">
@@ -27,18 +12,10 @@
         @enderror
     </div>
     <div class="form-group">
-        <label for="dtmDateCreated">Date Created</label>
-        <input type="date" name="dtmDateCreated" id="dtmDateCreated"
-            class="form-control @error('dtmDateCreated') is-invalid @enderror">
-        @error('dtmDateCreated')
-        <div class="text-danger">{{ $message }}</div>
-        @enderror
-    </div>
-    <div class="form-group">
-        <label for="dtmDateRequired">Date Required</label>
-        <input type="date" name="dtmDateRequired" id="dtmDateRequired"
-            class="form-control @error('dtmDateRequired') is-invalid @enderror">
-        @error('dtmDateRequired')
+        <label for="dtmTanggalKebutuhan">Tanggal Kebutuhan</label>
+        <input type="date" name="dtmTanggalKebutuhan" id="dtmTanggalKebutuhan"
+            class="form-control @error('dtmTanggalKebutuhan') is-invalid @enderror">
+        @error('dtmTanggalKebutuhan')
         <div class="text-danger">{{ $message }}</div>
         @enderror
     </div>
@@ -51,6 +28,7 @@
                     <th>Jumlah</th>
                     <th>Satuan</th>
                     <th>Keterangan</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>

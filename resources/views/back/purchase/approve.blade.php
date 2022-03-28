@@ -72,13 +72,17 @@
                     <div class="form-group">
                         <label for="txtFile">File</label>
                         <p>
-                            @foreach (json_decode($purchase->txtFile) as $file)
+                            @if ($purchase->txtFile != null)
+                                @foreach (json_decode($purchase->txtFile) as $file)
                                 <ol class="list-group list-group-numbered">
                                     <li class="list-group-item my-2">
                                         <a href="{{ asset('files/'.$file) }}" target="_blank">{{ $file }}</a>
                                     </li>
                                 </ol>
-                            @endforeach
+                                @endforeach
+                            @else
+                                Tidak ada file...
+                            @endif
                         </p>
                     </div>
 
