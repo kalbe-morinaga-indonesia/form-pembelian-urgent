@@ -16,6 +16,7 @@ class CreateMbarangsTable extends Migration
         Schema::create('mbarangs', function (Blueprint $table) {
             $table->id();
             $table->foreignId('mpurchase_id')->constrained()->onDelete('cascade');
+            $table->string('item_code')->unique();
             $table->string('txtNamaBarang');
             $table->integer('intJumlah');
             $table->string('txtSatuan');
