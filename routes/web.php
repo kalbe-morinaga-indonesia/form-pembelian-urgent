@@ -99,11 +99,11 @@ Route::group(
                 ->name('purchase-requests.index');
             Route::get('purchase-requests/create', 'create')
                 ->name('purchase-requests.create');
-            Route::get('purchase-requests/{purchase}', 'show')
+            Route::get('purchase-requests/{purchase:txtSlug}', 'show')
                 ->name('purchase-requests.show');
             Route::post('purchase-requests/create', 'store')
                 ->name('purchase-requests.store');
-            Route::get('purchase-requests/approve/{purchase}', 'approve')
+            Route::get('purchase-requests/approve/{purchase:txtSlug}', 'approve')
                 ->name('purchase-requests.approve');
         });
 
