@@ -25,11 +25,8 @@ class PurchaseRequest extends FormRequest
     {
         return [
             'muser_id' => 'required',
-            'mdepartment_id' => 'required',
             'txtNoPurchaseRequest' => 'required',
-            'dtmDateCreated' => 'required',
-            'dtmDateRequired' => 'required',
-            'txtFile' => 'required',
+            'dtmTanggalKebutuhan' => 'required',
             'txtFile.*' => 'mimes:png,jpg,jpeg,csv,txt,pdf,docx|max:2048',
             'txtReason' => 'required',
         ];
@@ -39,11 +36,8 @@ class PurchaseRequest extends FormRequest
     {
         return [
             'muser_id.required' => 'Requester name harus diisi',
-            'mdepartment_id.required' => 'Department harus diisi',
             'txtNoPurchaseRequest.required' => 'No purchase request harus diisi',
-            'dtmDateCreated.required' => 'Date created harus diisi',
-            'dtmDateRequired.required' => 'Date required harus diisi',
-            'txtFile.required' => 'File harus diisi',
+            'dtmTanggalKebutuhan.required' => 'Date created harus diisi',
             'txtReason.required' => 'Reason harus diisi',
         ];
     }
