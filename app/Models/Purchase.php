@@ -12,6 +12,7 @@ class Purchase extends Model
     protected $table = "mpurchases";
 
     protected $guarded = [];
+    protected $primaryKey = 'id';
 
     const CREATED_AT = "dtmInsertedBy";
     const UPDATED_AT = "dtmUpdatedBy";
@@ -28,6 +29,6 @@ class Purchase extends Model
 
     public function mbarangs()
     {
-        return $this->hasMany('App\Models\Barang');
+        return $this->hasMany('App\Models\Barang', 'mpurchase_id');
     }
 }
