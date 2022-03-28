@@ -65,6 +65,7 @@
                         <thead class="light">
                             <tr class="bg-primary text-white dark__bg-1000">
                                 <th class="border-0">No</th>
+                                <th class="border-0 text-center">Item Code</th>
                                 <th class="border-0 text-center">Nama Barang</th>
                                 <th class="border-0 text-center">Jumlah</th>
                                 <th class="border-0 text-center">Satuan</th>
@@ -76,6 +77,9 @@
                             <tr>
                                 <td class="align-middle">
                                     <h6 class="mb-0 text-nowrap">{{ $loop->iteration }}</h6>
+                                </td>
+                                <td class="align-middle text-center">
+                                    <h6 class="mb-0 text-nowrap">{{ $barang->txtItemCode }}</h6>
                                 </td>
                                 <td class="align-middle text-center">
                                     <h6 class="mb-0 text-nowrap">{{ $barang->txtNamaBarang }}</h6>

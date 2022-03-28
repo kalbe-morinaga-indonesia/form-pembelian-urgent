@@ -51,8 +51,8 @@
                                 <td>{{ $purchase->dtmUpdatedBy->diffForHumans() }}</td>
                                 @hasrole('dept_head')
                                 <td>
-                                    @if($purchase->status == "in process")
-                                    <a href="{{ route('purchase-requests.approve',['purchase' => $purchase->txtSlug]) }}" class="btn btn-primary" disabled>Approve</a>
+                                    @if($purchase->status == "in process" || $purchase->status == "rejected by dept head")
+                                    <a href="{{ route('purchase-requests.show-approve',['purchase' => $purchase->txtSlug]) }}" class="btn btn-primary" disabled>Approve</a>
                                     @endif
                                 </td>
                                 @endhasrole

@@ -24,6 +24,7 @@
         <table class="table table-striped" id="dynamicAddRemove">
             <thead>
                 <tr>
+                    <th>Item Code</th>
                     <th>Nama Barang</th>
                     <th>Jumlah</th>
                     <th>Satuan</th>
@@ -33,6 +34,9 @@
             </thead>
             <tbody>
                 <tr>
+                    <td>
+                        <input type="text" class="form-control" placeholder="Item Code" name="barang[0][txtItemCode]" required>
+                    </td>
                     <td>
                         <input type="text" class="form-control" placeholder="Nama Barang"
                             name="barang[0][txtNamaBarang]" required>
@@ -46,6 +50,7 @@
             </tbody>
             <tfoot>
                 <tr>
+                    <th>Item Code</th>
                     <th>Nama Barang</th>
                     <th>Jumlah</th>
                     <th>Satuan</th>

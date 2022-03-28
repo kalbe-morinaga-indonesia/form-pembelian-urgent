@@ -24,7 +24,8 @@
     $("#dynamic-ar").click(function () {
         ++i;
         $("#dynamicAddRemove").append('<tr><td><input type="text" name="barang[' + i +
-            '][txtNamaBarang]" placeholder="Nama Barang" class="form-control" required /></td><td><input type="text" name="barang[' + i +
+            '][txtItemCode]" placeholder="Item Code" class="form-control" required /></td><td><input type="text" name="barang[' + i +
+                        '][txtNamaBarang]" placeholder="Nama Barang" class="form-control" required /></td><td><input type="text" name="barang[' + i +
             '][intJumlah]" placeholder="Jumlah" class="form-control" required /></td><td><input type="text" name="barang[' + i +
             '][txtSatuan]" placeholder="Satuan" class="form-control" required /></td><td><input type="text" name="barang[' + i +
             '][txtKeterangan]" placeholder="Keterangan" class="form-control" /></td><td><button type="button" class="btn btn-danger remove-input-field">Delete</button></td></tr>'
