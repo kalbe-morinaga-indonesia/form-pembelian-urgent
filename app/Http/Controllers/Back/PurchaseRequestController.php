@@ -13,6 +13,7 @@ use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\PurchaseRequest;
+use JetBrains\PhpStorm\Pure;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class PurchaseRequestController extends Controller
@@ -77,6 +78,7 @@ class PurchaseRequestController extends Controller
             foreach ($request->barang as $key => $value) {
                 $dataBarang = new Barang();
                 $dataBarang->mpurchase_id = $purchase_id->id;
+                $dataBarang->txtItemCode = $value['txtItemCode'];
                 $dataBarang->txtNamaBarang = $value['txtNamaBarang'];
                 $dataBarang->intJumlah = $value['intJumlah'];
                 $dataBarang->txtSatuan = $value['txtSatuan'];
@@ -101,6 +103,7 @@ class PurchaseRequestController extends Controller
             foreach ($request->barang as $key => $value) {
                 $dataBarang = new Barang();
                 $dataBarang->mpurchase_id = $purchase_id->id;
+                $dataBarang->txtItemCode = $value['txtItemCode'];
                 $dataBarang->txtNamaBarang = $value['txtNamaBarang'];
                 $dataBarang->intJumlah = $value['intJumlah'];
                 $dataBarang->txtSatuan = $value['txtSatuan'];
@@ -112,13 +115,32 @@ class PurchaseRequestController extends Controller
         return redirect()->route('purchase-requests.index');
     }
 
-    public function approve(Purchase $purchase)
+    public function showApprove(Purchase $purchase)
     {
         $departments = Department::get();
-        return view('back.purchase.approve', [
-            'title' => 'Approve',
-            'purchase' => $purchase,
-            'departments' => $departments
-        ]);
+        if ($purchase->status == "approved by dept head") {
+            return redirect()->route('purchase-requests.index');
+        } else {
+            return view('back.purchase.approve', [
+                'title' => 'Approve',
+                'purchase' => $purchase,
+                'departments' => $departments
+            ]);
+        }
+    }
+
+    public function approve(Purchase $purchase, Request $request)
+    {
+        if ($request->submit == "yes") {
+            Purchase::where('id', $purchase->id)->update([
+                'status' => "approved by dept head"
+            ]);
+        } else {
+            Purchase::where('id', $purchase->id)->update([
+                'status' => "rejected by dept head"
+            ]);
+        }
+
+        return redirect()->route('purchase-requests.index');
     }
 }
