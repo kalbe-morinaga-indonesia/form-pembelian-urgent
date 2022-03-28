@@ -103,7 +103,9 @@ Route::group(
                 ->name('purchase-requests.show');
             Route::post('purchase-requests/create', 'store')
                 ->name('purchase-requests.store');
-            Route::get('purchase-requests/approve/{purchase:txtSlug}', 'approve')
+            Route::get('purchase-requests/approve/{purchase:txtSlug}', 'showApprove')
+                ->name('purchase-requests.show-approve');
+            Route::put('purchase-requests/approve/{purchase:txtSlug}', 'approve')
                 ->name('purchase-requests.approve');
         });
 
