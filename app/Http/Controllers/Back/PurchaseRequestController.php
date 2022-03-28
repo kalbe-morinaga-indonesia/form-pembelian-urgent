@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Back;
 
+use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Barang;
 use App\Models\Purchase;
 use App\Models\Department;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
@@ -17,10 +19,11 @@ class PurchaseRequestController extends Controller
 {
     public function index()
     {
+        $today = Carbon::now();
         if (Auth()->user()->hasRole('user')) {
             $purchases = Purchase::where('muser_id', Auth::user()->id)->get();
         } else {
-            $purchases = Purchase::orderBy('dtmInsertedBy','desc')->get();
+            $purchases = Purchase::orderBy('dtmInsertedBy', 'desc')->get();
         }
 
         return view('back.purchase.index', [
@@ -31,7 +34,6 @@ class PurchaseRequestController extends Controller
 
     public function show(Purchase $purchase)
     {
-
         return view('back.purchase.show', [
             'title' => 'Purchase Request',
             'purchase' => $purchase
@@ -40,16 +42,16 @@ class PurchaseRequestController extends Controller
 
     public function create()
     {
-        $departments = Department::get();
         return view('back.purchase.create', [
             'title' => 'Purchase Request',
-            'departments' => $departments,
         ]);
     }
 
     public function store(PurchaseRequest $request)
     {
-
+        $today = Carbon::now();
+        $jumlah = Purchase::whereYear('dtmInsertedBy', $today)->count('id');
+        $no_dok = "FPU" . $today->year . "." . $today->month . "." . sprintf("%04s", abs($jumlah + 1));
         if ($request->hasfile('txtFile')) {
             foreach ($request->file('txtFile') as $file) {
                 $name = $file->getClientOriginalName();
@@ -59,10 +61,11 @@ class PurchaseRequestController extends Controller
 
             $fileModal = new Purchase();
             $fileModal->muser_id = $request->muser_id;
-            $fileModal->mdepartment_id = $request->mdepartment_id;
+            $fileModal->mdepartment_id = Auth::user()->mdepartment_id;
+            $fileModal->txtSlug = Str::slug($no_dok);
+            $fileModal->txtNoDok = $no_dok;
             $fileModal->txtNoPurchaseRequest = $request->txtNoPurchaseRequest;
-            $fileModal->dtmDateCreated = $request->dtmDateCreated;
-            $fileModal->dtmDateRequired = $request->dtmDateRequired;
+            $fileModal->dtmTanggalKebutuhan = $request->dtmTanggalKebutuhan;
             $fileModal->txtFile = json_encode($fileData);
             $fileModal->txtReason = $request->txtReason;
             $fileModal->status = "in process";
@@ -73,17 +76,40 @@ class PurchaseRequestController extends Controller
 
             foreach ($request->barang as $key => $value) {
                 $dataBarang = new Barang();
-                $dataBarang->purchase_id = $purchase_id->id;
+                $dataBarang->mpurchase_id = $purchase_id->id;
                 $dataBarang->txtNamaBarang = $value['txtNamaBarang'];
                 $dataBarang->intJumlah = $value['intJumlah'];
                 $dataBarang->txtSatuan = $value['txtSatuan'];
                 $dataBarang->txtKeterangan = $value['txtKeterangan'];
                 $dataBarang->save();
             }
+        } else {
+            $fileModal = new Purchase();
+            $fileModal->muser_id = $request->muser_id;
+            $fileModal->mdepartment_id = Auth::user()->mdepartment_id;
+            $fileModal->txtSlug = Str::slug($no_dok);
+            $fileModal->txtNoDok = $no_dok;
+            $fileModal->txtNoPurchaseRequest = $request->txtNoPurchaseRequest;
+            $fileModal->dtmTanggalKebutuhan = $request->dtmTanggalKebutuhan;
+            $fileModal->txtReason = $request->txtReason;
+            $fileModal->status = "in process";
 
-            Alert::success("Berhasil", "Request dengan nomor $request->txtNoPurchaseRequest berhasil ditambahkan");
-            return redirect()->route('purchase-requests.index');
+            $fileModal->save();
+
+            $purchase_id = Purchase::where('txtNoPurchaseRequest', $request->txtNoPurchaseRequest)->first();
+
+            foreach ($request->barang as $key => $value) {
+                $dataBarang = new Barang();
+                $dataBarang->mpurchase_id = $purchase_id->id;
+                $dataBarang->txtNamaBarang = $value['txtNamaBarang'];
+                $dataBarang->intJumlah = $value['intJumlah'];
+                $dataBarang->txtSatuan = $value['txtSatuan'];
+                $dataBarang->txtKeterangan = $value['txtKeterangan'];
+                $dataBarang->save();
+            }
         }
+        Alert::success("Berhasil", "Request dengan nomor $request->txtNoPurchaseRequest berhasil ditambahkan");
+        return redirect()->route('purchase-requests.index');
     }
 
     public function approve(Purchase $purchase)
