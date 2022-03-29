@@ -5,6 +5,7 @@ use App\Http\Controllers\Back\AssignPermissionController;
 use App\Http\Controllers\Back\AssignUserController;
 use App\Http\Controllers\Back\DashboardController;
 use App\Http\Controllers\Back\DepartmentController;
+use App\Http\Controllers\Back\InputDataController;
 use App\Http\Controllers\Back\PermissionController;
 use App\Http\Controllers\Back\PurchaseRequestController;
 use App\Http\Controllers\Back\ReportController;
@@ -101,6 +102,10 @@ Route::group(
                 ->name('purchase-requests.create');
             Route::get('purchase-requests/{purchase:txtSlug}', 'show')
                 ->name('purchase-requests.show');
+            Route::post('purchase-requests/{purchase:txtSlug}/create', 'createInput')
+                ->name('purchase-requests.create.input');
+            Route::post('purchase-requests/create-input', 'storeInput')
+                ->name('purchase-requests.store.input');
             Route::post('purchase-requests/create', 'store')
                 ->name('purchase-requests.store');
             Route::get('purchase-requests/approve/{purchase:txtSlug}', 'showApprove')
