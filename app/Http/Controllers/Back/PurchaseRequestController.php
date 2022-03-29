@@ -4,16 +4,17 @@ namespace App\Http\Controllers\Back;
 
 use Carbon\Carbon;
 use App\Models\User;
+use App\Models\Input;
 use App\Models\Barang;
 use App\Models\Purchase;
 use App\Models\Department;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use JetBrains\PhpStorm\Pure;
 use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\PurchaseRequest;
-use JetBrains\PhpStorm\Pure;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class PurchaseRequestController extends Controller
@@ -35,10 +36,19 @@ class PurchaseRequestController extends Controller
 
     public function show(Purchase $purchase)
     {
-        return view('back.purchase.show', [
-            'title' => 'Purchase Request',
-            'purchase' => $purchase
-        ]);
+        if (Auth()->user()->hasRole('buyer')) {
+            $barangs = Barang::where('mpurchase_id', $purchase->id)->get();
+            return view('back.purchase.input.index', [
+                'title' => 'Purchase',
+                'barangs' => $barangs,
+                'purchase' => $purchase,
+            ]);
+        } else {
+            return view('back.purchase.show', [
+                'title' => 'Purchase Request',
+                'purchase' => $purchase
+            ]);
+        }
     }
 
     public function create()
@@ -46,6 +56,22 @@ class PurchaseRequestController extends Controller
         return view('back.purchase.create', [
             'title' => 'Purchase Request',
         ]);
+    }
+
+    public function createInput(Request $request)
+    {
+        $input = $request->all();
+        if ($request->input('noInput')) {
+            $input['noInput'] = $request->input('noInput');
+            $total = count($input['noInput']);
+            $inputBarangs = Barang::whereIn('id', [$input['noInput'][0], $input['noInput'][$total - 1]])->get();
+            return view('back.purchase.input.create', [
+                'title' => "Input Data",
+                'inputBarangs' => $inputBarangs
+            ]);
+        } else {
+            return redirect()->back()->with('message', 'Tidak ada item yang dipilih');
+        }
     }
 
     public function store(PurchaseRequest $request)
@@ -112,6 +138,27 @@ class PurchaseRequestController extends Controller
             }
         }
         Alert::success("Berhasil", "Request dengan nomor $request->txtNoPurchaseRequest berhasil ditambahkan");
+        return redirect()->route('purchase-requests.index');
+    }
+
+    public function storeInput(Request $request)
+    {
+        foreach ($request->mbarang_id as $key => $value) {
+            Input::create([
+                'mpurchase_id' => $request->mpurchase_id,
+                'mbarang_id' => $value,
+                'txtNomorPo' => $request->txtNomorPo,
+                'txtNamaSupplier' => $request->txtNamaSupplier,
+                'intHarga' => $request->intHarga,
+                'dtmTanggalKedatangan' => $request->dtmTanggalKedatangan,
+            ]);
+        }
+
+        Purchase::where('id', $request->mpurchase_id)->update([
+            'status' => 'in process by buyer'
+        ]);
+
+        Alert::success("Berhasil", "Input dengan nomor $request->txtNomorPo berhasil ditambahkan");
         return redirect()->route('purchase-requests.index');
     }
 
