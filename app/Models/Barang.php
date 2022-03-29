@@ -15,4 +15,14 @@ class Barang extends Model
 
     const CREATED_AT = "dtmInsertedBy";
     const UPDATED_AT = "dtmUpdatedBy";
+
+    public function purchase()
+    {
+        return $this->belongsTo("App\Models\Purchase", 'mpurchase_id');
+    }
+
+    public function inputs()
+    {
+        return $this->hasOne('App\Models\Input', 'mbarang_id');
+    }
 }
