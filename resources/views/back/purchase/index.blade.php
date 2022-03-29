@@ -7,12 +7,14 @@
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title">List Request</h3>
+                @hasrole('user')
                 <div class="card-tools">
                     <a href="{{ route('purchase-requests.create') }}" class="btn btn-primary">Purchase Request</a>
                     <button type="button" class="btn btn-tool" data-card-widget="collapse">
                         <i class="fas fa-minus"></i>
                     </button>
                 </div>
+                @endhasrole
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -40,7 +42,7 @@
                                 <td>{{ $purchase->txtNoPurchaseRequest }}</td>
                                 <td>{{ $purchase->txtReason }}</td>
                                 <td>
-                                    @if($purchase->status == "in process")
+                                    @if($purchase->status == "in process" || $purchase->status == "in process by buyer")
                                     <span class="badge p-1 bg-warning">{{ $purchase->status }}</span>
                                     @elseif($purchase->status == "approved by dept head")
                                     <span class="badge p-1 bg-success">{{ $purchase->status }}</span>
