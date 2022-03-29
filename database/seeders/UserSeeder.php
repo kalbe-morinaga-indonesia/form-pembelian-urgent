@@ -165,6 +165,26 @@ class UserSeeder extends Seeder
             'txtUpdatedBy' => "System"
         ]);
 
+        $user10 = User::create([
+            'txtNik' => $faker->nik(),
+            'txtNama' => "Riska",
+            'txtUsername' => "riska",
+            'txtPassword' => bcrypt(12345678),
+            'mdepartment_id' => 8,
+            'txtInsertedBy' => "System",
+            'txtUpdatedBy' => "System"
+        ]);
+
+        $user11 = User::create([
+            'txtNik' => $faker->nik(),
+            'txtNama' => "Iwan",
+            'txtUsername' => "iwan",
+            'txtPassword' => bcrypt(12345678),
+            'mdepartment_id' => 8,
+            'txtInsertedBy' => "System",
+            'txtUpdatedBy' => "System"
+        ]);
+
         // assign permission role
         $role1->givePermissionTo('dashboard');
         $role1->givePermissionTo('logout');
@@ -205,5 +225,7 @@ class UserSeeder extends Seeder
         $user7->assignRole($role2);
         $user8->assignRole($role2);
         $user9->assignRole($role2);
+        $user10->assignRole($role3);
+        $user11->assignRole($role4);
     }
 }
