@@ -13,6 +13,11 @@ class Input extends Model
 
     protected $guarded = [];
 
+    public function mbarang()
+    {
+        return $this->belongsTo('App\Models\Barang');
+    }
+
     const CREATED_AT = "dtmInsertedBy";
     const UPDATED_AT = "dtmUpdatedBy";
 }
