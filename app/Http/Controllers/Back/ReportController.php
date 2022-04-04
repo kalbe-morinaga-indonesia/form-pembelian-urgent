@@ -11,7 +11,6 @@ class ReportController extends Controller
 {
     public function index()
     {
-
         if (Auth()->user()->hasRole('user')) {
             $approve = Purchase::where([
                 ['muser_id', Auth::user()->id],
