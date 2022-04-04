@@ -4,10 +4,11 @@ namespace App\Http\Controllers\Back;
 
 use Carbon\Carbon;
 use App\Models\Purchase;
+use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
@@ -40,11 +41,6 @@ class DashboardController extends Controller
             ->groupBy('mpurchases.mdepartment_id')
             ->get();
 
-        // $reasons = DB::table('mpurchases')
-        //     ->select('txtReason', DB::raw("count(case when txtReason='Breakdown' THEN 1  END) As Breakdown)"))
-        //     ->groupBy(DB::raw("Month(dtmInsertedBy)"))
-        //     ->get();
-
         $reasons = DB::select(
             "SELECT txtReason,
                     COUNT(CASE WHEN txtReason='Breakdown' THEN 1  END) As breakdown,
@@ -56,15 +52,41 @@ class DashboardController extends Controller
                     FROM mpurchases GROUP BY MONTH(`dtmInsertedBy`), YEAR(`dtmInsertedBy`)"
         );
 
-
-
-        // $reasons = Purchase::get();
         $result[] = ['month', 'Breakdown', 'Human Error', 'Iddle Produksi', 'Safety K3'];
         foreach ($reasons as $key => $value) {
             $month = Carbon::createFromFormat('Y-m-d H:i:s', $value->dtmInsertedBy)->format('M');
             $result[++$key] = [$month, (int)$value->breakdown, (int)$value->humanError, (int)$value->iddleProduksi, (int)$value->safetyK3];
         }
 
+        // Report
+        if (Auth()->user()->hasRole('user')) {
+            $approve = Purchase::where([
+                ['muser_id', Auth::user()->id],
+                ['status', 'approved by dept head']
+            ])->orWhere([
+                ['muser_id', Auth::user()->id],
+                ['status', 'approved by pu spv']
+            ])->get();
+            $not_approve = Purchase::where([
+                ['muser_id', Auth::user()->id],
+                ['status', 'rejected by dept head']
+            ])->get();
+            $need_to_approve = Purchase::where([
+                ['muser_id', Auth::user()->id],
+                ['status', 'in process']
+            ])->orWhere([
+                ['muser_id', Auth::user()->id],
+                ['status', 'in process by buyer']
+            ])->get();
+        } else if (Auth()->user()->hasRole('buyer')) {
+            $approve = Purchase::where('status', 'approved by pu spv')->get();
+            $not_approve = Purchase::where('status', 'rejected by pu spv')->get();
+            $need_to_approve = Purchase::where('status', 'in process by buyer')->get();
+        } else {
+            $approve = Purchase::where('status', 'approved by dept head')->get();
+            $not_approve = Purchase::where('status', 'rejected by dept head')->get();
+            $need_to_approve = Purchase::where('status', 'in process')->get();
+        }
 
         return view('back.dashboard', [
             'title' => 'Dashboard',
@@ -74,15 +96,10 @@ class DashboardController extends Controller
             'donuts_daily' => $donuts_daily,
             'donuts_monthly' => $donuts_monthly,
             'donuts_yearly' => $donuts_yearly,
-            'product' => json_encode($result)
+            'product' => json_encode($result),
+            'approve' => $approve,
+            'not_approve' => $not_approve,
+            'need_to_approve' => $need_to_approve
         ]);
-    }
-
-    public function chart()
-    {
-        // $purchase = Purchase::get();
-
-
-        return response()->json($purchase);
     }
 }
