@@ -27,7 +27,7 @@
                                 <th>Reason</th>
                                 <th>Status</th>
                                 <th>Last Update</th>
-                                @hasrole('dept_head|user')
+                                @hasrole('dept_head|user|pu_svp')
                                 <th>Action</th>
                                 @endhasrole
                             </tr>
@@ -44,9 +44,9 @@
                                 <td>
                                     @if($purchase->status == "in process" || $purchase->status == "in process by buyer")
                                     <span class="badge p-1 bg-warning">{{ $purchase->status }}</span>
-                                    @elseif($purchase->status == "approved by dept head")
+                                    @elseif($purchase->status == "approved by dept head" || $purchase->status == "approved by pu spv")
                                     <span class="badge p-1 bg-success">{{ $purchase->status }}</span>
-                                    @elseif($purchase->status == "rejected by dept head")
+                                    @elseif($purchase->status == "rejected by dept head" || $purchase->status == "rejected by pu spv")
                                     <span class="badge p-1 bg-danger">{{ $purchase->status }}</span>
                                     @endif
                                 </td>
@@ -54,7 +54,15 @@
                                 @hasrole('dept_head')
                                 <td>
                                     @if($purchase->status == "in process" || $purchase->status == "rejected by dept head")
-                                    <a href="{{ route('purchase-requests.show-approve',['purchase' => $purchase->txtSlug]) }}" class="btn btn-primary" disabled>Approve</a>
+                                    <a href="{{ route('purchase-requests.show-approve',['purchase' => $purchase->txtSlug]) }}" class="btn btn-primary">Approve</a>
+                                    @endif
+                                </td>
+                                @endhasrole
+                                @hasrole('pu_svp')
+                                <td>
+                                    @if($purchase->status == "in process by buyer")
+                                    <a href="{{ route('purchase-requests.show-approve',['purchase' => $purchase->txtSlug]) }}"
+                                        class="btn btn-primary">Approve</a>
                                     @endif
                                 </td>
                                 @endhasrole
@@ -70,7 +78,7 @@
                             </tr>
                             @empty
                             <tr>
-                                <td colspan="6">Tidak ada data</td>
+                                <td colspan="7">Tidak ada data</td>
                             </tr>
                             @endforelse
                         </tbody>

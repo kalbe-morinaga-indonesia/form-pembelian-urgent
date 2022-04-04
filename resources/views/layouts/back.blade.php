@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="{{ asset('theme/plugins/jqvmap/jqvmap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('theme/dist/css/adminlte.min.css') }}">
     <link rel="stylesheet" href="{{ asset('theme/plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('theme/plugins/daterangepicker/daterangepicker.css') }}}">
+    <link rel="stylesheet" href="{{ asset('theme/plugins/daterangepicker/daterangepicker.css') }}">
     <link rel="stylesheet" href="{{ asset('theme/plugins/summernote/summernote-bs4.min.css') }}">
     <!-- DataTables -->
     <link rel="stylesheet" href="{{ asset('theme/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
@@ -25,6 +25,8 @@
     <link rel="stylesheet" href="{{ asset('theme/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('theme/plugins/select2/css/select2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('theme/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -108,8 +110,10 @@
 
     <script src="{{ asset('theme/plugins/bs-custom-file-input/bs-custom-file-input.min.js') }}"></script>
     <script src="{{ asset('theme/plugins/select2/js/select2.full.min.js') }}"></script>
+    <!-- ChartJS -->
     @include('sweetalert::alert')
     @stack('script-datatable')
+    @stack('script-chart')
     @stack('script-purchase')
     <script>
         $(function () {
@@ -126,6 +130,7 @@
         });
 
     </script>
+
 </body>
 
 </html>

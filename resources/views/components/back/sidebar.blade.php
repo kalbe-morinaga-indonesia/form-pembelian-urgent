@@ -100,7 +100,7 @@
         </li>
         @endhasrole
 
-        @hasrole('dept_head')
+        @hasrole('dept_head|buyer|pu_svp')
         <li class="nav-item">
             <a href="{{ route('purchase-requests.index') }}" class="nav-link">
                 <i class="nav-icon fas fa-list"></i>
@@ -119,7 +119,7 @@
         </li>
         @endhasrole
 
-        @hasrole('buyer')
+        {{-- @hasrole('buyer')
         <li class="nav-item">
             <a href="{{ route('purchase-requests.index') }}" class="nav-link">
                 <i class="nav-icon fas fa-list"></i>
@@ -136,7 +136,7 @@
                 </p>
             </a>
         </li>
-        @endhasrole
+        @endhasrole --}}
 
         <li class="nav-item">
             <a href="{{ route('logout') }}" class="nav-link" onclick="event.preventDefault();

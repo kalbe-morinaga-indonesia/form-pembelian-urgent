@@ -25,15 +25,32 @@
                         value="{{ $purchase->txtNoPurchaseRequest }}" readonly>
                 </div>
                 <div class="form-group">
-                    <label for="dtmDateCreated">No PR/WO</label>
-                    <input type="date" name="dtmDateCreated" id="dtmDateCreated" class="form-control"
-                        value="{{ $purchase->dtmDateCreated }}" readonly>
+                    <label for="dtmTanggalKebutuhan">Tanggal Kebutuhan</label>
+                    <input type="date" name="dtmTanggalKebutuhan" id="dtmTanggalKebutuhan" class="form-control"
+                        value="{{ $purchase->dtmTanggalKebutuhan }}" readonly>
+                </div>
+                @hasrole('pu_svp')
+                <div class="form-group">
+                    <label for="mdepartment_id">No PO</label>
+                    <input type="text" name="mdepartment_id" id="mdepartment_id" class="form-control"
+                        value="{{ $purchase->minput->txtNomorPO ?? '-' }}" readonly>
                 </div>
                 <div class="form-group">
-                    <label for="dtmDateRequired">No PR/WO</label>
-                    <input type="date" name="dtmDateRequired" id="dtmDateRequired" class="form-control"
-                        value="{{ $purchase->dtmDateRequired }}" readonly>
+                    <label for="mdepartment_id">Nama Supplier</label>
+                    <input type="text" name="mdepartment_id" id="mdepartment_id" class="form-control"
+                        value="{{ $purchase->minput->txtNamaSupplier ?? '-' }}" readonly>
                 </div>
+                <div class="form-group">
+                    <label for="mdepartment_id">Harga</label>
+                    <input type="text" name="mdepartment_id" id="mdepartment_id" class="form-control"
+                        value="{{ $purchase->minput->intHarga ?? '-' }}" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="mdepartment_id">Tanggal Kedatangan</label>
+                    <input type="text" name="mdepartment_id" id="mdepartment_id" class="form-control"
+                        value="{{ $purchase->minput->dtmTanggalKedatangan ?? '-' }}" readonly>
+                </div>
+                @endhasrole
 
                 <div class="table-responsive">
                     <table class="table table-hover">
