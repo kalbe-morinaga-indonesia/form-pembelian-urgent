@@ -52,7 +52,8 @@ Route::group(
     function () {
 
         Route::controller(DashboardController::class)->group(function () {
-            Route::get('/dashboard', 'index')->name('dashboard');
+            Route::get('dashboard', 'index')->name('dashboard');
+            Route::get('dashboard/chart', 'chart');
         });
 
         Route::resources([

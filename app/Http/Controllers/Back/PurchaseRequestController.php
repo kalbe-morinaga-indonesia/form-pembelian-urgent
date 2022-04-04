@@ -24,6 +24,15 @@ class PurchaseRequestController extends Controller
         $today = Carbon::now();
         if (Auth()->user()->hasRole('user')) {
             $purchases = Purchase::where('muser_id', Auth::user()->id)->get();
+        } else if (Auth()->user()->hasRole('buyer')) {
+            $purchases = Purchase::where('status', 'approved by dept head')
+                ->orWhere('status', 'in process by buyer')
+                ->get();
+        } else if (Auth()->user()->hasRole('pu_svp')) {
+            $purchases = Purchase::where('status', 'in process by buyer')
+                ->orWhere('status', 'approved by pu spv')
+                ->orWhere('status', 'rejected by pu spv')
+                ->get();
         } else {
             $purchases = Purchase::orderBy('dtmInsertedBy', 'desc')->get();
         }
@@ -164,6 +173,7 @@ class PurchaseRequestController extends Controller
 
     public function showApprove(Purchase $purchase)
     {
+
         $departments = Department::get();
         if ($purchase->status == "approved by dept head") {
             return redirect()->route('purchase-requests.index');
@@ -178,15 +188,28 @@ class PurchaseRequestController extends Controller
 
     public function approve(Purchase $purchase, Request $request)
     {
-        if ($request->submit == "yes") {
-            Purchase::where('id', $purchase->id)->update([
-                'status' => "approved by dept head"
-            ]);
-        } else {
-            Purchase::where('id', $purchase->id)->update([
-                'status' => "rejected by dept head"
-            ]);
+        if (Auth()->user()->hasRole('pu_svp')) {
+            if ($request->submit == "yes") {
+                Purchase::where('id', $purchase->id)->update([
+                    'status' => "approved by pu spv"
+                ]);
+            } else {
+                Purchase::where('id', $purchase->id)->update([
+                    'status' => "rejected by pu spv"
+                ]);
+            }
+        } else if (Auth()->user()->hasRole('dept_head')) {
+            if ($request->submit == "yes") {
+                Purchase::where('id', $purchase->id)->update([
+                    'status' => "approved by dept head"
+                ]);
+            } else {
+                Purchase::where('id', $purchase->id)->update([
+                    'status' => "rejected by dept head"
+                ]);
+            }
         }
+
 
         return redirect()->route('purchase-requests.index');
     }

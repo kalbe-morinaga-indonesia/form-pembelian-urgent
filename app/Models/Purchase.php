@@ -31,4 +31,9 @@ class Purchase extends Model
     {
         return $this->hasMany('App\Models\Barang', 'mpurchase_id');
     }
+
+    public function minput()
+    {
+        return $this->hasOne('App\Models\Input', 'mpurchase_id');
+    }
 }
