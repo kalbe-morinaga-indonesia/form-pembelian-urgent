@@ -27,6 +27,7 @@ class PurchaseRequestController extends Controller
         } else if (Auth()->user()->hasRole('buyer')) {
             $purchases = Purchase::where('status', 'approved by dept head')
                 ->orWhere('status', 'in process by buyer')
+                ->orWhere('status', 'approved by pu spv')
                 ->get();
         } else if (Auth()->user()->hasRole('pu_svp')) {
             $purchases = Purchase::where('status', 'in process by buyer')
@@ -60,10 +61,11 @@ class PurchaseRequestController extends Controller
         }
     }
 
-    public function create()
+    public function create(Purchase $purchase)
     {
         return view('back.purchase.create', [
             'title' => 'Purchase Request',
+            'purchase' => $purchase
         ]);
     }
 
@@ -178,10 +180,12 @@ class PurchaseRequestController extends Controller
         if ($purchase->status == "approved by dept head") {
             return redirect()->route('purchase-requests.index');
         } else {
+            $inputs = Input::where('mpurchase_id', $purchase->id)->get();
             return view('back.purchase.approve', [
                 'title' => 'Approve',
                 'purchase' => $purchase,
-                'departments' => $departments
+                'departments' => $departments,
+                'inputs' => $inputs
             ]);
         }
     }
@@ -212,5 +216,13 @@ class PurchaseRequestController extends Controller
 
 
         return redirect()->route('purchase-requests.index');
+    }
+
+    public function edit(Purchase $purchase)
+    {
+        return view('back.purchase.edit', [
+            'title' => 'Purchase Request',
+            'purchase' => $purchase
+        ]);
     }
 }
