@@ -37,6 +37,50 @@
         </div>
     </div>
 </div>
+@hasrole('user|buyer')
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="d-flex justify-content-between">
+                    <h3 class="card-title">Report</h3>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4 col-sm-6 col-12">
+                        <div class="info-box">
+                            <span class="info-box-icon bg-success"><i class="far fa-envelope"></i></span>
+                            <div class="info-box-content">
+                                <span class="info-box-text">Approve</span>
+                                <span class="info-box-number">{{ $approve->count() }}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6 col-12">
+                        <div class="info-box">
+                            <span class="info-box-icon bg-danger"><i class="far fa-flag"></i></span>
+                            <div class="info-box-content">
+                                <span class="info-box-text">Not Approve</span>
+                                <span class="info-box-number">{{ $not_approve->count() }}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6 col-12">
+                        <div class="info-box">
+                            <span class="info-box-icon bg-warning"><i class="far fa-copy"></i></span>
+                            <div class="info-box-content">
+                                <span class="info-box-text">Need to Approve</span>
+                                <span class="info-box-number">{{ $need_to_approve->count() }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endhasrole
 <div class="row">
     <div class="col-md-12">
         <div class="card">
@@ -53,7 +97,6 @@
     </div>
 </div>
 <div class="row">
-
     <div class="col-md-12">
         <div class="card">
             <div class="card-header d-flex p-0">
@@ -107,7 +150,6 @@
     }
 </script>
 <script>
-
     $(document).ready(function () {
                 var donutChartCanvasDaily = $('#canvas-daily').get(0).getContext('2d')
                 var donutData = {
@@ -201,10 +243,6 @@
                     data: donutData,
                     options: donutOptions
                 })
-
-                //-------------
-                //- BAR CHART -
-                //-------------
 });
 
 </script>

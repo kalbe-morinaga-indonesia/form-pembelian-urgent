@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <link rel="stylesheet" href="{{ asset('theme/plugins/jqvmap/jqvmap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('theme/dist/css/adminlte.min.css') }}">
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 </head>
 
 <body class="hold-transition">
@@ -82,6 +83,8 @@
     <script src="{{ asset('theme/plugins/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('theme/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('theme/dist/js/adminlte.js') }}"></script>
+    <script src="{{ asset('theme/plugins/chart.js/Chart.min.js') }}"></script>
+    @stack('script-chart')
 </body>
 
 </html>

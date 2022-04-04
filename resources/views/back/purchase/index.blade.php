@@ -53,7 +53,7 @@
                                 <td>{{ $purchase->dtmUpdatedBy->diffForHumans() }}</td>
                                 @hasrole('dept_head')
                                 <td>
-                                    @if($purchase->status == "in process" || $purchase->status == "rejected by dept head")
+                                    @if($purchase->status == "in process")
                                     <a href="{{ route('purchase-requests.show-approve',['purchase' => $purchase->txtSlug]) }}" class="btn btn-primary">Approve</a>
                                     @endif
                                 </td>
@@ -69,7 +69,7 @@
                                 @hasrole('user')
                                 <td>
                                     @if ($purchase->status == "rejected by dept head")
-                                        <a href="#" class="btn btn-warning btn-sm">Edit</a>
+                                        <a href="{{route('purchase-requests.edit',['purchase' => $purchase->txtSlug])}}" class="btn btn-warning btn-sm">Edit</a>
                                     @else
                                         <button class="btn btn-warning btn-sm" disabled>Edit</button>
                                     @endif
@@ -78,7 +78,10 @@
                             </tr>
                             @empty
                             <tr>
-                                <td colspan="7">Tidak ada data</td>
+                                <td colspan="7">
+                                    <img src="{{asset('theme/dist/img/no_data.png')}}" alt="Tidak Ada Data" class="img-fluid d-block mx-auto mt-4" width="200">
+                                    <p class="text-center">Tidak ada data...</p>
+                                </td>
                             </tr>
                             @endforelse
                         </tbody>

@@ -50,8 +50,41 @@
                     <input type="text" name="mdepartment_id" id="mdepartment_id" class="form-control"
                         value="{{ $purchase->minput->dtmTanggalKedatangan ?? '-' }}" readonly>
                 </div>
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead class="bg-primary text-white">
+                            <tr>
+                                <th>No</th>
+                                <th>Item Code</th>
+                                <th>Nama Barang</th>
+                                <th>Jumlah</th>
+                                <th>Satuan</th>
+                                <th>Keterangan</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse ($inputs as $barang)
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $barang->mbarang->itemCode }}</td>
+                                <td>{{ $barang->mbarang->txtNamaBarang }}</td>
+                                <td>{{ $barang->mbarang->intJumlah }}</td>
+                                <td>{{ $barang->mbarang->txtSatuan }}</td>
+                                <td>{{ $barang->mbarang->txtKeterangan }}</td>
+                            </tr>
+                            @empty
+                            <td colspan="6">
+                                <img src="{{asset('theme/dist/img/no_data.png')}}" alt="Tidak Ada Data"
+                                    class="img-fluid d-block mx-auto mt-4" width="200">
+                                <p class="text-center">Tidak ada data...</p>
+                            </td>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
                 @endhasrole
 
+                @hasrole('dept_head')
                 <div class="table-responsive">
                     <table class="table table-hover">
                         <thead class="bg-primary text-white">
@@ -86,6 +119,7 @@
                         </tbody>
                     </table>
                 </div>
+                @endhasrole
 
                 <div class="form-group">
                     <label for="txtFile">File</label>

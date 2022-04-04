@@ -6,12 +6,12 @@
     <div class="col-md-12">
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title">Purchase Request</h3>
+                <h3 class="card-title">Edit Purchase Request</h3>
             </div>
             <div class="card-body">
                 <form action="{{ route('purchase-requests.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
-                    @include('back.purchase.form',['button' => 'Request'])
+                    @include('back.purchase.form',['button' => 'Edit Request'])
                 </form>
             </div>
         </div>

@@ -81,45 +81,21 @@
         </li>
         @endhasrole
 
-        @hasrole('user')
+        @hasrole('user|dept_head|buyer|pu_svp')
         <li class="nav-item">
             <a href="{{ route('purchase-requests.index') }}" class="nav-link">
                 <i class="nav-icon fas fa-list"></i>
                 <p>
                     List Request
                 </p>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a href="{{ route('reports.index') }}" class="nav-link">
-                <i class="nav-icon fas fa-file-alt"></i>
-                <p>
-                    Report
-                </p>
+                @hasrole('dept_head')
+                <span class="badge bg-primary">{{$count_in_process}}</span>
+                @endhasrole
             </a>
         </li>
         @endhasrole
 
-        @hasrole('dept_head|buyer|pu_svp')
-        <li class="nav-item">
-            <a href="{{ route('purchase-requests.index') }}" class="nav-link">
-                <i class="nav-icon fas fa-list"></i>
-                <p>
-                    List Request
-                </p>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a href="{{ route('reports.index') }}" class="nav-link">
-                <i class="nav-icon fas fa-file-alt"></i>
-                <p>
-                    Report
-                </p>
-            </a>
-        </li>
-        @endhasrole
-
-        {{-- @hasrole('buyer')
+        {{-- @hasrole('dept_head|buyer|pu_svp')
         <li class="nav-item">
             <a href="{{ route('purchase-requests.index') }}" class="nav-link">
                 <i class="nav-icon fas fa-list"></i>

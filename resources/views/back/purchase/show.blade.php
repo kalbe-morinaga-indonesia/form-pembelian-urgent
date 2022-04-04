@@ -23,11 +23,13 @@
                             <p class="fs--1 text-left mb-0">No. Dok</p>
                             <p class="fs--1 text-left mb-0">No. Rev</p>
                             <p class="fs--1 text-left mb-0">Tanggal Berlaku</p>
+                            <p class="fs--1 text-left mb-0">Halaman</p>
                         </div>
                         <div class="m-2">
-                            <p class="fs--1 text-left mb-0">: {{$purchase->txtNoDok}}</p>
+                            <p class="fs--1 text-left mb-0">: FR/BDA-PU/FPU/008</p>
                             <p class="fs--1 text-left mb-0">: 04</p>
                             <p class="fs--1 text-left mb-0">: 01 Januari 2022</p>
+                            <p class="fs--1 text-left mb-0">: 1 dari 1</p>
                         </div>
                     </div>
                     <div class="col-12">
@@ -35,29 +37,33 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-4">
-                        <div class="d-flex justify-content-between">
-                            <p>Nomor PR / WO</p>
-                            <p>{{ $purchase->txtNoPurchaseRequest }}</p>
-                        </div>
-                        <div class="d-flex justify-content-between">
-                            <p>Tanggal Dibuat</p>
-                            <p>{{ $purchase->dtmInsertedBy->format("d M Y") }}</p>
-                        </div>
-                        <div class="d-flex justify-content-between">
-                            <p>Tanggal Dibutuhkan</p>
-                            <p>{{ date("d M Y", strtotime($purchase->dtmTanggalKebutuhan)) }}</p>
-                        </div>
+                    <div class="col-md-6">
+                        <table class="table table-borderless">
+                            <tr>
+                                <td>Nomor PR/WO</td>
+                                <td>{{ $purchase->txtNoPurchaseRequest }}</td>
+                            </tr>
+                            <tr>
+                                <td>Tanggal Dibuat</td>
+                                <td>{{ $purchase->dtmInsertedBy->format("d M Y") }}</td>
+                            </tr>
+                            <tr>
+                                <td>Tanggal Dibutuhkan</td>
+                                <td>{{ date("d M Y", strtotime($purchase->dtmTanggalKebutuhan)) }}</td>
+                            </tr>
+                        </table>
                     </div>
-                    <div class="col-md-4 offset-4">
-                        <div class="d-flex justify-content-between">
-                            <p>Nama Requester</p>
-                            <p>{{ $purchase->muser->txtNama }}</p>
-                        </div>
-                        <div class="d-flex justify-content-between">
-                            <p>Department</p>
-                            <p>{{ $purchase->mdepartment->txtNamaDept }}</p>
-                        </div>
+                    <div class="col-md-6">
+                        <table class="table table-borderless">
+                            <tr>
+                                <td>Nama Requester</td>
+                                <td>{{ $purchase->muser->txtNama }}</td>
+                            </tr>
+                            <tr>
+                                <td>Department</td>
+                                <td>{{ $purchase->mdepartment->txtNamaDept }}</td>
+                            </tr>
+                        </table>
                     </div>
                 </div>
                 <div class="table-responsive scrollbar mt-4 fs--1">
@@ -73,7 +79,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($purchase->mbarangs as $barang)
+                            @forelse ($purchase->mbarangs as $barang)
                             <tr>
                                 <td class="align-middle">
                                     <h6 class="mb-0 text-nowrap">{{ $loop->iteration }}</h6>
@@ -94,12 +100,28 @@
                                     <h6 class="mb-0 text-nowrap">{{ $barang->txtKeterangan }}</h6>
                                 </td>
                             </tr>
-                            @endforeach
+                            @empty
+                            <tr>
+                                <td colspan="6">Tidak ada data...</td>
+                            </tr>
+                            @endforelse
                         </tbody>
                     </table>
                 </div>
-                <div class="row justify-content-end">
-                    <div class="col-auto">
+                <div class="row mt-4">
+                    <div class="col-md-4">
+                        <table class="table table-borderless">
+                            <tr>
+                                <td>Nomor Dok</td>
+                                <td>{{ $purchase->txtNoDok }}</td>
+                            </tr>
+                            <tr>
+                                <td>Reason</td>
+                                <td>{{ $purchase->txtReason }}</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="col-md-4 offset-4 ms-auto">
                         <table class="table table-sm fs--1 border">
                             <thead>
                                 <tr>
