@@ -2,6 +2,7 @@
 
 namespace App\View\Components\back;
 
+use App\Models\Purchase;
 use Illuminate\View\Component;
 
 class sidebar extends Component
@@ -23,6 +24,9 @@ class sidebar extends Component
      */
     public function render()
     {
-        return view('components.back.sidebar');
+        $in_process = Purchase::where('status', 'in process')->get()->count();
+        return view('components.back.sidebar', [
+            'count_in_process' => $in_process
+        ]);
     }
 }
