@@ -4,15 +4,13 @@
 @section('content')
 <div class="row">
     <div class="col-md-12">
-        <div class="card">
+        <div class="card" id="card">
             <div class="card-header">
                 <h3 class="card-title">Data User</h3>
                 <div class="card-tools">
                     <a href="{{ route('users.create') }}" class="btn btn-sm btn-primary">
-                        <i class="fas fa-plus mr-2"></i>Tambah User</a>
-                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                        <i class="fas fa-minus"></i>
-                    </button>
+                        <i class="fas fa-plus mr-2"></i>Tambah User
+                    </a>
                 </div>
             </div>
             <div class="card-body">
@@ -21,8 +19,7 @@
                         <thead class="">
                             <tr>
                                 <th>#</th>
-                                <th>NIK</th>
-                                <th>Username</th>
+                                <th>NIK (Nomor Induk Karyawan)</th>
                                 <th>Nama</th>
                                 <th>Nomor Handphone</th>
                                 <th>Tempat, Tanggal Lahir</th>
@@ -35,7 +32,6 @@
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $user->txtNik }}</td>
-                                <td>{{ $user->txtUsername }}</td>
                                 <td>{{ $user->txtNama }}</td>
                                 <td>{{ $user->txtNoHp ? $user->txtNoHp : 'n/a'  }}</td>
                                 <td>
@@ -61,15 +57,14 @@
                             </tr>
                             @empty
                             <tr>
-                                <td colspan="4">Tidak ada data</td>
+                                <td colspan="6">
+                                    <img src="{{asset('theme/dist/img/no_data.png')}}" alt="Tidak Ada Data" class="img-fluid d-block mx-auto mt-4"
+                                        width="200">
+                                    <p class="text-center">Tidak ada data...</p>
+                                </td>
                             </tr>
                             @endforelse
                         </tbody>
-                        <tfoot>
-                            <tr>
-                                <th colspan="8">Jumlah User : <code>{{ $users->count() }}</code></th>
-                            </tr>
-                        </tfoot>
                     </table>
                 </div>
             </div>
@@ -79,14 +74,9 @@
 
 @push('script-datatable')
 <script>
-    $(function () {
-        $("#userTable").DataTable({
-            "responsive": true,
-            "lengthChange": false,
-            "autoWidth": false,
-        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-    });
-
+$(document).ready( function () {
+    $('#userTable').DataTable();
+});
 </script>
 @endpush
 

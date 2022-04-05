@@ -1,7 +1,10 @@
     <div class="form-group">
-        <label for="txtNik">NIK (Nomor Induk Kependudukan) <span class="text-danger">*</span></label>
+        <label for="txtNik">NIK (Nomor Induk Karyawan) <span class="text-danger">*</span></label>
         <input type="text" class="form-control @error('txtNik') is-invalid  @enderror" name="txtNik" id="txtNik"
             placeholder="Masukkan NIK" value="{{ old('txtNik') ?? $user->txtNik }}" autofocus @if($user->txtNik) readonly @endif>
+        @if ($button === 'Tambah')
+            <small>Masukkan Nomor Induk Karyawan dengan benar karena tidak bisa diubah</small>
+        @endif
         @error('txtNik')
         <div class="text-danger">{{ $message }}</div>
         @enderror
@@ -45,14 +48,6 @@
                 @enderror
             </div>
         </div>
-    </div>
-    <div class="form-group">
-        <label for="txtUsername">Username <span class="text-danger">*</span></label>
-        <input type="text" class="form-control @error('txtUsername') is-invalid  @enderror" name="txtUsername"
-            id="txtUsername" placeholder="Masukkan Username" value="{{ old('txtUsername') ?? $user->txtUsername }}">
-        @error('txtUsername')
-        <div class="text-danger">{{ $message }}</div>
-        @enderror
     </div>
     @if ($button == 'Tambah')
         <div class="row">

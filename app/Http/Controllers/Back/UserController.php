@@ -46,7 +46,6 @@ class UserController extends Controller
             'txtNoHp' =>  $request->txtNoHp,
             'txtTempatLahir' =>  $request->txtTempatLahir,
             'dtmTanggalLahir' =>  $request->dtmTanggalLahir,
-            'txtUsername' =>  $request->txtUsername,
             'txtPassword' =>  Hash::make($request->txtPassword),
             'txtAlamat' =>  $request->txtAlamat,
             'mdepartment_id' =>  $request->mdepartment_id,
@@ -76,7 +75,6 @@ class UserController extends Controller
             'txtNoHp' =>  $request->txtNoHp,
             'txtTempatLahir' =>  $request->txtTempatLahir,
             'dtmTanggalLahir' =>  $request->dtmTanggalLahir,
-            'txtUsername' =>  $request->txtUsername,
             'txtAlamat' =>  $request->txtAlamat,
             'mdepartment_id' =>  $request->mdepartment_id,
         ]);
@@ -88,7 +86,7 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         $user->delete();
-        Alert::success("Berhasil", "Data user $user->txtNama berhasil diubah");
+        Alert::success("Berhasil", "Data user $user->txtNama berhasil dihapus");
         return redirect()->route('users.index');
     }
 }
