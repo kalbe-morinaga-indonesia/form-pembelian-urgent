@@ -20,7 +20,6 @@ class CreateMusersTable extends Migration
             $table->string('txtNoHp')->nullable();
             $table->string('txtTempatLahir')->nullable();
             $table->date('dtmTanggalLahir')->nullable();
-            $table->string('txtUsername')->unique();
             $table->string('txtPassword');
             $table->text('txtAlamat')->nullable();
             $table->foreignId('mdepartment_id')->constrained()->onDelete('cascade');
