@@ -76,111 +76,173 @@ class UserSeeder extends Seeder
 
         // create user
         $user1 = User::create([
-            'txtNik' => $faker->nik(),
-            'txtNama' => "Budi Setiawan",
-            'txtUsername' => "budisetiawan",
-            'txtPassword' => bcrypt(12345678),
+            'txtNik' => "K190900331",
+            'txtNama' => "Rakha Adi Putra",
+            'txtPassword' => bcrypt("Kalbemorinaga"),
             'mdepartment_id' => 1,
             'txtInsertedBy' => "System",
             'txtUpdatedBy' => "System"
         ]);
 
         $user2 = User::create([
-            'txtNik' => $faker->nik(),
+            'txtNik' => "120292518",
             'txtNama' => "Zaini Ardhiansyah",
-            'txtUsername' => "zaini_ardhiansyah",
-            'txtPassword' => bcrypt(12345678),
+            'txtPassword' => bcrypt("Kalbemorinaga"),
             'mdepartment_id' => 1,
             'txtInsertedBy' => "System",
             'txtUpdatedBy' => "System"
         ]);
 
         $user3 = User::create([
-            'txtNik' => $faker->nik(),
+            'txtNik' => "120292515",
             'txtNama' => "Rudi Sugiarto",
-            'txtUsername' => "rudi_sugiarto",
-            'txtPassword' => bcrypt(12345678),
+            'txtPassword' => bcrypt("Kalbemorinaga"),
             'mdepartment_id' => 2,
             'txtInsertedBy' => "System",
             'txtUpdatedBy' => "System"
         ]);
 
         $user4 = User::create([
-            'txtNik' => $faker->nik(),
+            'txtNik' => "150791709",
             'txtNama' => "Happy Sugestie",
-            'txtUsername' => "happy_sugestie",
-            'txtPassword' => bcrypt(12345678),
+            'txtPassword' => bcrypt("Kalbemorinaga"),
             'mdepartment_id' => 3,
             'txtInsertedBy' => "System",
             'txtUpdatedBy' => "System"
         ]);
 
         $user5 = User::create([
-            'txtNik' => $faker->nik(),
+            'txtNik' => "220100111",
             'txtNama' => "Kukuh Gumilang",
-            'txtUsername' => "kukuh_gumilang",
-            'txtPassword' => bcrypt(12345678),
+            'txtPassword' => bcrypt("Kalbemorinaga"),
             'mdepartment_id' => 4,
             'txtInsertedBy' => "System",
             'txtUpdatedBy' => "System"
         ]);
 
         $user6 = User::create([
-            'txtNik' => $faker->nik(),
+            'txtNik' => "080900031",
             'txtNama' => "Dwi Kurniawan",
-            'txtUsername' => "dwi_kurniawan",
-            'txtPassword' => bcrypt(12345678),
+            'txtPassword' => bcrypt("Kalbemorinaga"),
             'mdepartment_id' => 5,
             'txtInsertedBy' => "System",
             'txtUpdatedBy' => "System"
         ]);
 
         $user7 = User::create([
-            'txtNik' => $faker->nik(),
+            'txtNik' => "100192702",
             'txtNama' => "Agung Hartanto",
-            'txtUsername' => "agung_hartanto",
-            'txtPassword' => bcrypt(12345678),
+            'txtPassword' => bcrypt("Kalbemorinaga"),
             'mdepartment_id' => 6,
             'txtInsertedBy' => "System",
             'txtUpdatedBy' => "System"
         ]);
 
         $user8 = User::create([
-            'txtNik' => $faker->nik(),
+            'txtNik' => "120892523",
             'txtNama' => "Mukti Wibowo",
-            'txtUsername' => "mukti_wibowo",
-            'txtPassword' => bcrypt(12345678),
+            'txtPassword' => bcrypt("Kalbemorinaga"),
             'mdepartment_id' => 7,
             'txtInsertedBy' => "System",
             'txtUpdatedBy' => "System"
         ]);
 
         $user9 = User::create([
-            'txtNik' => $faker->nik(),
+            'txtNik' => "120292511",
             'txtNama' => "Ahmad Sahroni",
-            'txtUsername' => "ahmad_sahroni",
-            'txtPassword' => bcrypt(12345678),
+            'txtPassword' => bcrypt("Kalbemorinaga"),
             'mdepartment_id' => 8,
             'txtInsertedBy' => "System",
             'txtUpdatedBy' => "System"
         ]);
 
+        // dept head
         $user10 = User::create([
-            'txtNik' => $faker->nik(),
-            'txtNama' => "Riska",
-            'txtUsername' => "riska",
-            'txtPassword' => bcrypt(12345678),
-            'mdepartment_id' => 8,
+            'txtNik' => "050700014",
+            'txtNama' => "Didik Budiarto",
+            'txtPassword' => bcrypt("Kalbemorinaga"),
+            'mdepartment_id' => 1,
             'txtInsertedBy' => "System",
             'txtUpdatedBy' => "System"
         ]);
 
         $user11 = User::create([
-            'txtNik' => $faker->nik(),
-            'txtNama' => "Iwan",
-            'txtUsername' => "iwan",
-            'txtPassword' => bcrypt(12345678),
+            'txtNik' => "130100005",
+            'txtNama' => "Ambar Kusumo Nugroho",
+            'txtPassword' => bcrypt("Kalbemorinaga"),
             'mdepartment_id' => 8,
+            'txtInsertedBy' => "System",
+            'txtUpdatedBy' => "System"
+        ]);
+
+        $user12 = User::create([
+            'txtNik' => "180600122",
+            'txtNama' => "Bernadheta Rismisari Handayani",
+            'txtPassword' => bcrypt("Kalbemorinaga"),
+            'mdepartment_id' => 3,
+            'txtInsertedBy' => "System",
+            'txtUpdatedBy' => "System"
+        ]);
+
+        $user13 = User::create([
+            'txtNik' => "110900055",
+            'txtNama' => "Hermansyah",
+            'txtPassword' => bcrypt("Kalbemorinaga"),
+            'mdepartment_id' => 2,
+            'txtInsertedBy' => "System",
+            'txtUpdatedBy' => "System"
+        ]);
+        $user14 = User::create([
+            'txtNik' => "100300009",
+            'txtNama' => "Nazarudin Rachman Sidik",
+            'txtPassword' => bcrypt("Kalbemorinaga"),
+            'mdepartment_id' => 6,
+            'txtInsertedBy' => "System",
+            'txtUpdatedBy' => "System"
+        ]);
+
+        $user15 = User::create([
+            'txtNik' => "070400065",
+            'txtNama' => "Marleny Patandung",
+            'txtPassword' => bcrypt("Kalbemorinaga"),
+            'mdepartment_id' => 7,
+            'txtInsertedBy' => "System",
+            'txtUpdatedBy' => "System"
+        ]);
+
+        $user16 = User::create([
+            'txtNik' => "150600127",
+            'txtNama' => "Yoppy Sukmandar",
+            'txtPassword' => bcrypt("Kalbemorinaga"),
+            'mdepartment_id' => 4,
+            'txtInsertedBy' => "System",
+            'txtUpdatedBy' => "System"
+        ]);
+
+        $user17 = User::create([
+            'txtNik' => "081000038",
+            'txtNama' => "Agus Firmansyah",
+            'txtPassword' => bcrypt("Kalbemorinaga"),
+            'mdepartment_id' => 5,
+            'txtInsertedBy' => "System",
+            'txtUpdatedBy' => "System"
+        ]);
+
+        // Buyer dan PU
+        $user18 = User::create([
+            'txtNik' => "100192704",
+            'txtNama' => "Ika Oktafianti",
+            'txtPassword' => bcrypt("Kalbemorinaga"),
+            'mdepartment_id' => 5,
+            'txtInsertedBy' => "System",
+            'txtUpdatedBy' => "System"
+        ]);
+
+        $user19 = User::create([
+            'txtNik' => $faker->nik(),
+            'txtNama' => "Asep Setiawan",
+            'txtPassword' => bcrypt("Kalbemorinaga"),
+            'mdepartment_id' => 5,
             'txtInsertedBy' => "System",
             'txtUpdatedBy' => "System"
         ]);
@@ -215,8 +277,10 @@ class UserSeeder extends Seeder
         $role1->givePermissionTo('add_assign_user');
         $role1->givePermissionTo('sync_assign_user');
 
-        // Assign role user
+        // assign role admin
         $user1->assignRole($role1);
+
+        // Assign role user
         $user2->assignRole($role2);
         $user3->assignRole($role2);
         $user4->assignRole($role2);
@@ -225,7 +289,25 @@ class UserSeeder extends Seeder
         $user7->assignRole($role2);
         $user8->assignRole($role2);
         $user9->assignRole($role2);
+
+        // assign role dept head
         $user10->assignRole($role3);
-        $user11->assignRole($role4);
+        $user11->assignRole($role3);
+        $user12->assignRole($role3);
+        $user13->assignRole($role3);
+        $user14->assignRole($role3);
+        $user15->assignRole($role3);
+        $user16->assignRole($role3);
+        $user17->assignRole($role3);
+
+        // assign role buyer
+        $user1->assignRole($role4);
+        $user18->assignRole($role4);
+        $user19->assignRole($role4);
+
+        // assign role pu
+        $user1->assignRole($role5);
+        $user18->assignRole($role5);
+        $user19->assignRole($role5);
     }
 }
