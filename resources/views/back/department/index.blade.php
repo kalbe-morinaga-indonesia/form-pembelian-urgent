@@ -10,9 +10,6 @@
                 <div class="card-tools">
                     <a href="{{ route('departments.create') }}" class="btn btn-sm btn-primary">Tambah
                         Department</a>
-                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                        <i class="fas fa-minus"></i>
-                    </button>
                 </div>
             </div>
             <div class="card-body">
@@ -33,7 +30,7 @@
                                 <td>
                                     <div class="btn-group">
                                         <a href="{{ route('departments.edit',['department' => $department->id]) }}"
-                                            class="btn btn-warning">Edit</a>
+                                            class="btn btn-warning mx-2">Edit</a>
                                         <form
                                             action="{{ route('departments.destroy',['department' => $department->id]) }}"
                                             method="POST">
@@ -48,7 +45,11 @@
                             </tr>
                             @empty
                             <tr>
-                                <td colspan="3">Tidak ada data...</td>
+                                <td colspan="3">
+                                    <img src="{{asset('theme/dist/img/no_data.png')}}" alt="Tidak Ada Data" class="img-fluid d-block mx-auto mt-4"
+                                        width="200">
+                                    <p class="text-center">Tidak ada data...</p>
+                                </td>
                             </tr>
                             @endforelse
                         </tbody>
@@ -61,14 +62,9 @@
 
 @push('script-datatable')
 <script>
-    $(function () {
-        $("#departmentTable").DataTable({
-            "responsive": true,
-            "lengthChange": false,
-            "autoWidth": false,
-        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+    $(document).ready(function () {
+        $('#departmentTable').DataTable();
     });
-
 </script>
 @endpush
 
