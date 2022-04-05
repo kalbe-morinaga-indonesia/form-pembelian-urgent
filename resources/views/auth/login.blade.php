@@ -15,11 +15,11 @@
                 <form method="POST" action="{{ route('login') }}">
                     @csrf
                     <div class="input-group mb-3">
-                        <input id="txtUsername" type="text"
-                            class="form-control @error('txtUsername') is-invalid @enderror" name="txtUsername"
-                            value="{{ old('txtUsername') }}" autofocus placeholder="Username">
+                        <input id="txtNik" type="text"
+                            class="form-control @error('txtNik') is-invalid @enderror" name="txtNik"
+                            value="{{ old('txtNik') }}" autofocus placeholder="NIK (Nomor Induk Karyawan)">
 
-                        @error('txtUsername')
+                        @error('txtNik')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
