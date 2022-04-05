@@ -10,8 +10,6 @@
                 <div class="card-tools">
                     <a href="{{ route('uoms.create') }}" class="btn btn-sm btn-primary">Tambah
                         UOM</a>
-                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                        <i class="fas fa-minus"></i>
                     </button>
                 </div>
             </div>
@@ -50,7 +48,11 @@
                             </tr>
                             @empty
                             <tr>
-                                <td colspan="3">Tidak ada data...</td>
+                                <td colspan="5">
+                                    <img src="{{asset('theme/dist/img/no_data.png')}}" alt="Tidak Ada Data"
+                                        class="img-fluid d-block mx-auto mt-4" width="200">
+                                    <p class="text-center">Tidak ada data...</p>
+                                </td>
                             </tr>
                             @endforelse
                         </tbody>
@@ -64,14 +66,9 @@
 
 @push('script-datatable')
 <script>
-    $(function () {
-        $("#uomTable").DataTable({
-            "responsive": true,
-            "lengthChange": false,
-            "autoWidth": false,
-        });
+    $(document).ready(function () {
+        $('#uomTable').DataTable();
     });
-
 </script>
 @endpush
 

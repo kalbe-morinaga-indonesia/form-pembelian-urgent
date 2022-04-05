@@ -18,7 +18,7 @@
     <div class="form-group">
         <label for="intJumlahKebutuhan">Jumlah Kebutuhan</label>
         <input type="number" min="1" class="form-control @error('intJumlahKebutuhan') is-invalid  @enderror"
-            name="intJumlahKebutuhan" id="intJumlahKebutuhan" placeholder="Masukkan Nama Department"
+            name="intJumlahKebutuhan" id="intJumlahKebutuhan" placeholder="Masukkan Jumlah Kebutuhan"
             value="{{ old('intJumlahKebutuhan') ?? $uom->intJumlahKebutuhan }}">
         @error('intJumlahKebutuhan')
         <div class="text-danger">{{ $message }}</div>

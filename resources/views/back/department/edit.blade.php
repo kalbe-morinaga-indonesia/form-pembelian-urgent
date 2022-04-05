@@ -17,7 +17,7 @@
                 <form action="{{ route('departments.update',['department' => $department->id]) }}" method="POST">
                     @method('put')
                     @csrf
-                    @include('back.department.form.partials',['button' => 'Edit'])
+                    @include('back.department.form',['button' => 'Edit'])
                 </form>
             </div>
         </div>

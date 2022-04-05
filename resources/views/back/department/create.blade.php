@@ -16,7 +16,7 @@
             <div class="card-body">
                 <form action="{{ route('departments.store') }}" method="POST">
                     @csrf
-                    @include('back.department.form.partials',['button' => 'Tambah'])
+                    @include('back.department.form',['button' => 'Tambah'])
                 </form>
             </div>
         </div>
