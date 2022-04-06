@@ -21,18 +21,24 @@ class PurchaseRequestController extends Controller
 {
     public function index()
     {
-        $today = Carbon::now();
         if (Auth()->user()->hasRole('user')) {
             $purchases = Purchase::where('muser_id', Auth::user()->id)->get();
         } else if (Auth()->user()->hasRole('buyer')) {
             $purchases = Purchase::where('status', 'approved by dept head')
                 ->orWhere('status', 'in process by buyer')
                 ->orWhere('status', 'approved by pu spv')
+                ->orWhere('status', 'rejected by pu spv')
                 ->get();
         } else if (Auth()->user()->hasRole('pu_svp')) {
             $purchases = Purchase::where('status', 'in process by buyer')
                 ->orWhere('status', 'approved by pu spv')
                 ->orWhere('status', 'rejected by pu spv')
+                ->get();
+        } else if (Auth()->user()->hasRole('dept_head')) {
+            $purchases = Purchase::where([
+                ['status', 'in process'],
+                ['mdepartment_id', Auth()->user()->mdepartment_id]
+            ])->orderByDesc('dtmInsertedBy')
                 ->get();
         } else {
             $purchases = Purchase::orderBy('dtmInsertedBy', 'desc')->get();
@@ -169,7 +175,7 @@ class PurchaseRequestController extends Controller
             'status' => 'in process by buyer'
         ]);
 
-        Alert::success("Berhasil", "Input dengan nomor $request->txtNomorPo berhasil ditambahkan");
+        Alert::success("Berhasil", "Input dengan nomor PO $request->txtNomorPo berhasil ditambahkan");
         return redirect()->route('purchase-requests.index');
     }
 
@@ -190,6 +196,21 @@ class PurchaseRequestController extends Controller
         }
     }
 
+    public function formpo(Purchase $purchase)
+    {
+        $total = 0;
+        if ($purchase->status == "approved by pu spv") {
+            return view('back.purchase.formpo', [
+                'title' => 'Form PO',
+                'purchase' => $purchase,
+                'total' => 0,
+                'vat' => 0,
+            ]);
+        } else {
+            return redirect()->route('purchase-requests.index');
+        }
+    }
+
     public function approve(Purchase $purchase, Request $request)
     {
         if (Auth()->user()->hasRole('pu_svp')) {
@@ -201,6 +222,7 @@ class PurchaseRequestController extends Controller
                 Purchase::where('id', $purchase->id)->update([
                     'status' => "rejected by pu spv"
                 ]);
+                Input::where('mpurchase_id', $purchase->id)->delete();
             }
         } else if (Auth()->user()->hasRole('dept_head')) {
             if ($request->submit == "yes") {
@@ -224,5 +246,57 @@ class PurchaseRequestController extends Controller
             'title' => 'Purchase Request',
             'purchase' => $purchase
         ]);
+    }
+
+    public function update(PurchaseRequest $request, Purchase $purchase, Barang $barang)
+    {
+        $today = Carbon::now();
+        $jumlah = Purchase::whereYear('dtmInsertedBy', $today)->count('id');
+        if ($request->hasfile('txtFile')) {
+            foreach ($request->file('txtFile') as $file) {
+                $name = $file->getClientOriginalName();
+                $file->move(public_path() . '/files/', $name);
+                $fileData[] = $name;
+            }
+
+            $fileModal = Purchase::where('id', $purchase->id)->first();
+            $fileModal->txtNoPurchaseRequest = $request->txtNoPurchaseRequest;
+            $fileModal->dtmTanggalKebutuhan = $request->dtmTanggalKebutuhan;
+            $fileModal->txtFile = json_encode($fileData);
+            $fileModal->txtReason = $request->txtReason;
+            $fileModal->status = "in process";
+
+            $fileModal->save();
+
+            foreach ($request->barang as $key => $value) {
+                $dataBarang = Barang::where('id', $value['id'])->first();
+                $dataBarang->txtItemCode = $value['txtItemCode'];
+                $dataBarang->txtNamaBarang = $value['txtNamaBarang'];
+                $dataBarang->intJumlah = $value['intJumlah'];
+                $dataBarang->txtSatuan = $value['txtSatuan'];
+                $dataBarang->txtKeterangan = $value['txtKeterangan'];
+                $dataBarang->save();
+            }
+        } else {
+            $fileModal = Purchase::where('id', $purchase->id)->first();
+            $fileModal->txtNoPurchaseRequest = $request->txtNoPurchaseRequest;
+            $fileModal->dtmTanggalKebutuhan = $request->dtmTanggalKebutuhan;
+            $fileModal->txtReason = $request->txtReason;
+            $fileModal->status = "in process";
+
+            $fileModal->save();
+
+            foreach ($request->barang as $key => $value) {
+                $dataBarang = Barang::where('id', $value['id'])->first();
+                $dataBarang->txtItemCode = $value['txtItemCode'];
+                $dataBarang->txtNamaBarang = $value['txtNamaBarang'];
+                $dataBarang->intJumlah = $value['intJumlah'];
+                $dataBarang->txtSatuan = $value['txtSatuan'];
+                $dataBarang->txtKeterangan = $value['txtKeterangan'];
+                $dataBarang->save();
+            }
+        }
+        Alert::success("Berhasil", "Request dengan nomor $request->txtNoPurchaseRequest berhasil diubah");
+        return redirect()->route('purchase-requests.index');
     }
 }
