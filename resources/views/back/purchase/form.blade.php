@@ -36,22 +36,23 @@
                 </tr>
             </thead>
             <tbody>
-                @forelse ($purchase->mbarangs as $barang)
+                @forelse ($purchase->mbarangs as $key => $barang)
                 <tr>
+                    <input type="hidden" name="barang[{{$key}}][id]" value="{{$barang->id}}">
                     <td>
-                        <input type="text" class="form-control" placeholder="Item Code" name="barang[0][txtItemCode]" value="{{$barang->txtItemCode}}"
+                        <input type="text" class="form-control" placeholder="Item Code" name="barang[{{$key}}][txtItemCode]" value="{{$barang->txtItemCode}}"
                             required>
                     </td>
                     <td>
                         <input type="text" class="form-control" placeholder="Nama Barang"
-                            name="barang[0][txtNamaBarang]" value="{{$barang->txtNamaBarang}}" required>
+                            name="barang[{{$key}}][txtNamaBarang]" value="{{$barang->txtNamaBarang}}" required>
                     </td>
-                    <td><input type="number" class="form-control" placeholder="Jumlah" value="{{$barang->intJumlah}}" name="barang[0][intJumlah]"
+                    <td><input type="number" class="form-control" placeholder="Jumlah" value="{{$barang->intJumlah}}" name="barang[{{$key}}][intJumlah]"
                             required></td>
-                    <td><input type="text" class="form-control" placeholder="Satuan" value="{{$barang->txtSatuan}}" name="barang[0][txtSatuan]"
+                    <td><input type="text" class="form-control" placeholder="Satuan" value="{{$barang->txtSatuan}}" name="barang[{{$key}}][txtSatuan]"
                             required></td>
                     <td><input type="text" class="form-control" placeholder="Keterangan"
-                            name="barang[0][txtKeterangan]" value="{{$barang->txtKeterangan}}"></td>
+                            name="barang[{{$key}}][txtKeterangan]" value="{{$barang->txtKeterangan}}"></td>
                 </tr>
                 @empty
                     <tr>
@@ -100,7 +101,11 @@
         <label for="reason">Reason</label>
         <div class="form-check">
             <input class="form-check-input" type="radio" name="txtReason" id="breakdown" value="Breakdown"
-                {{$purchase->txtReason ? 'checked' : ''}}>
+            @if (old('txtReason') == "Breakdown")
+                checked
+            @elseif ($purchase->txtReason == 'Breakdown')
+                checked
+            @endif>
             <label class="form-check-label" for="breakdown">
                 Breakdown
             </label>
@@ -110,7 +115,11 @@
         </div>
         <div class="form-check">
             <input class="form-check-input" type="radio" name="txtReason" id="iddle_produksi" value="Iddle Produksi"
-                {{$purchase->txtReason ? 'checked' : ''}}>
+            @if (old('txtReason') == "Iddle Produksi")
+                checked
+            @elseif ($purchase->txtReason == 'Iddle Produksi')
+                checked
+            @endif>
             <label class="form-check-label" for="iddle_produksi">
                 Iddle Produksi
             </label>
@@ -120,7 +129,12 @@
         </div>
         <div class="form-check">
             <input class="form-check-input" type="radio" name="txtReason" id="human_error"
-                value="Human Error (Miss Planning)" {{$purchase->txtReason ? 'checked' : ''}}>
+                value="Human Error (Miss Planning)"
+                @if (old('txtReason') == "Human Error (Miss Planning)")
+                checked
+            @elseif ($purchase->txtReason == 'Human Error (Miss Planning)')
+                checked
+            @endif>
             <label class="form-check-label" for="human_error">
                 Human Error (Miss Planning)
             </label>
@@ -130,7 +144,11 @@
         </div>
         <div class="form-check">
             <input class="form-check-input" type="radio" name="txtReason" id="safety_k3" value="Safety K3"
-                {{$purchase->txtReason ? 'checked' : ''}}>
+            @if (old('txtReason') == "Safety K3")
+                checked
+            @elseif ($purchase->txtReason == 'Safety K3')
+                checked
+            @endif>
             <label class="form-check-label" for="safety_k3">
                 Safety K3
             </label>

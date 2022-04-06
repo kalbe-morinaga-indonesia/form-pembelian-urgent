@@ -1,5 +1,5 @@
 @extends('layouts.back')
-@section('title','Uom | Form Pembelian Urgent')
+@section('title','Purchase Request | Form Pembelian Urgent')
 
 @section('content')
 <div class="row">
@@ -9,7 +9,8 @@
                 <h3 class="card-title">Edit Purchase Request</h3>
             </div>
             <div class="card-body">
-                <form action="{{ route('purchase-requests.store') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('purchase-requests.update',['purchase' => $purchase->txtSlug]) }}" method="POST" enctype="multipart/form-data">
+                    @method('put')
                     @csrf
                     @include('back.purchase.form',['button' => 'Edit Request'])
                 </form>

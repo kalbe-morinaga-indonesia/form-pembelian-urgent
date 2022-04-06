@@ -1,5 +1,5 @@
 @extends('layouts.back')
-@section('title','Uom | Form Pembelian Urgent')
+@section('title','Purchase Request | Form Pembelian Urgent')
 
 @section('content')
 <div class="row">

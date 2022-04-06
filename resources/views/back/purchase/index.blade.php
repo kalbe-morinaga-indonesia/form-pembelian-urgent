@@ -1,5 +1,5 @@
 @extends('layouts.back')
-@section('title','Uom | Form Pembelian Urgent')
+@section('title','Purchase Request | Form Pembelian Urgent')
 
 @section('content')
 <div class="row">
@@ -10,9 +10,6 @@
                 @hasrole('user')
                 <div class="card-tools">
                     <a href="{{ route('purchase-requests.create') }}" class="btn btn-primary">Purchase Request</a>
-                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                        <i class="fas fa-minus"></i>
-                    </button>
                 </div>
                 @endhasrole
             </div>
@@ -37,16 +34,19 @@
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>
-                                    <a class="text-dark" href="{{ route('purchase-requests.show',['purchase' => $purchase->txtSlug]) }}">{{ $purchase->txtNoDok }}</a>
+                                    <a class="text-dark"
+                                        href="{{ route('purchase-requests.show',['purchase' => $purchase->txtSlug]) }}">{{ $purchase->txtNoDok }}</a>
                                 </td>
                                 <td>{{ $purchase->txtNoPurchaseRequest }}</td>
                                 <td>{{ $purchase->txtReason }}</td>
                                 <td>
                                     @if($purchase->status == "in process" || $purchase->status == "in process by buyer")
                                     <span class="badge p-1 bg-warning">{{ $purchase->status }}</span>
-                                    @elseif($purchase->status == "approved by dept head" || $purchase->status == "approved by pu spv")
+                                    @elseif($purchase->status == "approved by dept head" || $purchase->status ==
+                                    "approved by pu spv")
                                     <span class="badge p-1 bg-success">{{ $purchase->status }}</span>
-                                    @elseif($purchase->status == "rejected by dept head" || $purchase->status == "rejected by pu spv")
+                                    @elseif($purchase->status == "rejected by dept head" || $purchase->status ==
+                                    "rejected by pu spv")
                                     <span class="badge p-1 bg-danger">{{ $purchase->status }}</span>
                                     @endif
                                 </td>
@@ -54,7 +54,8 @@
                                 @hasrole('dept_head')
                                 <td>
                                     @if($purchase->status == "in process")
-                                    <a href="{{ route('purchase-requests.show-approve',['purchase' => $purchase->txtSlug]) }}" class="btn btn-primary">Approve</a>
+                                    <a href="{{ route('purchase-requests.show-approve',['purchase' => $purchase->txtSlug]) }}"
+                                        class="btn btn-primary">Approve</a>
                                     @endif
                                 </td>
                                 @endhasrole
@@ -64,14 +65,18 @@
                                     <a href="{{ route('purchase-requests.show-approve',['purchase' => $purchase->txtSlug]) }}"
                                         class="btn btn-primary">Approve</a>
                                     @endif
+                                    @if ($purchase->status == "approved by pu spv")
+                                    <a href="{{ route('purchase-requests.formpo',['purchase' => $purchase->txtSlug]) }}" class="btn btn-primary">Form PO</a>
+                                    @endif
                                 </td>
                                 @endhasrole
                                 @hasrole('user')
                                 <td>
                                     @if ($purchase->status == "rejected by dept head")
-                                        <a href="{{route('purchase-requests.edit',['purchase' => $purchase->txtSlug])}}" class="btn btn-warning btn-sm">Edit</a>
+                                    <a href="{{route('purchase-requests.edit',['purchase' => $purchase->txtSlug])}}"
+                                        class="btn btn-warning btn-sm">Edit</a>
                                     @else
-                                        <button class="btn btn-warning btn-sm" disabled>Edit</button>
+                                    <button class="btn btn-warning btn-sm" disabled>Edit</button>
                                     @endif
                                 </td>
                                 @endhasrole
@@ -79,7 +84,8 @@
                             @empty
                             <tr>
                                 <td colspan="7">
-                                    <img src="{{asset('theme/dist/img/no_data.png')}}" alt="Tidak Ada Data" class="img-fluid d-block mx-auto mt-4" width="200">
+                                    <img src="{{asset('theme/dist/img/no_data.png')}}" alt="Tidak Ada Data"
+                                        class="img-fluid d-block mx-auto mt-4" width="200">
                                     <p class="text-center">Tidak ada data...</p>
                                 </td>
                             </tr>
@@ -94,14 +100,9 @@
 
 @push('script-datatable')
 <script>
-    $(function () {
-        $("#purchaseTable").DataTable({
-            "responsive": true,
-            "lengthChange": false,
-            "autoWidth": false,
-        });
+    $(document).ready(function () {
+        $('#purchaseTable').DataTable();
     });
-
 </script>
 @endpush
 
