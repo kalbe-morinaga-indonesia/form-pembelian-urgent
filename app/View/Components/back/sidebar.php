@@ -24,7 +24,10 @@ class sidebar extends Component
      */
     public function render()
     {
-        $in_process = Purchase::where('status', 'in process')->get()->count();
+        $in_process = Purchase::where([
+            ['status', 'in process'],
+            ['mdepartment_id', Auth()->user()->mdepartment_id]
+        ])->get()->count();
         return view('components.back.sidebar', [
             'count_in_process' => $in_process
         ]);
