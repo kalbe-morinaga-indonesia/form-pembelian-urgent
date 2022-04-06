@@ -18,6 +18,10 @@ class Input extends Model
         return $this->belongsTo('App\Models\Barang');
     }
 
+    public function getAmountAttribute(){
+        return $this->attributes['intHarga'] * $this->mbarang->attributes['intJumlah'];
+    }
+
     const CREATED_AT = "dtmInsertedBy";
     const UPDATED_AT = "dtmUpdatedBy";
 }
