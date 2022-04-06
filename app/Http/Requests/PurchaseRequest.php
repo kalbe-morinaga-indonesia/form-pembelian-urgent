@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
+
 
 class PurchaseRequest extends FormRequest
 {
@@ -25,7 +27,9 @@ class PurchaseRequest extends FormRequest
     {
         return [
             'muser_id' => 'required',
-            'txtNoPurchaseRequest' => 'required',
+            'txtNoPurchaseRequest' => [
+                'required'
+            ],
             'dtmTanggalKebutuhan' => 'required',
             'txtFile.*' => 'mimes:png,jpg,jpeg,csv,txt,pdf,docx|max:2048',
             'txtReason' => 'required',
