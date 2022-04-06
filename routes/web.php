@@ -103,6 +103,8 @@ Route::group(
                 ->name('purchase-requests.create');
             Route::get('purchase-requests/{purchase:txtSlug}', 'show')
                 ->name('purchase-requests.show');
+            Route::get('purchase-requests/{purchase:txtSlug}/form-po', 'formpo')
+                ->name('purchase-requests.formpo');
             Route::post('purchase-requests/{purchase:txtSlug}/create', 'createInput')
                 ->name('purchase-requests.create.input');
             Route::post('purchase-requests/create-input', 'storeInput')
@@ -111,6 +113,8 @@ Route::group(
                 ->name('purchase-requests.store');
             Route::get('purchase-requests/{purchase:txtSlug}/edit', 'edit')
                 ->name('purchase-requests.edit');
+            Route::put('purchase-requests/{purchase:txtSlug}/update', 'update')
+                ->name('purchase-requests.update');
             Route::get('purchase-requests/approve/{purchase:txtSlug}', 'showApprove')
                 ->name('purchase-requests.show-approve');
             Route::put('purchase-requests/approve/{purchase:txtSlug}', 'approve')
