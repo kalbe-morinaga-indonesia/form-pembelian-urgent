@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Back;
 
 use Carbon\Carbon;
+use App\Models\Uom;
 use App\Models\User;
 use App\Models\Input;
 use App\Models\Barang;
@@ -16,6 +17,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\PurchaseRequest;
 use RealRashid\SweetAlert\Facades\Alert;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class PurchaseRequestController extends Controller
 {
@@ -71,7 +73,8 @@ class PurchaseRequestController extends Controller
     {
         return view('back.purchase.create', [
             'title' => 'Purchase Request',
-            'purchase' => $purchase
+            'purchase' => $purchase,
+            'uoms' => Uom::get()
         ]);
     }
 
@@ -84,7 +87,8 @@ class PurchaseRequestController extends Controller
             $inputBarangs = Barang::whereIn('id', [$input['noInput'][0], $input['noInput'][$total - 1]])->get();
             return view('back.purchase.input.create', [
                 'title' => "Input Data",
-                'inputBarangs' => $inputBarangs
+                'inputBarangs' => $inputBarangs,
+                'count' => $inputBarangs->count()
             ]);
         } else {
             return redirect()->back()->with('message', 'Tidak ada item yang dipilih');
@@ -124,7 +128,7 @@ class PurchaseRequestController extends Controller
                 $dataBarang->txtItemCode = $value['txtItemCode'];
                 $dataBarang->txtNamaBarang = $value['txtNamaBarang'];
                 $dataBarang->intJumlah = $value['intJumlah'];
-                $dataBarang->txtSatuan = $value['txtSatuan'];
+                $dataBarang->muom_id = $value['muom_id'];
                 $dataBarang->txtKeterangan = $value['txtKeterangan'];
                 $dataBarang->save();
             }
@@ -149,7 +153,7 @@ class PurchaseRequestController extends Controller
                 $dataBarang->txtItemCode = $value['txtItemCode'];
                 $dataBarang->txtNamaBarang = $value['txtNamaBarang'];
                 $dataBarang->intJumlah = $value['intJumlah'];
-                $dataBarang->txtSatuan = $value['txtSatuan'];
+                $dataBarang->muom_id = $value['muom_id'];
                 $dataBarang->txtKeterangan = $value['txtKeterangan'];
                 $dataBarang->save();
             }
@@ -160,19 +164,22 @@ class PurchaseRequestController extends Controller
 
     public function storeInput(Request $request)
     {
+
         foreach ($request->mbarang_id as $key => $value) {
-            Input::create([
+            Input::updateOrCreate([
                 'mpurchase_id' => $request->mpurchase_id,
                 'mbarang_id' => $value,
                 'txtNomorPo' => $request->txtNomorPo,
                 'txtNamaSupplier' => $request->txtNamaSupplier,
-                'intHarga' => $request->intHarga,
+                'intHarga' => $request->intHarga[$key],
+                'intSubTotal' => $request->intSubTotal[$key],
                 'dtmTanggalKedatangan' => $request->dtmTanggalKedatangan,
             ]);
         }
 
         Purchase::where('id', $request->mpurchase_id)->update([
-            'status' => 'in process by buyer'
+            'status' => 'in process by buyer',
+            'total' => $request->intTotal
         ]);
 
         Alert::success("Berhasil", "Input dengan nomor PO $request->txtNomorPo berhasil ditambahkan");
@@ -198,14 +205,25 @@ class PurchaseRequestController extends Controller
 
     public function formpo(Purchase $purchase)
     {
-        $total = 0;
         if ($purchase->status == "approved by pu spv") {
             return view('back.purchase.formpo', [
                 'title' => 'Form PO',
                 'purchase' => $purchase,
-                'total' => 0,
                 'vat' => 0,
+                'user' => User::get()
             ]);
+        } else {
+            return redirect()->route('purchase-requests.index');
+        }
+    }
+
+    public function cetakPo(Purchase $purchase)
+    {
+        if ($purchase->status == "approved by pu spv") {
+            $pdf = PDF::loadView('po', [
+                'purchase' => $purchase
+            ])->setPaper('a4', 'portrait')->setWarnings(false);
+            return $pdf->stream();
         } else {
             return redirect()->route('purchase-requests.index');
         }
@@ -227,6 +245,7 @@ class PurchaseRequestController extends Controller
         } else if (Auth()->user()->hasRole('dept_head')) {
             if ($request->submit == "yes") {
                 Purchase::where('id', $purchase->id)->update([
+                    'txtApprovedByDeptHead' => Auth()->user()->txtNama,
                     'status' => "approved by dept head"
                 ]);
             } else {
@@ -273,7 +292,7 @@ class PurchaseRequestController extends Controller
                 $dataBarang->txtItemCode = $value['txtItemCode'];
                 $dataBarang->txtNamaBarang = $value['txtNamaBarang'];
                 $dataBarang->intJumlah = $value['intJumlah'];
-                $dataBarang->txtSatuan = $value['txtSatuan'];
+                $dataBarang->muom_id = $value['muom_id'];
                 $dataBarang->txtKeterangan = $value['txtKeterangan'];
                 $dataBarang->save();
             }
@@ -291,7 +310,7 @@ class PurchaseRequestController extends Controller
                 $dataBarang->txtItemCode = $value['txtItemCode'];
                 $dataBarang->txtNamaBarang = $value['txtNamaBarang'];
                 $dataBarang->intJumlah = $value['intJumlah'];
-                $dataBarang->txtSatuan = $value['txtSatuan'];
+                $dataBarang->muom_id = $value['muom_id'];
                 $dataBarang->txtKeterangan = $value['txtKeterangan'];
                 $dataBarang->save();
             }

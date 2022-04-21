@@ -1,26 +1,8 @@
     <div class="form-group">
-        <label for="txtItemCode">Item Code</label>
-        <input type="text" class="form-control @error('txtItemCode') is-invalid  @enderror" name="txtItemCode"
-            id="txtItemCode" placeholder="Masukkan Item Code" value="{{ old('txtItemCode') ?? $uom->txtItemCode }}">
-        @error('txtItemCode')
-        <div class="text-danger">{{ $message }}</div>
-        @enderror
-    </div>
-    <div class="form-group">
-        <label for="dtmTanggalKebutuhan">Tanggal Kebutuhan</label>
-        <input type="date" class="form-control @error('dtmTanggalKebutuhan') is-invalid  @enderror"
-            name="dtmTanggalKebutuhan" id="dtmTanggalKebutuhan" placeholder="Masukkan Nama Department"
-            value="{{ old('dtmTanggalKebutuhan') ?? $uom->dtmTanggalKebutuhan}}">
-        @error('dtmTanggalKebutuhan')
-        <div class="text-danger">{{ $message }}</div>
-        @enderror
-    </div>
-    <div class="form-group">
-        <label for="intJumlahKebutuhan">Jumlah Kebutuhan</label>
-        <input type="number" min="1" class="form-control @error('intJumlahKebutuhan') is-invalid  @enderror"
-            name="intJumlahKebutuhan" id="intJumlahKebutuhan" placeholder="Masukkan Jumlah Kebutuhan"
-            value="{{ old('intJumlahKebutuhan') ?? $uom->intJumlahKebutuhan }}">
-        @error('intJumlahKebutuhan')
+        <label for="txtUom">UOM</label>
+        <input type="text" class="form-control @error('txtUom') is-invalid  @enderror" name="txtUom"
+            id="txtUom" placeholder="Masukkan UOM" value="{{ old('txtUom') ?? $uom->txtUom }}">
+        @error('txtUom')
         <div class="text-danger">{{ $message }}</div>
         @enderror
     </div>

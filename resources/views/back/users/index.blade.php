@@ -40,17 +40,17 @@
                                 <td>{{ $user->mdepartment->txtNamaDept }}</td>
                                 <td>
                                     <div class="btn-group">
-                                        <a class="btn btn-app btn-sm bg-warning"
+                                        <a class="btn btn-sm bg-warning mr-2"
                                             href="{{ route('users.edit',['user' => $user->id]) }}">
-                                            <i class="fas fa-edit"></i> Edit
+                                            <i class="fas fa-edit"></i>
                                         </a>
                                         <form action="{{ route('users.destroy',['user' => $user->id]) }}" method="POST">
                                             @method('delete')
                                             @csrf
-                                            <button type="submit" class="btn btn-app btn-sm btn-sm bg-danger btn-hapus"
+                                            <button type="submit" class="btn btn-sm btn-sm bg-danger btn-hapus"
                                                 data-name="{{ $user->txtNama }}" data-table="user">
                                                 <i class="fas fa-trash"></i>
-                                                Hapus</button>
+                                                </button>
                                         </form>
                                     </div>
                                 </td>

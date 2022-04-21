@@ -247,6 +247,15 @@ class UserSeeder extends Seeder
             'txtUpdatedBy' => "System"
         ]);
 
+        $user20 = User::create([
+            'txtNik' => "070100013",
+            'txtNama' => "Agus Riyanto",
+            'txtPassword' => bcrypt("Kalbemorinaga"),
+            'mdepartment_id' => 1,
+            'txtInsertedBy' => "System",
+            'txtUpdatedBy' => "System"
+        ]);
+
         // assign permission role
         $role1->givePermissionTo('dashboard');
         $role1->givePermissionTo('logout');
@@ -306,8 +315,8 @@ class UserSeeder extends Seeder
         $user19->assignRole($role4);
 
         // assign role pu
-        $user1->assignRole($role5);
         $user18->assignRole($role5);
         $user19->assignRole($role5);
+        $user20->assignRole($role5);
     }
 }

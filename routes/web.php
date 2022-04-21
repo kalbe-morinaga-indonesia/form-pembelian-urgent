@@ -29,6 +29,10 @@ use Illuminate\Support\Facades\Route;
 
 // Front
 
+Route::get('form-po', function () {
+    return view('back.purchase.form-po.form-po');
+});
+
 Route::prefix('/')->group(function () {
     Route::controller(HomeController::class)->group(function () {
         Route::get('', 'index')->name('home');
@@ -105,6 +109,8 @@ Route::group(
                 ->name('purchase-requests.show');
             Route::get('purchase-requests/{purchase:txtSlug}/form-po', 'formpo')
                 ->name('purchase-requests.formpo');
+            Route::get('purchase-requests/{purchase:txtSlug}/cetak_po', 'cetakPo')
+                ->name('purchase-requests.cetakpo');
             Route::post('purchase-requests/{purchase:txtSlug}/create', 'createInput')
                 ->name('purchase-requests.create.input');
             Route::post('purchase-requests/create-input', 'storeInput')

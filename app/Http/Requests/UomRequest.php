@@ -25,24 +25,14 @@ class UomRequest extends FormRequest
     public function rules()
     {
         return [
-            'txtItemCode' => [
-                'required',
-                Rule::unique('muoms', 'txtItemCode')
-                    ->ignore($this->uom)
-            ],
-            'dtmTanggalKebutuhan' => 'required',
-            'intJumlahKebutuhan' => 'required|numeric'
+            'txtUom' => 'required',
         ];
     }
 
     public function messages()
     {
         return [
-            'txtItemCode.required' => 'Item code harus diisi',
-            'txtItemCode.unique' => 'Item code sudah ada',
-            'dtmTanggalKebutuhan.required' => 'Tanggal kebutuhan harus diisi',
-            'intJumlahKebutuhan.required' => 'Jumlah Kebutuhan harus diisi',
-            'intJumlahKebutuhan.numeric' => 'Jumlah kebutuhan harus angka'
+            'txtUom.required' => 'Uom harus diisi',
         ];
     }
 }

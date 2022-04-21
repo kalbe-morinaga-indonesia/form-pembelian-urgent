@@ -94,7 +94,7 @@
                                     <h6 class="mb-0 text-nowrap">{{ $barang->intJumlah }}</h6>
                                 </td>
                                 <td class="align-middle text-center">
-                                    <h6 class="mb-0 text-nowrap">{{ $barang->txtSatuan }}</h6>
+                                    <h6 class="mb-0 text-nowrap">{{ $barang->uom->txtUom }}</h6>
                                 </td>
                                 <td class="align-middle text-center">
                                     <h6 class="mb-0 text-nowrap">{{ $barang->txtKeterangan }}</h6>
@@ -122,33 +122,19 @@
                         </table>
                     </div>
                     <div class="col-md-4 offset-4 ms-auto">
-                        <table class="table table-sm fs--1 border">
+                        <table class="table table-sm table-bordered">
                             <thead>
                                 <tr>
-                                    <th scope="col" class="border-right text-center">Dibuat Oleh</th>
-                                    <th scope="col" class="text-center"> Disetujui Oleh</th>
+                                    <th scope="col">Dibuat Oleh</th>
+                                    <th scope="col"> Disetujui Oleh</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td class="border-right text-center">
-                                        <br>
-                                        <br>
-                                        <br>
-                                    </td>
-                                    <td class="text-center">
-                                        <br>
-                                        <br>
-                                        <br>
-                                    </td>
+                                    <td>{{$purchase->muser->txtNama}}</td>
+                                    <td>{{$purchase->txtApprovedByDeptHead ? $purchase->txtApprovedByDeptHead : "-"}}</td>
                                 </tr>
                             </tbody>
-                            <thead>
-                                <tr>
-                                    <th scope="col" class="border-right text-center">User</th>
-                                    <th scope="col" class="text-center">Dept Head</th>
-                                </tr>
-                            </thead>
                         </table>
                     </div>
                 </div>

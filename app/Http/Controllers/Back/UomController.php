@@ -37,14 +37,12 @@ class UomController extends Controller
         $nama_user = Auth()->user()->txtNama;
 
         Uom::create([
-            'txtItemCode' => $request->txtItemCode,
-            'dtmTanggalKebutuhan' => $request->dtmTanggalKebutuhan,
-            'intJumlahKebutuhan' => $request->intJumlahKebutuhan,
+            'txtUom' => $request->txtUom,
             'txtInsertedBy' => $nama_user,
             'txtUpdatedBy' => $nama_user
         ]);
 
-        Alert::success("Berhasil", "Data uom $request->txtItemCode berhasil ditambahkan");
+        Alert::success("Berhasil", "Data uom $request->txtUom berhasil ditambahkan");
         return redirect()->route('uoms.index');
     }
 
@@ -61,20 +59,18 @@ class UomController extends Controller
         $nama_user = Auth()->user()->txtNama;
 
         Uom::where('id', $uom->id)->update([
-            'txtItemCode' => $request->txtItemCode,
-            'dtmTanggalKebutuhan' => $request->dtmTanggalKebutuhan,
-            'intJumlahKebutuhan' => $request->intJumlahKebutuhan,
+            'txtUom' => $request->txtUom,
             'txtUpdatedBy' => $nama_user
         ]);
 
-        Alert::success("Berhasil", "Data uom $request->txtItemCode berhasil diubah");
+        Alert::success("Berhasil", "Data uom $request->txtUom berhasil diubah");
         return redirect()->route('uoms.index');
     }
 
     public function destroy(Uom $uom)
     {
         $uom->delete();
-        Alert::success("Berhasil", "Data uom $uom->txtItemCode berhasil dihapus");
+        Alert::success("Berhasil", "Data uom $uom->txtUom berhasil dihapus");
         return redirect()->route('uoms.index');
     }
 }

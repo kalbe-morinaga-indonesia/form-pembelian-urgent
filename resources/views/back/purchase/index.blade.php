@@ -24,7 +24,7 @@
                                 <th>Reason</th>
                                 <th>Status</th>
                                 <th>Last Update</th>
-                                @hasrole('dept_head|user|pu_svp')
+                                @hasrole('dept_head|user|pu_svp|buyer')
                                 <th>Action</th>
                                 @endhasrole
                             </tr>
@@ -33,10 +33,7 @@
                             @forelse ($purchases as $purchase)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>
-                                    <a class="text-dark"
-                                        href="{{ route('purchase-requests.show',['purchase' => $purchase->txtSlug]) }}">{{ $purchase->txtNoDok }}</a>
-                                </td>
+                                <td>{{ $purchase->txtNoDok }}</td>
                                 <td>{{ $purchase->txtNoPurchaseRequest }}</td>
                                 <td>{{ $purchase->txtReason }}</td>
                                 <td>
@@ -63,20 +60,40 @@
                                 <td>
                                     @if($purchase->status == "in process by buyer")
                                     <a href="{{ route('purchase-requests.show-approve',['purchase' => $purchase->txtSlug]) }}"
-                                        class="btn btn-primary">Approve</a>
+                                        class="btn btn-sm bg-success">
+                                    <i class="fas fa-check"></i></a>
                                     @endif
                                     @if ($purchase->status == "approved by pu spv")
-                                    <a href="{{ route('purchase-requests.formpo',['purchase' => $purchase->txtSlug]) }}" class="btn btn-primary">Form PO</a>
+                                    <a class="btn btn-sm bg-primary" href="{{route('purchase-requests.cetakpo',['purchase' => $purchase->txtSlug])}}" target="_blank"><i class="fas fa-print"></i></a>
                                     @endif
+                                    @hasrole('buyer')
+                                    <a href="{{ route('purchase-requests.show',['purchase' => $purchase->txtSlug]) }}" class="btn btn-sm btn-success">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
+                                    @endhasrole
+                                </td>
+                                @endhasrole
+                                @hasrole('buyer')
+                                <td>
+                                    <a href="{{ route('purchase-requests.show',['purchase' => $purchase->txtSlug]) }}" class="btn btn-sm btn-success">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
                                 </td>
                                 @endhasrole
                                 @hasrole('user')
                                 <td>
                                     @if ($purchase->status == "rejected by dept head")
                                     <a href="{{route('purchase-requests.edit',['purchase' => $purchase->txtSlug])}}"
-                                        class="btn btn-warning btn-sm">Edit</a>
+                                        class="btn btn-warning btn-sm">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
                                     @else
-                                    <button class="btn btn-warning btn-sm" disabled>Edit</button>
+                                    <a href="{{ route('purchase-requests.show',['purchase' => $purchase->txtSlug]) }}" class="btn btn-sm btn-success">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
+                                    <button class="btn btn-warning btn-sm" disabled>
+                                        <i class="fas fa-edit"></i>
+                                    </button>
                                     @endif
                                 </td>
                                 @endhasrole

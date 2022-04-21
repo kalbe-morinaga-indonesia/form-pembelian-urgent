@@ -15,9 +15,7 @@ class CreateMuomsTable extends Migration
     {
         Schema::create('muoms', function (Blueprint $table) {
             $table->id();
-            $table->string('txtItemCode');
-            $table->date('dtmTanggalKebutuhan');
-            $table->integer('intJumlahKebutuhan');
+            $table->string('txtUom');
             $table->string('txtInsertedBy')->nullable();
             $table->string('txtUpdatedBy')->nullable();
             $table->dateTime('dtmInsertedBy');

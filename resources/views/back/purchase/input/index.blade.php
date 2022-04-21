@@ -49,7 +49,7 @@
                                     <td>{{$barang->purchase->txtNoPurchaseRequest}}</td>
                                     <td>{{$barang->txtNamaBarang}}</td>
                                     <td>{{$barang->intJumlah}}</td>
-                                    <td>{{$barang->txtSatuan}}</td>
+                                    <td>{{$barang->uom->txtUom}}</td>
                                     <td>{{$barang->txtKeterangan}}</td>
                                     <td>{{$barang->inputs->txtNomorPO ?? "-"}}</td>
                                     <td>{{$barang->purchase->dtmTanggalKebutuhan}}</td>

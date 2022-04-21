@@ -19,9 +19,7 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Item Code</th>
-                                <th>Tanggal Kebutuhan</th>
-                                <th>Jumlah Kebutuhan</th>
+                                <th>UOM</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -29,19 +27,19 @@
                             @forelse ($uoms as $uom)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $uom->txtItemCode }}</td>
-                                <td>{{ $uom->dtmTanggalKebutuhan }}</td>
-                                <td>{{ $uom->intJumlahKebutuhan }}</td>
+                                <td>{{ $uom->txtUom }}</td>
                                 <td>
                                     <div class="btn-group">
                                         <a href="{{ route('uoms.edit',['uom' => $uom->id]) }}"
-                                            class="btn btn-warning edit">Edit</a>
+                                            class="btn btn-warning edit">
+                                        <i class="fas fa-edit"></i></a>
                                         <form action="{{ route('uoms.destroy',['uom' => $uom->id]) }}" method="POST">
                                             @method('delete')
                                             @csrf
                                             <button type="submit" class="btn btn-danger btn-hapus"
                                                 title="Hapus Department" data-name="{{ $uom->txtItemCode }}"
-                                                data-table="uom">Delete</button>
+                                                data-table="uom">
+                                            <i class="fas fa-trash"></i></button>
                                         </form>
                                     </div>
                                 </td>

@@ -30,7 +30,9 @@
                                 <td>
                                     <div class="btn-group">
                                         <a href="{{ route('departments.edit',['department' => $department->id]) }}"
-                                            class="btn btn-warning mx-2">Edit</a>
+                                            class="btn btn-warning mx-2">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
                                         <form
                                             action="{{ route('departments.destroy',['department' => $department->id]) }}"
                                             method="POST">
@@ -38,7 +40,9 @@
                                             @csrf
                                             <button type="submit" class="btn btn-danger btn-hapus"
                                                 title="Hapus Department" data-name="{{ $department->txtNamaDept }}"
-                                                data-table="department">Delete</button>
+                                                data-table="department">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
                                         </form>
                                     </div>
                                 </td>

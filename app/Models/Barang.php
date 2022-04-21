@@ -21,6 +21,11 @@ class Barang extends Model
         return $this->belongsTo("App\Models\Purchase", 'mpurchase_id');
     }
 
+    public function uom()
+    {
+        return $this->belongsTo("App\Models\Uom", 'muom_id');
+    }
+
     public function inputs()
     {
         return $this->hasOne('App\Models\Input', 'mbarang_id');

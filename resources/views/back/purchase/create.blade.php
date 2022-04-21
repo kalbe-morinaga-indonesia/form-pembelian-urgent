@@ -28,9 +28,7 @@
             i +
             '][txtNamaBarang]" placeholder="Nama Barang" class="form-control" required /></td><td><input type="text" name="barang[' +
             i +
-            '][intJumlah]" placeholder="Jumlah" class="form-control" required /></td><td><input type="text" name="barang[' +
-            i +
-            '][txtSatuan]" placeholder="Satuan" class="form-control" required /></td><td><input type="text" name="barang[' +
+            '][intJumlah]" placeholder="Jumlah" class="form-control" required /></td><td><select name="barang['+i+'][muom_id]" class="form-control">@forelse($uoms as $uom) <option value="{{$uom->id}}">{{$uom->txtUom}}</option> @empty <option>Tidak ada data</option> @endforelse</select></td><td><input type="text" name="barang[' +
             i +
             '][txtKeterangan]" placeholder="Keterangan" class="form-control" /></td><td><button type="button" class="btn btn-danger remove-input-field">Delete</button></td></tr>'
         );

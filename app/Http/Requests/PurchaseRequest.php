@@ -28,7 +28,11 @@ class PurchaseRequest extends FormRequest
         return [
             'muser_id' => 'required',
             'txtNoPurchaseRequest' => [
-                'required'
+                'required',
+                'max:16',
+                'alpha_dash',
+                Rule::unique('mpurchases', 'txtNoPurchaseRequest')
+                    ->ignore($this->purchase)
             ],
             'dtmTanggalKebutuhan' => 'required',
             'txtFile.*' => 'mimes:png,jpg,jpeg,csv,txt,pdf,docx|max:2048',
@@ -41,6 +45,7 @@ class PurchaseRequest extends FormRequest
         return [
             'muser_id.required' => 'Requester name harus diisi',
             'txtNoPurchaseRequest.required' => 'No purchase request harus diisi',
+            'txtNoPurchaseRequest.unique' => 'No purchase request tidak boleh sama',
             'dtmTanggalKebutuhan.required' => 'Date created harus diisi',
             'txtReason.required' => 'Reason harus diisi',
         ];

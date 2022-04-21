@@ -20,6 +20,7 @@ class CreateMinputsTable extends Migration
             $table->string('txtNomorPO');
             $table->string('txtNamaSupplier');
             $table->integer('intHarga');
+            $table->integer('intSubTotal');
             $table->date('dtmTanggalKedatangan');
             $table->dateTime('dtmInsertedBy');
             $table->dateTime('dtmUpdatedBy');

@@ -91,17 +91,14 @@
                             <td>Delivery</td>
                         </tr>
                         @foreach ($purchase->minputs as $input)
-                             @php
-                                 $total += $input->amount
-                             @endphp
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{$input->mbarang->txtNamaBarang}}</td>
-                                <td></td>
+                                <td>{{$input->mbarang->txtItemCode}}</td>
                                 <td>{{$input->mbarang->intJumlah}}</td>
                                 <td>{{$input->mbarang->txtSatuan}}</td>
                                 <td>@currency($input->intHarga)</td>
-                                <td>@currency($input->amount)</td>
+                                <td>@currency($input->intSubTotal)</td>
                                 <td></td>
                                 <td>{{ date("d-M-Y", strtotime($input->dtmTanggalKedatangan)) }}</td>
                             </tr>
@@ -131,9 +128,9 @@
                                 <p class="font-weight-bold m-0">Grand Total</p>
                             </td>
                             <td colspan="2">
-                                <p class="font-weight-bold m-0">@currency($total)</p>
-                                <p class="font-weight-bold m-0">@currency($vat = $total * 0.1)</p>
-                                <p class="font-weight-bold m-0">@currency($total + $vat)</p>
+                                <p class="font-weight-bold m-0">@currency($purchase->total)</p>
+                                <p class="font-weight-bold m-0">@currency($vat = $purchase->total * 0.11)</p>
+                                <p class="font-weight-bold m-0">@currency($purchase->total + $vat)</p>
                             </td>
                             <td colspan="2">
                                 <p>
@@ -159,8 +156,8 @@
                                 <br>
                                 <br>
                                 <br>
-                                <p class="text-center m-0 font-weight-bold">Didik Budiarto</p>
-                                <p class="text-center m-0 font-weight-bold">BDA Dept Head</p>
+                                <p class="text-center m-0 font-weight-bold">{{$purchase->txtApprovedByDeptHead}}</p>
+                                <p class="text-center m-0 font-weight-bold">{{$purchase->mdepartment->txtNamaDept}} Dept Head</p>
                             </td>
                             <td colspan="2">
                                 <p class="m-0">Authorized Signature : </p>
