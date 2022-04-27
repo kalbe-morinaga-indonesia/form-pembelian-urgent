@@ -111,14 +111,83 @@
                 <div class="tab-content">
                     <div class="tab-pane active" id="tab_daily">
                         <canvas id="canvas-daily" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                        <div class="table-responsive">
+                            <table class="table table-bordered my-3" id="reason_daily">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Department</th>
+                                        <th>Reason</th>
+                                        <th>Jumlah</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($donuts_daily_reason as $donut)
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $donut->txtNamaDept }}</td>
+                                        <td>{{ $donut->txtReason }}</td>
+                                        <td>{{ $donut->total }}</td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                     <!-- /.tab-pane -->
                     <div class="tab-pane" id="tab_monthly">
-                        <canvas id="canvas-monthly" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                        <canvas id="canvas-monthly" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;">
+                        </canvas>
+                        <div class="table-responsive">
+                            <table class="table table-bordered my-3" id="reason">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Department</th>
+                                        <th>Reason</th>
+                                        <th>Jumlah</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($donuts_monthly_reason as $donut)
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $donut->txtNamaDept }}</td>
+                                        <td>{{ $donut->txtReason }}</td>
+                                        <td>{{ $donut->total }}</td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                     <!-- /.tab-pane -->
                     <div class="tab-pane" id="tab_yearly">
                         <canvas id="canvas-yearly" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                        <div class="table-responsive">
+                            <table class="table table-bordered my-3" id="reason_yearly">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Bulan</th>
+                                        <th>Department</th>
+                                        <th>Reason</th>
+                                        <th>Jumlah</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($donuts_yearly_reason as $donut)
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ date('M', strtotime($donut->dtmInsertedBy)); }}</td>
+                                        <td>{{ $donut->txtNamaDept }}</td>
+                                        <td>{{ $donut->txtReason }}</td>
+                                        <td>{{ $donut->total }}</td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -126,6 +195,12 @@
     </div>
 </div>
 @push('script-chart')
+<script>
+    !function(t,n,e,i){"use strict";function a(n,e){this.element=n,this.settings=t.extend({},o,e),this._defaults=o,this._name=s,this.init()}var s="rowspanizer",o={vertical_align:"top"};t.extend(a.prototype,{init:function(){var n=this,e=t(this.element),i=[];e.find("tr").each(function(n,e){t(this).find("td").each(function(n,e){var a=t(e),s=a.html();if("undefined"!=typeof i[n]&&"dato"in i[n]&&i[n].dato==s){var o=i[n].elem.data("rowspan");("undefined"==o||isNaN(o))&&(o=1),i[n].elem.data("rowspan",parseInt(o)+1).addClass("rowspan-combine"),a.addClass("rowspan-remove")}else i[n]={dato:s,elem:a}})}),t(".rowspan-combine").each(function(e,i){var a=t(this);a.attr("rowspan",a.data("rowspan")).css({"vertical-align":n.settings.vertical_align})}),t(".rowspan-remove").remove()}}),t.fn[s]=function(n){return this.each(function(){t.data(this,"plugin_"+s)||t.data(this,"plugin_"+s,new a(this,n))})}}(jQuery,window,document);
+  $("#reason").rowspanizer({vertical_align: 'middle'});
+  $("#reason_yearly").rowspanizer({vertical_align: 'middle'});
+  $("#reason_daily").rowspanizer({vertical_align: 'middle'});
+</script>
 <script>
     var product = <?php echo $product; ?>;
         google.charts.load("current", {packages:["corechart"]});

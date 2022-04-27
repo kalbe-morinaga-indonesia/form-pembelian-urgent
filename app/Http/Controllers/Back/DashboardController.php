@@ -27,18 +27,45 @@ class DashboardController extends Controller
             ->groupBy('mpurchases.mdepartment_id')
             ->get();
 
+        $donuts_daily_reason = DB::table('mpurchases')
+            ->select('mdepartments.txtNamaDept', 'mpurchases.txtReason', DB::raw('count(*) as total'))
+            ->join('mdepartments', 'mdepartments.id', '=', 'mpurchases.mdepartment_id')
+            ->whereDay('mpurchases.dtmInsertedBy', $today)
+            ->orderBy('mpurchases.mdepartment_id', 'asc')
+            ->groupBy('mpurchases.txtReason', 'mpurchases.mdepartment_id')
+            ->get();
+
         $donuts_monthly = DB::table('mpurchases')
-            ->select('mdepartments.txtNamaDept', DB::raw('count(*) as total'))
+            ->select('mdepartments.txtNamaDept', 'mpurchases.txtReason', DB::raw('count(*) as total'))
             ->join('mdepartments', 'mdepartments.id', '=', 'mpurchases.mdepartment_id')
             ->whereMonth('mpurchases.dtmInsertedBy', $today)
             ->groupBy('mpurchases.mdepartment_id')
             ->get();
+
+        $donuts_monthly_reason = DB::table('mpurchases')
+            ->select('mdepartments.txtNamaDept', 'mpurchases.txtReason', DB::raw('count(*) as total'))
+            ->join('mdepartments', 'mdepartments.id', '=', 'mpurchases.mdepartment_id')
+            ->whereMonth('mpurchases.dtmInsertedBy', $today)
+            ->orderBy('mpurchases.mdepartment_id', 'asc')
+            ->groupBy('mpurchases.txtReason', 'mpurchases.mdepartment_id')
+            ->get();
+
+        // dd($donuts_monthly_reason);
+
 
         $donuts_yearly = DB::table('mpurchases')
             ->select('mdepartments.txtNamaDept', DB::raw('count(*) as total'))
             ->join('mdepartments', 'mdepartments.id', '=', 'mpurchases.mdepartment_id')
             ->whereYear('mpurchases.dtmInsertedBy', $today)
             ->groupBy('mpurchases.mdepartment_id')
+            ->get();
+
+        $donuts_yearly_reason = DB::table('mpurchases')
+            ->select('mdepartments.txtNamaDept', 'mpurchases.txtReason', 'mpurchases.dtmInsertedBy', DB::raw('count(*) as total'))
+            ->join('mdepartments', 'mdepartments.id', '=', 'mpurchases.mdepartment_id')
+            ->whereYear('mpurchases.dtmInsertedBy', $today)
+            ->orderBy('mpurchases.mdepartment_id', 'asc')
+            ->groupBy('mpurchases.txtReason', 'mpurchases.mdepartment_id')
             ->get();
 
         $reasons = DB::select(
@@ -94,8 +121,11 @@ class DashboardController extends Controller
             'monthly_request' => $monthly_request,
             'yearly_request' => $yearly_request,
             'donuts_daily' => $donuts_daily,
+            'donuts_daily_reason' => $donuts_daily_reason,
             'donuts_monthly' => $donuts_monthly,
+            'donuts_monthly_reason' => $donuts_monthly_reason,
             'donuts_yearly' => $donuts_yearly,
+            'donuts_yearly_reason' => $donuts_yearly_reason,
             'product' => json_encode($result),
             'approve' => $approve,
             'not_approve' => $not_approve,

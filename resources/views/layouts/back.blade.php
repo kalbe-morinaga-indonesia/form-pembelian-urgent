@@ -26,7 +26,6 @@
     <link rel="stylesheet" href="{{ asset('theme/plugins/select2/css/select2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('theme/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -84,14 +83,15 @@
     </div>
 
     <script src="{{ asset('theme/plugins/jquery/jquery.min.js') }}"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+    <script src="{{ asset('js/jquery.rowspanizer.js') }}"></script>
+    {{-- <script src="{{ asset('theme/dist/js/combinerowspan.js') }}"></script> --}}
     <script src="{{ asset('theme/plugins/jquery-ui/jquery-ui.min.js') }}"></script>
     <script>
         $.widget.bridge('uibutton', $.ui.button)
 
     </script>
     <script src="{{ asset('theme/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('theme/plugins/chart.js/Chart.min.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="{{ asset('theme/plugins/sparklines/sparkline.js') }}"></script>
     <script src="{{ asset('theme/plugins/jqvmap/jquery.vmap.min.js') }}"></script>
     <script src="{{ asset('theme/plugins/jqvmap/maps/jquery.vmap.usa.js') }}"></script>
