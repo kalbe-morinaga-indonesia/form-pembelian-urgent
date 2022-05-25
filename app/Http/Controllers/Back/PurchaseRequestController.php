@@ -12,12 +12,13 @@ use App\Models\Department;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use JetBrains\PhpStorm\Pure;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\PurchaseRequest;
 use RealRashid\SweetAlert\Facades\Alert;
-use Barryvdh\DomPDF\Facade\Pdf;
 
 class PurchaseRequestController extends Controller
 {
@@ -30,11 +31,13 @@ class PurchaseRequestController extends Controller
                 ->orWhere('status', 'in process by buyer')
                 ->orWhere('status', 'approved by pu spv')
                 ->orWhere('status', 'rejected by pu spv')
+                ->orderBy('dtmUpdatedBy','desc')
                 ->get();
         } else if (Auth()->user()->hasRole('pu_svp')) {
             $purchases = Purchase::where('status', 'in process by buyer')
                 ->orWhere('status', 'approved by pu spv')
                 ->orWhere('status', 'rejected by pu spv')
+                ->orderBy('dtmUpdatedBy', 'desc')
                 ->get();
         } else if (Auth()->user()->hasRole('dept_head')) {
             $purchases = Purchase::where([
@@ -177,10 +180,14 @@ class PurchaseRequestController extends Controller
             ]);
         }
 
+        $total = Purchase::where('id', $request->mpurchase_id)->value('total');
+
+
         Purchase::where('id', $request->mpurchase_id)->update([
             'status' => 'in process by buyer',
-            'total' => $request->intTotal
+            'total' => (int)$request->intTotal + $total
         ]);
+
 
         Alert::success("Berhasil", "Input dengan nomor PO $request->txtNomorPo berhasil ditambahkan");
         return redirect()->route('purchase-requests.index');
@@ -188,7 +195,6 @@ class PurchaseRequestController extends Controller
 
     public function showApprove(Purchase $purchase)
     {
-
         $departments = Department::get();
         if ($purchase->status == "approved by dept head") {
             return redirect()->route('purchase-requests.index');
@@ -201,6 +207,57 @@ class PurchaseRequestController extends Controller
                 'inputs' => $inputs
             ]);
         }
+    }
+
+    public function showList(Purchase $purchase)
+    {
+        $departments = Department::get();
+            $inputs = Input::where('mpurchase_id', $purchase->id)
+            ->groupBy('txtNomorPO')
+            ->get();
+
+            $approve = Input::where([
+                ['mpurchase_id', $purchase->id],
+                ['txtStatus', 'approved by pu spv']
+            ])
+            ->groupBy('txtNomorPO')
+            ->get()
+            ->count();
+
+            $proccess = Input::where([
+                ['mpurchase_id', $purchase->id],
+                ['txtStatus', 'In Proccess']
+            ])
+            ->groupBy('txtNomorPO')
+            ->get()
+            ->count();
+
+
+            return view('back.purchase.list', [
+                'title' => 'List Po',
+                'purchase' => $purchase,
+                'departments' => $departments,
+                'inputs' => $inputs,
+                'approve' => $approve,
+                'proccess' => $proccess
+            ]);
+    }
+
+    public function showListPo(Purchase $purchase, Input $input){
+        $inputs = Input::where('txtNomorPO',$input->txtNomorPO)->get();
+
+        $subTotal = 0;
+        foreach($inputs as $total){
+            $subTotal += $total->intSubTotal;
+        }
+
+        return view('back.purchase.listpo', [
+            'title' => "List PO",
+            'purchase' => $purchase,
+            'inputs' => $inputs,
+            'input' => $input,
+            'subTotal' => $subTotal
+        ]);
     }
 
     public function formpo(Purchase $purchase)
@@ -217,11 +274,20 @@ class PurchaseRequestController extends Controller
         }
     }
 
-    public function cetakPo(Purchase $purchase)
+    public function cetakPo(Purchase $purchase, Input $input)
     {
+        $inputs = Input::where('txtNomorPO', $input->txtNomorPO)->get();
+
+        $subTotal = 0;
+        foreach ($inputs as $total) {
+            $subTotal += $total->intSubTotal;
+        }
         if ($purchase->status == "approved by pu spv") {
             $pdf = PDF::loadView('po', [
-                'purchase' => $purchase
+                'purchase' => $purchase,
+                'inputs' => $inputs,
+                'input' => $input,
+                'subTotal' => $subTotal
             ])->setPaper('a4', 'portrait')->setWarnings(false);
             return $pdf->stream();
         } else {
@@ -255,8 +321,26 @@ class PurchaseRequestController extends Controller
             }
         }
 
-
+        Alert::success("Berhasil", "Nomor Purchase Request $purchase->txtNoPurchaseRequest berhasil di approve");
         return redirect()->route('purchase-requests.index');
+    }
+
+    public function approvePo(Purchase $purchase, Request $request, Input $input)
+    {
+        if (Auth()->user()->hasRole('pu_svp')) {
+            if ($request->submit == "yes") {
+                Input::where('txtNomorPO', $input->txtNomorPO)->update([
+                    'txtStatus' => "approved by pu spv"
+                ]);
+            } else {
+                Input::where('txtNomorPO', $input->txtNomorPO)->update([
+                    'txtStatus' => "rejected by pu spv"
+                ]);
+                Input::where('txtNomorPO', $input->txtNomorPO)->delete();
+            }
+        }
+        Alert::success("Berhasil", "Nomor PO $input->txtNomorPO berhasil di approve");
+        return redirect()->route('purchase-requests.show-list',['purchase' => $purchase->txtSlug]);
     }
 
     public function edit(Purchase $purchase)
