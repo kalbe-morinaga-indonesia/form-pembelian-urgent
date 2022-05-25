@@ -734,7 +734,7 @@
                 <td>Vendor Name</td>
                 <td colspan="4">: FESTO, PT</td>
                 <td>PO Number</td>
-                <td colspan="4">: </td>
+                <td colspan="4">: {{$input->txtNomorPO}}</td>
             </tr>
             <tr>
                 <td>Vendor Address</td>
@@ -773,17 +773,17 @@
                 <td>Reference</td>
                 <td>Delivery</td>
             </tr>
-            @foreach ($purchase->minputs as $input)
+            @foreach ($inputs as $barang)
             <tr>
                 <td>{{ $loop->iteration }}</td>
-                <td>{{$input->mbarang->txtNamaBarang}}</td>
-                <td>{{$input->mbarang->txtItemCode}}</td>
-                <td>{{$input->mbarang->intJumlah}}</td>
-                <td>{{$input->mbarang->uom->txtUom}}</td>
-                <td>@currency($input->intHarga)</td>
-                <td>@currency($input->intSubTotal)</td>
+                <td>{{$barang->mbarang->txtNamaBarang}}</td>
+                <td>{{$barang->mbarang->txtItemCode}}</td>
+                <td>{{$barang->mbarang->intJumlah}}</td>
+                <td>{{$barang->mbarang->uom->txtUom}}</td>
+                <td>@currency($barang->intHarga)</td>
+                <td>@currency($barang->intSubTotal)</td>
                 <td></td>
-                <td>{{ date("d-M-Y", strtotime($input->dtmTanggalKedatangan)) }}</td>
+                <td>{{ date("d-M-Y", strtotime($barang->dtmTanggalKedatangan)) }}</td>
             </tr>
             @endforeach
         </table>
@@ -808,9 +808,9 @@
                     Grand Total
                 </td>
                 <td class="font-weight-bold" width="15%">
-                    @currency($purchase->total) <br>
-                    @currency($vat = $purchase->total * 0.11) <br>
-                    @currency($purchase->total + $vat)
+                    @currency($subTotal) <br>
+                    @currency($vat = $subTotal * 0.11) <br>
+                    @currency($subTotal + $vat)
                 </td>
                 <td>Please supply as scheduled and do not hesitate to call for any question
                 </td>
