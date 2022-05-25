@@ -28,8 +28,10 @@ class sidebar extends Component
             ['status', 'in process'],
             ['mdepartment_id', Auth()->user()->mdepartment_id]
         ])->get()->count();
+        $in_process_buyer = Purchase::where('status', 'in process by buyer')->get()->count();
         return view('components.back.sidebar', [
-            'count_in_process' => $in_process
+            'count_in_process' => $in_process,
+            'count_in_process_buyer' => $in_process_buyer,
         ]);
     }
 }
