@@ -122,7 +122,7 @@
                         </table>
                     </div>
                     <div class="col-md-4 offset-4 ms-auto">
-                        <table class="table table-sm table-bordered">
+                        <table class="table table-sm table-bordered text-center">
                             <thead>
                                 <tr>
                                     <th scope="col">Dibuat Oleh</th>

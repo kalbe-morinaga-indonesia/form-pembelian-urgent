@@ -59,13 +59,11 @@
                                 @hasrole('pu_svp')
                                 <td>
                                     @if($purchase->status == "in process by buyer")
-                                    <a href="{{ route('purchase-requests.show-approve',['purchase' => $purchase->txtSlug]) }}"
+                                    <a href="{{ route('purchase-requests.show-list',['purchase' => $purchase->txtSlug]) }}"
                                         class="btn btn-sm bg-success">
-                                    <i class="fas fa-check"></i></a>
+                                    Approved</a>
                                     @endif
-                                    @if ($purchase->status == "approved by pu spv")
-                                    <a class="btn btn-sm bg-primary" href="{{route('purchase-requests.cetakpo',['purchase' => $purchase->txtSlug])}}" target="_blank"><i class="fas fa-print"></i></a>
-                                    @endif
+
                                     @hasrole('buyer')
                                     <a href="{{ route('purchase-requests.show',['purchase' => $purchase->txtSlug]) }}" class="btn btn-sm btn-success">
                                         <i class="fas fa-eye"></i>
@@ -78,6 +76,9 @@
                                     <a href="{{ route('purchase-requests.show',['purchase' => $purchase->txtSlug]) }}" class="btn btn-sm btn-success">
                                         <i class="fas fa-eye"></i>
                                     </a>
+                                    @if ($purchase->status == "approved by pu spv")
+                                    <a class="btn btn-sm bg-primary" href="{{route('purchase-requests.show-list',['purchase' => $purchase->txtSlug])}}"><i class="fas fa-print"></i></a>
+                                    @endif
                                 </td>
                                 @endhasrole
                                 @hasrole('user')

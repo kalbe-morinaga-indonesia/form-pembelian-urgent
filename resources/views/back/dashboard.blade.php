@@ -122,14 +122,18 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($donuts_daily_reason as $donut)
+                                    @forelse ($donuts_daily_reason as $donut)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $donut->txtNamaDept }}</td>
                                         <td>{{ $donut->txtReason }}</td>
                                         <td>{{ $donut->total }}</td>
                                     </tr>
-                                    @endforeach
+                                    @empty
+                                    <tr>
+                                        <td colspan="4">Tidak ada data...</td>
+                                    </tr>
+                                    @endforelse
                                 </tbody>
                             </table>
                         </div>
@@ -149,14 +153,18 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($donuts_monthly_reason as $donut)
+                                    @forelse ($donuts_monthly_reason as $donut)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $donut->txtNamaDept }}</td>
                                         <td>{{ $donut->txtReason }}</td>
                                         <td>{{ $donut->total }}</td>
                                     </tr>
-                                    @endforeach
+                                    @empty
+                                    <tr>
+                                        <td colspan="4">Tidak ada data...</td>
+                                    </tr>
+                                    @endforelse
                                 </tbody>
                             </table>
                         </div>
@@ -176,7 +184,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($donuts_yearly_reason as $donut)
+                                    @forelse ($donuts_yearly_reason as $donut)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ date('M', strtotime($donut->dtmInsertedBy)); }}</td>
@@ -184,7 +192,11 @@
                                         <td>{{ $donut->txtReason }}</td>
                                         <td>{{ $donut->total }}</td>
                                     </tr>
-                                    @endforeach
+                                    @empty
+                                    <tr>
+                                        <td colspan="4">Tidak ada data...</td>
+                                    </tr>
+                                    @endforelse
                                 </tbody>
                             </table>
                         </div>

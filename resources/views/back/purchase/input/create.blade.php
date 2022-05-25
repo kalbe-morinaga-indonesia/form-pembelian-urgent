@@ -44,12 +44,14 @@
                             <div class="form-group">
                                 <label for="intTotal">Total</label>
                                 <div class="input-group mb-2">
-                                    <div class="input-group-prepend">
+                                    {{-- <div class="input-group-prepend">
                                         <div class="input-group-text">Rp. </div>
-                                    </div>
-                                    <input type="text" class="form-control @error('intTotal') is-invalid  @enderror" name="intTotal" id="intTotal"
+                                    </div> --}}
+                                    <input type="hidden" class="form-control @error('intTotal') is-invalid  @enderror" name="intTotal" id="intTotal"
                                         placeholder="Total Harga" value="{{ old('intTotal') }}" readonly>
-                                    @error('intTotal')
+                                    <input type="text" class="form-control @error('intTtl') is-invalid  @enderror" id="intTtl"
+                                        placeholder="Total Harga" value="{{ old('intTtl') }}" readonly>
+                                    @error('intTtl')
                                     <div class="text-danger">{{ $message }}</div>
                                     @enderror
                                 </div>
@@ -155,10 +157,40 @@
             var sum_value = 0;
             $('.subTotal').each(function () {
                 sum_value += +$(this).val();
+                $('#intTtl').val(new Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR" }).format(sum_value));
                 $('#intTotal').val(sum_value);
-            })
 
+            })
     }
+
+    // var rupiah = document.getElementsByClassName("harga");
+
+    // for (const rp of rupiah) {
+    //     rp.addEventListener('keyup', function(e){
+    //      rp.value = formatRupiah(this.value, 'Rp. ');
+    //     });
+    // }
+
+    // rupiah[0].addEventListener('keyup', function(e){
+    //     rupiah.value = formatRupiah(this.value, '');
+    // });
+
+    // function formatRupiah(angka, prefix){
+    //     var number_string = angka.replace(/[^,\d]/g, '').toString(),
+    //     split = number_string.split(','),
+    //     sisa = split[0].length % 3,
+    //     rupiah = split[0].substr(0, sisa),
+    //     ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+
+    // // tambahkan titik jika yang di input sudah menjadi angka ribuan
+    // if(ribuan){
+    //     separator = sisa ? '.' : '';
+    //     rupiah += separator + ribuan.join('.');
+    // }
+
+    //     rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+    //     return prefix == undefined ? rupiah : (rupiah ? ' ' + rupiah : '');
+    // }
 
 </script>
 @endpush

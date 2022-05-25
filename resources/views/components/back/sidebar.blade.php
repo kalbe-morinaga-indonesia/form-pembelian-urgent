@@ -92,9 +92,21 @@
                 @hasrole('dept_head')
                 <span class="badge bg-primary">{{$count_in_process}}</span>
                 @endhasrole
+                @hasrole('pu_svp')
+                <span class="badge bg-primary">{{$count_in_process_buyer}}</span>
+                @endhasrole
             </a>
         </li>
         @endhasrole
+
+        <li class="nav-item">
+            <a href="{{route('profile')}}" class="nav-link">
+                <i class="nav-icon fas fa-user"></i>
+                <p>
+                    Profile
+                </p>
+            </a>
+        </li>
 
         <li class="nav-item">
             <a href="{{ route('logout') }}" class="nav-link" onclick="event.preventDefault();
