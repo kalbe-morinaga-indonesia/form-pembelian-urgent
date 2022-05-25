@@ -7,6 +7,7 @@ use App\Http\Controllers\Back\DashboardController;
 use App\Http\Controllers\Back\DepartmentController;
 use App\Http\Controllers\Back\InputDataController;
 use App\Http\Controllers\Back\PermissionController;
+use App\Http\Controllers\Back\ProfileController;
 use App\Http\Controllers\Back\PurchaseRequestController;
 use App\Http\Controllers\Back\ReportController;
 use App\Http\Controllers\Back\RoleController;
@@ -60,6 +61,11 @@ Route::group(
             Route::get('dashboard/chart', 'chart');
         });
 
+        Route::controller(ProfileController::class)->group(function () {
+            Route::get('profile', 'index')->name('profile');
+            Route::put('profile', 'update')->name('profile.update');
+        });
+
         Route::resources([
             'departments' => DepartmentController::class,
             'users' => UserController::class,
@@ -109,8 +115,6 @@ Route::group(
                 ->name('purchase-requests.show');
             Route::get('purchase-requests/{purchase:txtSlug}/form-po', 'formpo')
                 ->name('purchase-requests.formpo');
-            Route::get('purchase-requests/{purchase:txtSlug}/cetak_po', 'cetakPo')
-                ->name('purchase-requests.cetakpo');
             Route::post('purchase-requests/{purchase:txtSlug}/create', 'createInput')
                 ->name('purchase-requests.create.input');
             Route::post('purchase-requests/create-input', 'storeInput')
@@ -123,6 +127,14 @@ Route::group(
                 ->name('purchase-requests.update');
             Route::get('purchase-requests/approve/{purchase:txtSlug}', 'showApprove')
                 ->name('purchase-requests.show-approve');
+            Route::get('purchase-requests/list-po/{purchase:txtSlug}', 'showList')
+                ->name('purchase-requests.show-list');
+            Route::get('purchase-requests/list-po/{purchase:txtSlug}/{input:txtNomorPO}', 'showListPo')
+            ->name('purchase-requests.show-list-po');
+            Route::get('purchase-requests/{purchase:txtSlug}/{input:txtNomorPO}/cetak_po', 'cetakPo')
+            ->name('purchase-requests.cetakpo');
+            Route::put('purchase-requests/list-po/{purchase:txtSlug}/{input:txtNomorPO}', 'approvePo')
+            ->name('purchase-requests.approve-po');
             Route::put('purchase-requests/approve/{purchase:txtSlug}', 'approve')
                 ->name('purchase-requests.approve');
         });
