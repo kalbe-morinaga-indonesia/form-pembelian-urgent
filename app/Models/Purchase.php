@@ -37,7 +37,7 @@ class Purchase extends Model
         return $this->hasOne('App\Models\Input', 'mpurchase_id');
     }
 
-    public function minputs()
+    public function inputs()
     {
         return $this->hasMany('App\Models\Input', 'mpurchase_id');
     }
