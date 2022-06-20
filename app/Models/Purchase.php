@@ -17,6 +17,7 @@ class Purchase extends Model
     const CREATED_AT = "dtmInsertedBy";
     const UPDATED_AT = "dtmUpdatedBy";
 
+
     public function muser()
     {
         return $this->belongsTo('App\Models\User');

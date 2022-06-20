@@ -120,6 +120,8 @@ class PurchaseRequestController extends Controller
             $fileModal->txtFile = json_encode($fileData);
             $fileModal->txtReason = $request->txtReason;
             $fileModal->status = "in process";
+            $fileModal->txtInsertedBy = Auth()->user()->txtNama;
+            $fileModal->txtUpdatedBy = Auth()->user()->txtNama;
 
             $fileModal->save();
 
@@ -133,6 +135,8 @@ class PurchaseRequestController extends Controller
                 $dataBarang->intJumlah = $value['intJumlah'];
                 $dataBarang->muom_id = $value['muom_id'];
                 $dataBarang->txtKeterangan = $value['txtKeterangan'];
+                $dataBarang->txtInsertedBy = Auth()->user()->txtNama;
+                $dataBarang->txtUpdatedBy = Auth()->user()->txtNama;
                 $dataBarang->save();
             }
         } else {
@@ -145,7 +149,8 @@ class PurchaseRequestController extends Controller
             $fileModal->dtmTanggalKebutuhan = $request->dtmTanggalKebutuhan;
             $fileModal->txtReason = $request->txtReason;
             $fileModal->status = "in process";
-
+            $fileModal->txtInsertedBy = Auth()->user()->txtNama;
+            $fileModal->txtUpdatedBy = Auth()->user()->txtNama;
             $fileModal->save();
 
             $purchase_id = Purchase::where('txtNoPurchaseRequest', $request->txtNoPurchaseRequest)->first();
@@ -158,6 +163,8 @@ class PurchaseRequestController extends Controller
                 $dataBarang->intJumlah = $value['intJumlah'];
                 $dataBarang->muom_id = $value['muom_id'];
                 $dataBarang->txtKeterangan = $value['txtKeterangan'];
+                $dataBarang->txtInsertedBy = Auth()->user()->txtNama;
+                $dataBarang->txtUpdatedBy = Auth()->user()->txtNama;
                 $dataBarang->save();
             }
         }
@@ -177,6 +184,8 @@ class PurchaseRequestController extends Controller
                 'intHarga' => $request->intHarga[$key],
                 'intSubTotal' => $request->intSubTotal[$key],
                 'dtmTanggalKedatangan' => $request->dtmTanggalKedatangan,
+                'txtInsertedBy' => Auth()->user()->txtNama,
+                'txtUpdatedBy' => Auth()->user()->txtNama
             ]);
         }
 
@@ -300,11 +309,13 @@ class PurchaseRequestController extends Controller
         if (Auth()->user()->hasRole('pu_svp')) {
             if ($request->submit == "yes") {
                 Purchase::where('id', $purchase->id)->update([
-                    'status' => "approved by pu spv"
+                    'status' => "approved by pu spv",
+                    'txtUpdatedBy' => Auth()->user()->txtNama,
                 ]);
             } else {
                 Purchase::where('id', $purchase->id)->update([
-                    'status' => "rejected by pu spv"
+                    'status' => "rejected by pu spv",
+                    'txtUpdatedBy' => Auth()->user()->txtNama,
                 ]);
                 Input::where('mpurchase_id', $purchase->id)->delete();
             }
@@ -312,11 +323,13 @@ class PurchaseRequestController extends Controller
             if ($request->submit == "yes") {
                 Purchase::where('id', $purchase->id)->update([
                     'txtApprovedByDeptHead' => Auth()->user()->txtNama,
-                    'status' => "approved by dept head"
+                    'status' => "approved by dept head",
+                    'txtUpdatedBy' => Auth()->user()->txtNama,
                 ]);
             } else {
                 Purchase::where('id', $purchase->id)->update([
-                    'status' => "rejected by dept head"
+                    'status' => "rejected by dept head",
+                    'txtUpdatedBy' => Auth()->user()->txtNama,
                 ]);
             }
         }
@@ -330,18 +343,22 @@ class PurchaseRequestController extends Controller
         if (Auth()->user()->hasRole('pu_svp')) {
             if ($request->submit == "yes") {
                 Input::where('txtNomorPO', $input->txtNomorPO)->update([
-                    'txtStatus' => "approved by pu spv"
+                    'txtStatus' => "approved by pu spv",
+                    'txtUpdatedBy' => Auth()->user()->txtNama,
                 ]);
                 Purchase::where('id', $purchase->id)->update([
-                    'status' => "approved by pu spv"
+                    'status' => "approved by pu spv",
+                    'txtUpdatedBy' => Auth()->user()->txtNama,
                 ]);
             } else {
                 Input::where('txtNomorPO', $input->txtNomorPO)->update([
-                    'txtStatus' => "rejected by pu spv"
+                    'txtStatus' => "rejected by pu spv",
+                    'txtUpdatedBy' => Auth()->user()->txtNama,
                 ]);
                 Input::where('txtNomorPO', $input->txtNomorPO)->delete();
                 Purchase::where('id', $purchase->id)->update([
-                    'status' => "rejected by dept head"
+                    'status' => "rejected by dept head",
+                    'txtUpdatedBy' => Auth()->user()->txtNama,
                 ]);
             }
         }
@@ -374,6 +391,7 @@ class PurchaseRequestController extends Controller
             $fileModal->txtFile = json_encode($fileData);
             $fileModal->txtReason = $request->txtReason;
             $fileModal->status = "in process";
+            $fileModal->txtUpdatedBy = Auth()->user()->txtNama;
 
             $fileModal->save();
 
@@ -384,6 +402,7 @@ class PurchaseRequestController extends Controller
                 $dataBarang->intJumlah = $value['intJumlah'];
                 $dataBarang->muom_id = $value['muom_id'];
                 $dataBarang->txtKeterangan = $value['txtKeterangan'];
+                $dataBarang->txtUpdatedBy = Auth()->user()->txtNama;
                 $dataBarang->save();
             }
         } else {
@@ -392,7 +411,7 @@ class PurchaseRequestController extends Controller
             $fileModal->dtmTanggalKebutuhan = $request->dtmTanggalKebutuhan;
             $fileModal->txtReason = $request->txtReason;
             $fileModal->status = "in process";
-
+            $fileModal->txtUpdatedBy = Auth()->user()->txtNama;
             $fileModal->save();
 
             foreach ($request->barang as $key => $value) {
@@ -402,6 +421,7 @@ class PurchaseRequestController extends Controller
                 $dataBarang->intJumlah = $value['intJumlah'];
                 $dataBarang->muom_id = $value['muom_id'];
                 $dataBarang->txtKeterangan = $value['txtKeterangan'];
+                $dataBarang->txtUpdatedBy = Auth()->user()->txtNama;
                 $dataBarang->save();
             }
         }
