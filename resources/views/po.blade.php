@@ -687,37 +687,44 @@
         table tr th {
             font-size: 9pt;
         }
+        *{
+            margin: 0;
+            padding: 0;
+        }
     </style>
 </head>
 
 <body>
-        <table class="table table-sm table-bordered">
-            <tr>
-                <td rowspan="4" colspan="2" class="align-middle">
-
+        <table class="table table-sm table-bordered m-0">
+            <tr class="m-0 p-0">
+                <td colspan="2" class="align-middle">
                     <img src="{{ public_path("theme/dist/img/header-form-po.png") }}" alt="Kalbe Morinaga"
                         class="img-fluid d-block mx-auto">
                 </td>
-                <td rowspan="4" colspan="3" class="align-middle">
+                <td colspan="3" class="align-middle">
                     <h6 class="fw-bold text-center">FORM <br> PURCHASE ORDER</h6>
                 </td>
-                <td colspan="2">No Dok</td>
-                <td colspan="2">FR/HRD-PU/FPO/001</td>
-            </tr>
-            <tr>
-                <td colspan="2">No. Rev</td>
-                <td colspan="2">02</td>
-            </tr>
-            <tr>
-                <td colspan="2">Tgl Berlaku</td>
-                <td colspan="2">08-Feb-21</td>
-            </tr>
-            <tr>
-                <td colspan="2">Halaman</td>
-                <td colspan="2">1 of 2</td>
+                <td colspan="2">
+                    No Dok
+                    <br>
+                    No. Rev
+                    <br>
+                    Tgl Berlaku
+                    <br>
+                    Halaman
+                </td>
+                <td colspan="2">
+                    FR/HRD-PU/FPO/001
+                    <br>
+                    02
+                    <br>
+                    08-Feb-21
+                    <br>
+                    1 of 2
+                </td>
             </tr>
         </table>
-        <table class="table table-sm table-bordered">
+        <table class="table table-sm table-bordered m-0">
             <tr>
                 <td colspan="9">
                     <p class="font-weight-bold m-0">PT KALBE MORINAGA INDONESIA</p>
@@ -799,7 +806,7 @@
                     <ol>
                         <li>Please mention our PO number in your <br> delivery order and Invoice.</li>
                         <li>Delivery Franco our warehouse</li>
-                        <li>Please attached CoA/SDS/MSDS/food grade <br> certificate/JSA for chemical/oil&gases goods/service work or <br> related document support.</li>
+                        <li>Please attached CoA/SDS/MSDS/food grade <br> certificate/JSA for chemical/oil&gases goods/service work or related document support.</li>
                     </ol>
                 </td>
                 <td class="font-weight-bold" width="15%">

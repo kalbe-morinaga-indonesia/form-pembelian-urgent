@@ -288,7 +288,7 @@ class PurchaseRequestController extends Controller
                 'inputs' => $inputs,
                 'input' => $input,
                 'subTotal' => $subTotal
-            ])->setPaper('a4', 'landscape')->setWarnings(false)->save("Form PO $input->txtNomorPO");
+            ])->setPaper('a4', 'landscape')->setWarnings(false);
             return $pdf->stream();
         } else {
             return redirect()->route('purchase-requests.index');
