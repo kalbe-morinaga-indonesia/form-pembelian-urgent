@@ -21,6 +21,8 @@ class CreateMbarangsTable extends Migration
             $table->integer('intJumlah');
             $table->foreignId('muom_id')->constrained()->onDelete('cascade');
             $table->string('txtKeterangan')->nullable();
+            $table->string('txtInsertedBy');
+            $table->string('txtUpdatedBy');
             $table->dateTime('dtmInsertedBy');
             $table->dateTime('dtmUpdatedBy');
         });

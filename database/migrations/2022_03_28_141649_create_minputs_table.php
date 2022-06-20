@@ -23,6 +23,8 @@ class CreateMinputsTable extends Migration
             $table->integer('intSubTotal');
             $table->date('dtmTanggalKedatangan');
             $table->string('txtStatus')->default('In Proccess');
+            $table->string('txtInsertedBy');
+            $table->string('txtUpdatedBy');
             $table->dateTime('dtmInsertedBy');
             $table->dateTime('dtmUpdatedBy');
         });

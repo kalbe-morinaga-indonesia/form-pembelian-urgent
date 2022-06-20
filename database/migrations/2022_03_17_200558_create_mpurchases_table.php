@@ -26,6 +26,8 @@ class CreateMpurchasesTable extends Migration
             $table->integer('total')->default(0);
             $table->enum('status', ['approved by dept head', 'approved by pu spv', 'in process', 'in process by buyer', 'rejected by dept head', 'rejected by buyer', 'rejected by pu spv', 'closed']);
             $table->string('txtApprovedByDeptHead')->nullable();
+            $table->string('txtInsertedBy');
+            $table->string('txtUpdatedBy');
             $table->dateTime('dtmInsertedBy');
             $table->dateTime('dtmUpdatedBy');
         });
