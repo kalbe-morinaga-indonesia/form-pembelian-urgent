@@ -68,6 +68,7 @@ Route::group(
         });
 
         Route::get('settings', [SettingController::class,'index'])->name('settings.index');
+        Route::put('settings', [SettingController::class,'update'])->name('settings.update');
 
         Route::resources([
             'departments' => DepartmentController::class,

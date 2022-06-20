@@ -14,14 +14,16 @@
                 </div>
             </div>
             <div class="card-body">
-                <form action="#" method="POST">
+                <form action="{{route('settings.update')}}" method="POST">
+                    @method('put')
                     @csrf
                     <div class="row">
                                <div class="col-md-12">
+                                <input type="hidden" name="id" value="{{$setting->id}}">
                                    <div class="form-group">
                                         <label for="intVat">VAT<span class="text-danger">*</span></label>
                                         <input type="number" class="form-control @error('intVat') is-invalid  @enderror" name="intVat" id="intVat"
-                                            placeholder="Masukkan VAT" value="{{ old('intVat')}}" autofocus>
+                                            placeholder="Masukkan VAT" value="{{ old('intVat') ?? $setting->intVat}}" autofocus>
                                         @error('intVat')
                                         <div class="text-danger">{{ $message }}</div>
                                         @enderror
