@@ -15,7 +15,7 @@ class SettingSeeder extends Seeder
     public function run()
     {
         Setting::create([
-            'vat' => 11,
+            'intVat' => 11,
             'txtInsertedBy' => "System",
             'txtUpdatedBy' => "System"
         ]);
