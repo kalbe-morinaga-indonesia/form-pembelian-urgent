@@ -39,7 +39,22 @@
                     <h3 class="mx-auto my-auto font-weight-bold">Form Pembelian Urgent</h3>
                     @if (Route::has('login'))
                     @auth
-
+                    {{-- Desktop --}}
+                    <div class="my-2 mt-lg-0 d-none d-md-block">
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <a class="btn btn-secondary" href="{{ route('dashboard') }}">Dashboard</a>
+                            </li>
+                        </ul>
+                    </div>
+                    {{-- Mobile --}}
+                    <div class="d-sm-block d-md-none">
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <a class="btn btn-secondary my-2 my-sm-0 px-4 btn-block" href="{{route('dashboard')}}">Dashboard</a>
+                            </li>
+                        </ul>
+                    </div>
                     @else
                     {{-- Desktop --}}
                     <div class="my-2 mt-lg-0 d-none d-md-block">
@@ -53,7 +68,7 @@
                     <div class="d-sm-block d-md-none">
                         <ul class="navbar-nav ml-auto">
                             <li class="nav-item">
-                                <a class="btn btn-secondary my-2 my-sm-0 px-4 btn-block" href="#">Login</a>
+                                <a class="btn btn-secondary my-2 my-sm-0 px-4 btn-block" href="{{route('login')}}">Login</a>
                             </li>
                         </ul>
                     </div>
