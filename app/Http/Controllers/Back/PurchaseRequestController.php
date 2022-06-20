@@ -7,6 +7,7 @@ use App\Models\Uom;
 use App\Models\User;
 use App\Models\Input;
 use App\Models\Barang;
+use App\Models\Setting;
 use App\Models\Purchase;
 use App\Models\Department;
 use Illuminate\Support\Str;
@@ -286,6 +287,7 @@ class PurchaseRequestController extends Controller
     public function cetakPo(Purchase $purchase, Input $input)
     {
         $inputs = Input::where('txtNomorPO', $input->txtNomorPO)->get();
+        $settingVat = Setting::pluck('intVat')->first();
 
         $subTotal = 0;
         foreach ($inputs as $total) {
@@ -296,7 +298,8 @@ class PurchaseRequestController extends Controller
                 'purchase' => $purchase,
                 'inputs' => $inputs,
                 'input' => $input,
-                'subTotal' => $subTotal
+                'subTotal' => $subTotal,
+                'settingVat' => $settingVat
             ])->setPaper('a4', 'landscape')->setWarnings(false);
             return $pdf->stream();
         } else {

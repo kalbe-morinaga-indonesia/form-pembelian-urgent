@@ -816,7 +816,7 @@
                 </td>
                 <td class="font-weight-bold" width="15%">
                     @currency($subTotal) <br>
-                    @currency($vat = $subTotal * 0.11) <br>
+                    @currency($vat = $subTotal * ($settingVat / 100)) <br>
                     @currency($subTotal + $vat)
                 </td>
                 <td>Please supply as scheduled and do not hesitate to call for any question
