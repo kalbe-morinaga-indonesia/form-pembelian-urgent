@@ -239,7 +239,7 @@ class UserSeeder extends Seeder
         ]);
 
         $user19 = User::create([
-            'txtNik' => $faker->nik(),
+            'txtNik' => "K220300040",
             'txtNama' => "Asep Setiawan",
             'txtPassword' => bcrypt("Kalbemorinaga"),
             'mdepartment_id' => 5,
