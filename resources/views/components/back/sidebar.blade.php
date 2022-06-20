@@ -79,6 +79,14 @@
                 </p>
             </a>
         </li>
+        <li class="nav-item">
+            <a href="{{ route('settings.index') }}" class="nav-link">
+                <i class="nav-icon fas fa-cog"></i>
+                <p>
+                    Setting
+                </p>
+            </a>
+        </li>
         @endhasrole
 
         @hasrole('user|dept_head|buyer|pu_svp')

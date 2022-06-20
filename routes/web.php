@@ -14,6 +14,7 @@ use App\Http\Controllers\Back\RoleController;
 use App\Http\Controllers\Back\UomController;
 use App\Http\Controllers\Back\UserController;
 use App\Http\Controllers\Front\HomeController;
+use App\Http\Controllers\SettingController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -65,6 +66,8 @@ Route::group(
             Route::get('profile', 'index')->name('profile');
             Route::put('profile', 'update')->name('profile.update');
         });
+
+        Route::get('settings', [SettingController::class,'index'])->name('settings.index');
 
         Route::resources([
             'departments' => DepartmentController::class,

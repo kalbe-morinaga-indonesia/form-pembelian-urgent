@@ -22,7 +22,7 @@
                                     <th>Department</th>
                                     <td>{{ $purchase->mdepartment->txtNamaDept }}</td>
                                     <th>Tanggal Kebutuhan</th>
-                                    <td>{{ $purchase->dtmTanggalKebutuhan }}</td>
+                                    <td>{{ date("d M Y", strtotime($purchase->dtmTanggalKebutuhan)) }}</td>
                                     <th>Total</th>
                                     <td>@currency($purchase->total)</td>
                                 </tr>
@@ -52,9 +52,12 @@
                     <div class="list">
                         <ul class="list-group">
                             @forelse ($inputs as $input)
-                            <li class="list-group-item">
+                            <li class="list-group-item d-flex justify-content-between">
                                 <a href="{{route('purchase-requests.show-list-po',['purchase' => $purchase->txtSlug, 'input' => $input->txtNomorPO])}}">
                                     {{$input->txtNomorPO}}
+                                </a>
+                                <a href="{{route('purchase-requests.show-list-po',['purchase' => $purchase->txtSlug, 'input' => $input->txtNomorPO])}}">
+                                    <i class="fas fa-eye"></i>
                                 </a>
                             </li>
                             @empty
@@ -62,7 +65,7 @@
                             @endforelse
                         </ul>
                     </div>
-                    <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+                    {{-- <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
                         <form
                             action="{{route('purchase-requests.approve',['purchase' => $purchase->txtSlug])}}"
                             method="POST">
@@ -73,7 +76,7 @@
                             <button type="submit" name="submit" value="no" class="btn btn-danger mx-2" >Rejected</button>
                             @endif
                         </form>
-                    </div>
+                    </div> --}}
                     @endhasrole
                     @hasrole('buyer')
                     <div class="alert alert-light">

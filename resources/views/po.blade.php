@@ -714,7 +714,7 @@
             </tr>
             <tr>
                 <td colspan="2">Halaman</td>
-                <td colspan="2">1 of 1</td>
+                <td colspan="2">1 of 2</td>
             </tr>
         </table>
         <table class="table table-sm table-bordered">

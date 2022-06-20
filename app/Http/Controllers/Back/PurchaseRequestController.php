@@ -288,7 +288,7 @@ class PurchaseRequestController extends Controller
                 'inputs' => $inputs,
                 'input' => $input,
                 'subTotal' => $subTotal
-            ])->setPaper('a4', 'portrait')->setWarnings(false);
+            ])->setPaper('a4', 'landscape')->setWarnings(false)->save("Form PO $input->txtNomorPO");
             return $pdf->stream();
         } else {
             return redirect()->route('purchase-requests.index');
@@ -332,11 +332,17 @@ class PurchaseRequestController extends Controller
                 Input::where('txtNomorPO', $input->txtNomorPO)->update([
                     'txtStatus' => "approved by pu spv"
                 ]);
+                Purchase::where('id', $purchase->id)->update([
+                    'status' => "approved by pu spv"
+                ]);
             } else {
                 Input::where('txtNomorPO', $input->txtNomorPO)->update([
                     'txtStatus' => "rejected by pu spv"
                 ]);
                 Input::where('txtNomorPO', $input->txtNomorPO)->delete();
+                Purchase::where('id', $purchase->id)->update([
+                    'status' => "rejected by dept head"
+                ]);
             }
         }
         Alert::success("Berhasil", "Nomor PO $input->txtNomorPO berhasil di approve");
