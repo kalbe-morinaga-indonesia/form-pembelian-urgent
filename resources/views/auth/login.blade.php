@@ -10,7 +10,7 @@
                 <a href="../../index2.html" class="h1"><b>Kalbe Morinaga</b> Indonesia</a>
             </div>
             <div class="card-body">
-                <p class="login-box-msg">Silahkan Untuk Masuk</p>
+                <p class="login-box-msg">Silahkan Masuk</p>
 
                 <form method="POST" action="{{ route('login') }}">
                     @csrf
