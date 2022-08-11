@@ -15,7 +15,7 @@ class CreateMdivisisTable extends Migration
     {
         Schema::create('mdivisis', function (Blueprint $table) {
             $table->id();
-            $table->char('txtIdDivisi', 8);
+            $table->char('txtIdDivisi', 8)->unique();
             $table->string('txtNamaDivisi');
             $table->string('txtInsertedBy')->nullable();
             $table->string('txtUpdatedBy')->nullable();

@@ -20,6 +20,7 @@
                             <tr>
                                 <th>#</th>
                                 <th>NIK (Nomor Induk Karyawan)</th>
+                                <th>Username</th>
                                 <th>Nama</th>
                                 <th>Nomor Handphone</th>
                                 <th>Tempat, Tanggal Lahir</th>
@@ -32,6 +33,7 @@
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $user->txtNik }}</td>
+                                <td><code>{{ $user->txtUsername }}</code></td>
                                 <td>{{ $user->txtNama }}</td>
                                 <td>{{ $user->txtNoHp ? $user->txtNoHp : 'n/a'  }}</td>
                                 <td>

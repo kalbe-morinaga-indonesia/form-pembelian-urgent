@@ -31,7 +31,7 @@
                                 <td>{{ $divisi->txtNamaDivisi }}</td>
                                 <td>
                                     <div class="btn-group">
-                                        <a href="#" class="btn btn-warning mx-2">
+                                        <a href="{{route('divisis.edit',['divisi' => $divisi->id])}}" class="btn btn-warning mx-2">
                                             <i class="fas fa-edit"></i>
                                         </a>
                                         <form action="{{route('divisis.destroy',['divisi' => $divisi->id])}}" method="POST">

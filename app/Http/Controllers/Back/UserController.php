@@ -42,6 +42,7 @@ class UserController extends Controller
     {
         User::create([
             'txtNik' =>  $request->txtNik,
+            'txtUsername' => $request->txtUsername,
             'txtNama' =>  $request->txtNama,
             'txtNoHp' =>  $request->txtNoHp,
             'txtTempatLahir' =>  $request->txtTempatLahir,

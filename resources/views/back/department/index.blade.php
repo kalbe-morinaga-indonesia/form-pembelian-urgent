@@ -18,6 +18,8 @@
                         <thead>
                             <tr>
                                 <th>#</th>
+                                <th>Id Divisi</th>
+                                <th>Divisi</th>
                                 <th>Nama Departemen</th>
                                 <th>Aksi</th>
                             </tr>
@@ -26,6 +28,8 @@
                             @forelse ($departments as $department)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
+                                <td><code>{{$department->txtIdDept}}</code></td>
+                                <td>{{$department->divisi->txtNamaDivisi}}</td>
                                 <td>{{ $department->txtNamaDept }}</td>
                                 <td>
                                     <div class="btn-group">

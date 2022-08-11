@@ -10,7 +10,7 @@ class Department extends Model
     use HasFactory;
 
     protected $table = "mdepartments";
-    protected $fillable = ['txtNamaDept'];
+    protected $guarded = [];
 
     const CREATED_AT = "dtmInsertedBy";
     const UPDATED_AT = "dtmUpdatedBy";
@@ -18,5 +18,9 @@ class Department extends Model
     public function users()
     {
         return $this->hasMany('App\Models\User');
+    }
+
+    public function divisi(){
+        return $this->belongsTo('App\Models\Divisi','txtIdDivisi','txtIdDivisi');
     }
 }

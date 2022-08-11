@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Back;
 use App\Models\Department;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\DepartmentRequest;
+use App\Models\Divisi;
 use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -27,24 +29,23 @@ class DepartmentController extends Controller
 
     public function create(Department $department)
     {
+        $divisis = Divisi::get();
         return view('back.department.create', [
             'title' => 'Department',
-            'department' => $department
+            'department' => $department,
+            'divisis' => $divisis
         ]);
     }
 
-    public function store(Request $request)
+    public function store(DepartmentRequest $request)
     {
-        $validateData = $request->validate([
-            'txtNamaDept' => 'required'
-        ], [
-            'txtNamaDept.required' => 'Nama Department wajib diisi'
-        ]);
 
         $namaUser = Auth()->user()->txtNama;
 
         Department::create([
-            'txtNamaDept' => $validateData['txtNamaDept'],
+            'txtIdDept' => $request['txtIdDept'],
+            'txtIdDivisi' => $request['txtIdDivisi'],
+            'txtNamaDept' => $request['txtNamaDept'],
             'txtInsertedBy' => $namaUser,
             'txtUpdatedBy' => $namaUser
         ]);
@@ -55,24 +56,22 @@ class DepartmentController extends Controller
 
     public function edit(Department $department)
     {
+        $divisis = Divisi::get();
         return view('back.department.edit', [
             'title' => 'Department',
-            'department' => $department
+            'department' => $department,
+            'divisis' => $divisis
         ]);
     }
 
     public function update(Department $department, Request $request)
     {
-        $validateData = $request->validate([
-            'txtNamaDept' => 'required'
-        ], [
-            'txtNamaDept.required' => 'Nama Department wajib diisi'
-        ]);
 
         $namaUser = Auth()->user()->txtNama;
 
         Department::where('id', $department->id)->update([
-            'txtNamaDept' => $validateData['txtNamaDept'],
+            'txtIdDivisi' => $request['txtIdDivisi'],
+            'txtNamaDept' => $request['txtNamaDept'],
             'txtUpdatedBy' => $namaUser
         ]);
 

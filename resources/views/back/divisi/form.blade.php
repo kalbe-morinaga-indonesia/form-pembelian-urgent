@@ -2,7 +2,11 @@
     <label for="txtIdDivisi">ID Divisi</label>
     <input type="text" class="form-control @error('txtIdDivisi') is-invalid  @enderror" name="txtIdDivisi"
         id="txtIdDivisi" placeholder="Masukkan ID Divisi"
-        value="{{ old('txtIdDivisi') ?? $divisi->txtIdDivisi }}">
+        value="{{ old('txtIdDivisi') ?? $divisi->txtIdDivisi }}" @if($divisi->txtIdDivisi)
+        readonly @endif>
+        @if ($button === 'Tambah')
+        <small>ID Divisi tidak bisa diubah</small>
+        @endif
     @error('txtIdDivisi')
     <div class="text-danger">{{ $message }}</div>
     @enderror

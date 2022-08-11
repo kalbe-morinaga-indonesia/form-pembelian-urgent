@@ -6,7 +6,7 @@
     <div class="col-md-12">
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title">Tambah Divisi</h3>
+                <h3 class="card-title">Edit Divisi {{ $divisi->txtNamaDivisi }}</h3>
                 <div class="card-tools">
                     <button type="button" class="btn btn-tool" data-card-widget="collapse">
                         <i class="fas fa-minus"></i>
@@ -14,9 +14,10 @@
                 </div>
             </div>
             <div class="card-body">
-                <form action="{{route('divisis.store')}}" method="POST">
+                <form action="{{ route('divisis.update',['divisi' => $divisi->id]) }}" method="POST">
+                    @method('put')
                     @csrf
-                    @include('back.divisi.form',['button' => 'Tambah'])
+                    @include('back.divisi.form',['button' => 'Edit'])
                 </form>
             </div>
         </div>

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMdepartmentsTable extends Migration
+class CreateMsubdeparmentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,18 +13,17 @@ class CreateMdepartmentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('mdepartments', function (Blueprint $table) {
+        Schema::create('msubdeparments', function (Blueprint $table) {
             $table->id();
-            $table->char('txtIdDept',8)->unique();
-            $table->char('txtIdDivisi');
-            $table->string('txtNamaDept');
+            $table->char('txtIdSubDept',8)->unique();
+            $table->char('txtIdDept',8);
+            $table->string('txtNamaSubDept');
             $table->string('txtInsertedBy')->nullable();
             $table->string('txtUpdatedBy')->nullable();
             $table->dateTime('dtmInsertedBy');
             $table->dateTime('dtmUpdatedBy');
 
-            $table->foreign('txtIdDivisi')->references('txtIdDivisi')->on('mdivisis')->onDelete('cascade');
-
+            $table->foreign('txtIdDept')->references('txtIdDept')->on('mdepartments')->onDelete('cascade');
         });
     }
 
@@ -35,6 +34,6 @@ class CreateMdepartmentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('mdepartments');
+        Schema::dropIfExists('msubdeparments');
     }
 }

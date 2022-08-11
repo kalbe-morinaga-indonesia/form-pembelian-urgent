@@ -1,5 +1,5 @@
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-3">
             <div class="form-group">
                 <label for="txtNik">NIK (Nomor Induk Karyawan) <span class="text-danger">*</span></label>
                 <input type="text" class="form-control @error('txtNik') is-invalid  @enderror" name="txtNik" id="txtNik"
@@ -14,7 +14,20 @@
                 @enderror
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-3">
+            <div class="form-group">
+                <label for="txtUsername">Username <span class="text-danger">*</span></label>
+                <input type="text" class="form-control @error('txtUsername') is-invalid  @enderror" name="txtUsername" id="txtUsername"
+                    placeholder="Masukkan Username" value="{{ old('txtUsername') ?? $user->txtUsername }}">
+                @if ($button === 'Tambah')
+                <small>Username tidak bisa diubah</small>
+                @endif
+                    @error('txtUsername')
+                <div class="text-danger">{{ $message }}</div>
+                @enderror
+            </div>
+        </div>
+        <div class="col-md-3">
             <div class="form-group">
                 <label for="txtNama">Nama Lengkap <span class="text-danger">*</span></label>
                 <input type="text" class="form-control @error('txtNama') is-invalid  @enderror" name="txtNama"
@@ -24,7 +37,7 @@
                 @enderror
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-3">
             <div class="form-group">
                 <label for="txtNoHp">Nomor Handhone</label>
                 <input type="text" class="form-control @error('txtNoHp') is-invalid  @enderror" name="txtNoHp"

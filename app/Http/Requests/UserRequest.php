@@ -32,6 +32,11 @@ class UserRequest extends FormRequest
                 Rule::unique('musers', 'txtNik')
                     ->ignore($this->user)
             ],
+            'txtUsername' => [
+                'required',
+                Rule::unique('musers', 'txtUsername')
+                ->ignore($this->user)
+            ],
             'txtNama' => 'required',
             'txtNoHp' => 'max:13',
             'txtPassword' => 'sometimes|required|min:8|confirmed',
@@ -46,12 +51,14 @@ class UserRequest extends FormRequest
             // required
             'txtNama.required' => "Nama Lengkap harus diisi",
             'txtNik.required' => "NIK harus diisi",
+            'txtUsername.required' => "Username harus diisi",
             'txtPassword.required' => "Password harus diisi",
             'txtPassword_confirmation.required' => "Konfirmasi Password harus diisi",
             'mdepartment_id.required' => "Department harus diisi",
 
             // unique
             'txtNik.unique' => "NIK tidak boleh sama",
+            'txtUsername.unique' => "Username tidak boleh sama",
 
             // min
             'txtPassword.min' => "Password minimal 8 karakter",
