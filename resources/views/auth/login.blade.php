@@ -7,7 +7,7 @@
         <!-- /.login-logo -->
         <div class="card card-outline card-primary">
             <div class="card-header text-center">
-                <a href="../../index2.html" class="h1"><b>Kalbe Morinaga</b> Indonesia</a>
+                <a href="#" class="h1"><b>Kalbe Morinaga</b> Indonesia</a>
             </div>
             <div class="card-body">
                 <p class="login-box-msg">Silahkan Masuk</p>
@@ -15,11 +15,11 @@
                 <form method="POST" action="{{ route('login') }}">
                     @csrf
                     <div class="input-group mb-3">
-                        <input id="txtNik" type="text"
-                            class="form-control @error('txtNik') is-invalid @enderror" name="txtNik"
-                            value="{{ old('txtNik') }}" autofocus placeholder="NIK (Nomor Induk Karyawan)">
+                        <input id="txtUsername" type="text"
+                            class="form-control @error('txtUsername') is-invalid @enderror" name="txtUsername"
+                            value="{{ old('txtUsername') }}" autofocus placeholder="Username">
 
-                        @error('txtNik')
+                        @error('txtUsername')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
@@ -41,8 +41,9 @@
                                 <input type="checkbox" class="@error('remember') is-invalid @enderror" name="remember"
                                     id="remember" {{ old('remember') ? 'checked' : '' }}>
                                 <label for="remember">
-                                    {{ __('Remember Me') }}
+                                    Login Using Active Directory
                                 </label>
+                                <span class="text-danger">*(Ceklis jika memiliki login PC)</span>
                                 @error('remember')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>

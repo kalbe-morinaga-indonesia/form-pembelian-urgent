@@ -16,6 +16,7 @@ class CreateMusersTable extends Migration
         Schema::create('musers', function (Blueprint $table) {
             $table->id();
             $table->string('txtNik')->unique();
+            $table->string('txtUsername')->unique();
             $table->string('txtNama');
             $table->string('txtNoHp')->nullable();
             $table->string('txtTempatLahir')->nullable();

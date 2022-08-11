@@ -5,12 +5,16 @@ use App\Http\Controllers\Back\AssignPermissionController;
 use App\Http\Controllers\Back\AssignUserController;
 use App\Http\Controllers\Back\DashboardController;
 use App\Http\Controllers\Back\DepartmentController;
+use App\Http\Controllers\Back\DivisiController;
 use App\Http\Controllers\Back\InputDataController;
+use App\Http\Controllers\Back\JabatanController;
+use App\Http\Controllers\Back\LokasiController;
 use App\Http\Controllers\Back\PermissionController;
 use App\Http\Controllers\Back\ProfileController;
 use App\Http\Controllers\Back\PurchaseRequestController;
 use App\Http\Controllers\Back\ReportController;
 use App\Http\Controllers\Back\RoleController;
+use App\Http\Controllers\Back\SubDepartmentController;
 use App\Http\Controllers\Back\UomController;
 use App\Http\Controllers\Back\UserController;
 use App\Http\Controllers\Front\HomeController;
@@ -72,6 +76,10 @@ Route::group(
 
         Route::resources([
             'departments' => DepartmentController::class,
+            'subdepartments' => SubDepartmentController::class,
+            'divisis' => DivisiController::class,
+            'jabatan' => JabatanController::class,
+            'lokasi' => LokasiController::class,
             'users' => UserController::class,
             'uoms' => UomController::class,
             'roles' => RoleController::class,

@@ -31,6 +31,38 @@
             </a>
         </li>
         <li class="nav-item">
+                    <a href="{{route('subdepartments.index')}}" class="nav-link">
+                        <i class="nav-icon fas fa-building"></i>
+                        <p>
+                            Sub Departemen
+                        </p>
+                    </a>
+                </li>
+        <li class="nav-item">
+            <a href="{{route('divisis.index')}}" class="nav-link">
+                <i class="nav-icon fas fa-globe"></i>
+                <p>
+                    Divisi
+                </p>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="{{route('jabatan.index')}}" class="nav-link">
+                <i class="nav-icon fas fa-briefcase"></i>
+                <p>
+                    Jabatan
+                </p>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="{{route('lokasi.index')}}" class="nav-link">
+                <i class="nav-icon fas fa-map"></i>
+                <p>
+                    Lokasi
+                </p>
+            </a>
+        </li>
+        <li class="nav-item">
             <a href="{{ route('users.index') }}" class="nav-link">
                 <i class="nav-icon fas fa-users"></i>
                 <p>

@@ -77,6 +77,7 @@ class UserSeeder extends Seeder
         // create user
         $user1 = User::create([
             'txtNik' => "K190900331",
+            'txtUsername' => "rakha.adi",
             'txtNama' => "Rakha Adi Putra",
             'txtPassword' => bcrypt("Kalbemorinaga"),
             'mdepartment_id' => 1,
@@ -86,6 +87,7 @@ class UserSeeder extends Seeder
 
         $user2 = User::create([
             'txtNik' => "120292518",
+            'txtUsername' => "zaini.ardhiansyah",
             'txtNama' => "Zaini Ardhiansyah",
             'txtPassword' => bcrypt("Kalbemorinaga"),
             'mdepartment_id' => 1,
@@ -95,6 +97,7 @@ class UserSeeder extends Seeder
 
         $user3 = User::create([
             'txtNik' => "120292515",
+            'txtUsername' => "rudi.sugiarto",
             'txtNama' => "Rudi Sugiarto",
             'txtPassword' => bcrypt("Kalbemorinaga"),
             'mdepartment_id' => 2,
@@ -104,6 +107,7 @@ class UserSeeder extends Seeder
 
         $user4 = User::create([
             'txtNik' => "150791709",
+            'txtUsername' => "happy.sugestie",
             'txtNama' => "Happy Sugestie",
             'txtPassword' => bcrypt("Kalbemorinaga"),
             'mdepartment_id' => 3,
@@ -113,6 +117,7 @@ class UserSeeder extends Seeder
 
         $user5 = User::create([
             'txtNik' => "220100111",
+            'txtUsername' => "kukuh.gumilang",
             'txtNama' => "Kukuh Gumilang",
             'txtPassword' => bcrypt("Kalbemorinaga"),
             'mdepartment_id' => 4,
@@ -122,6 +127,7 @@ class UserSeeder extends Seeder
 
         $user6 = User::create([
             'txtNik' => "080900031",
+            'txtUsername' => "dwi.kurniawan",
             'txtNama' => "Dwi Kurniawan",
             'txtPassword' => bcrypt("Kalbemorinaga"),
             'mdepartment_id' => 5,
@@ -131,6 +137,7 @@ class UserSeeder extends Seeder
 
         $user7 = User::create([
             'txtNik' => "100192702",
+            'txtUsername' => "agung.hartanto",
             'txtNama' => "Agung Hartanto",
             'txtPassword' => bcrypt("Kalbemorinaga"),
             'mdepartment_id' => 6,
@@ -140,6 +147,7 @@ class UserSeeder extends Seeder
 
         $user8 = User::create([
             'txtNik' => "120892523",
+            'txtUsername' => "mukti.wibowo",
             'txtNama' => "Mukti Wibowo",
             'txtPassword' => bcrypt("Kalbemorinaga"),
             'mdepartment_id' => 7,
@@ -149,6 +157,7 @@ class UserSeeder extends Seeder
 
         $user9 = User::create([
             'txtNik' => "120292511",
+            'txtUsername' => "ahmad.sahroni",
             'txtNama' => "Ahmad Sahroni",
             'txtPassword' => bcrypt("Kalbemorinaga"),
             'mdepartment_id' => 8,
@@ -159,6 +168,7 @@ class UserSeeder extends Seeder
         // dept head
         $user10 = User::create([
             'txtNik' => "050700014",
+            'txtUsername' => "didik.budiarto",
             'txtNama' => "Didik Budiarto",
             'txtPassword' => bcrypt("Kalbemorinaga"),
             'mdepartment_id' => 1,
@@ -168,6 +178,7 @@ class UserSeeder extends Seeder
 
         $user11 = User::create([
             'txtNik' => "130100005",
+            'txtUsername' => "ambar.kusumo",
             'txtNama' => "Ambar Kusumo Nugroho",
             'txtPassword' => bcrypt("Kalbemorinaga"),
             'mdepartment_id' => 8,
@@ -177,6 +188,7 @@ class UserSeeder extends Seeder
 
         $user12 = User::create([
             'txtNik' => "180600122",
+            'txtUsername' => "bernadheta.rismisari",
             'txtNama' => "Bernadheta Rismisari Handayani",
             'txtPassword' => bcrypt("Kalbemorinaga"),
             'mdepartment_id' => 3,
@@ -186,6 +198,7 @@ class UserSeeder extends Seeder
 
         $user13 = User::create([
             'txtNik' => "110900055",
+            'txtUsername' => "hermansyah",
             'txtNama' => "Hermansyah",
             'txtPassword' => bcrypt("Kalbemorinaga"),
             'mdepartment_id' => 2,
@@ -194,6 +207,7 @@ class UserSeeder extends Seeder
         ]);
         $user14 = User::create([
             'txtNik' => "100300009",
+            'txtUsername' => "nazarudin.rachman",
             'txtNama' => "Nazarudin Rachman Sidik",
             'txtPassword' => bcrypt("Kalbemorinaga"),
             'mdepartment_id' => 6,
@@ -203,6 +217,7 @@ class UserSeeder extends Seeder
 
         $user15 = User::create([
             'txtNik' => "070400065",
+            'txtUsername' => "marleny.patandung",
             'txtNama' => "Marleny Patandung",
             'txtPassword' => bcrypt("Kalbemorinaga"),
             'mdepartment_id' => 7,
@@ -212,6 +227,7 @@ class UserSeeder extends Seeder
 
         $user16 = User::create([
             'txtNik' => "150600127",
+            'txtUsername' => "yoppy.sukmandar",
             'txtNama' => "Yoppy Sukmandar",
             'txtPassword' => bcrypt("Kalbemorinaga"),
             'mdepartment_id' => 4,
@@ -221,6 +237,7 @@ class UserSeeder extends Seeder
 
         $user17 = User::create([
             'txtNik' => "081000038",
+            'txtUsername' => "agus.firmansyah",
             'txtNama' => "Agus Firmansyah",
             'txtPassword' => bcrypt("Kalbemorinaga"),
             'mdepartment_id' => 5,
@@ -231,6 +248,7 @@ class UserSeeder extends Seeder
         // Buyer dan PU
         $user18 = User::create([
             'txtNik' => "100192704",
+            'txtUsername' => "ika.oktafianti",
             'txtNama' => "Ika Oktafianti",
             'txtPassword' => bcrypt("Kalbemorinaga"),
             'mdepartment_id' => 5,
@@ -240,6 +258,7 @@ class UserSeeder extends Seeder
 
         $user19 = User::create([
             'txtNik' => "K220300040",
+            'txtUsername' => "asep.setiawan",
             'txtNama' => "Asep Setiawan",
             'txtPassword' => bcrypt("Kalbemorinaga"),
             'mdepartment_id' => 5,
@@ -249,6 +268,7 @@ class UserSeeder extends Seeder
 
         $user20 = User::create([
             'txtNik' => "070100013",
+            'txtUsername' => "agus.riyanto",
             'txtNama' => "Agus Riyanto",
             'txtPassword' => bcrypt("Kalbemorinaga"),
             'mdepartment_id' => 1,

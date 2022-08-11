@@ -13,13 +13,31 @@ use Illuminate\Support\Facades\Auth;
 class DashboardController extends Controller
 {
     public function index()
-    {$today = Carbon::now();
-        $daily_request = Purchase::whereDay('dtmInsertedBy', $today)->get();
-        $monthly_request = Purchase::whereMonth('dtmInsertedBy', $today)->get();
-        $yearly_request = Purchase::whereYear('dtmInsertedBy', $today)->get();
-        if (Auth()->user()->hasRole('user')){
+    {
+        $today = Carbon::now();
+        $user_department = Auth()->user()->mdepartment_id;
+        $daily_request = Purchase::whereDay('dtmInsertedBy', $today)
+            ->get();
 
-            $user_department = Auth()->user()->mdepartment_id;
+        $monthly_request = Purchase::whereMonth('dtmInsertedBy', $today)
+            ->get();
+
+        $yearly_request = Purchase::whereYear('dtmInsertedBy', $today)
+            ->get();
+
+        if (Auth()->user()->hasRole('user')){
+            $daily_request = Purchase::whereDay('dtmInsertedBy', $today)
+            ->where('mdepartment_id', $user_department)
+            ->get();
+
+            $monthly_request = Purchase::whereMonth('dtmInsertedBy', $today)
+            ->where('mdepartment_id', $user_department)
+            ->get();
+
+
+            $yearly_request = Purchase::whereYear('dtmInsertedBy', $today)
+            ->where('mdepartment_id', $user_department)
+            ->get();
 
             $donuts_daily = DB::table('mpurchases')
             ->select('mdepartments.txtNamaDept', DB::raw('count(*) as total'))
@@ -132,7 +150,7 @@ class DashboardController extends Controller
                     COUNT(CASE WHEN txtReason='Safety K3' THEN 1  END) As 'safetyK3',
                     COUNT(*) as total,
                     dtmInsertedBy
-                    FROM mpurchases GROUP BY MONTH(`dtmInsertedBy`), YEAR(`dtmInsertedBy`)"
+                    FROM mpurchases WHERE mdepartment_id = $user_department GROUP BY MONTH(`dtmInsertedBy`), YEAR(`dtmInsertedBy`)"
         );
 
         $result[] = ['month', 'Breakdown', 'Human Error', 'Iddle Produksi', 'Safety K3'];
