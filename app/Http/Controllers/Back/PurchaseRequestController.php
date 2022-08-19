@@ -19,6 +19,7 @@ use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\PurchaseRequest;
+use App\Models\PurchaseRequest as ModelsPurchaseRequest;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class PurchaseRequestController extends Controller
@@ -75,10 +76,12 @@ class PurchaseRequestController extends Controller
 
     public function create(Purchase $purchase)
     {
-        return view('back.purchase.create', [
+        $purchase_items = ModelsPurchaseRequest::get();
+            return view('back.purchase.create', [
             'title' => 'Purchase Request',
             'purchase' => $purchase,
-            'uoms' => Uom::get()
+            'uoms' => Uom::get(),
+            'purchase_items' => $purchase_items
         ]);
     }
 

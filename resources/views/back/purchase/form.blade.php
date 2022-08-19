@@ -44,8 +44,9 @@
                 <tr>
                     <input type="hidden" name="barang[{{$key}}][id]" value="{{$barang->id}}">
                     <td>
-                        <input type="text" class="form-control" placeholder="Item Code" name="barang[{{$key}}][txtItemCode]" value="{{$barang->txtItemCode}}"
-                            required>
+                        {{-- <input type="text" class="form-control" placeholder="Item Code" name="barang[{{$key}}][txtItemCode]" value="{{$barang->txtItemCode}}"
+                            required> --}}
+
                     </td>
                     <td>
                         <input type="text" class="form-control" placeholder="Nama Barang"
@@ -64,21 +65,33 @@
                 @empty
                     <tr>
                         <td>
-                            <input type="text" class="form-control" placeholder="Item Code" name="barang[0][txtItemCode]"
-                                required>
+                            {{-- <input type="text" class="form-control" placeholder="Item Code" name="barang[0][txtItemCode]"
+                                required> --}}
+                                <div class="form-group">
+                                    <select name="barang[0][txtItemCode]" id="item_code" class="select2bs4 form-control" onchange="myItem(event)" required>
+                                        <option value="">Pilih Item</option>
+                                        @foreach ($purchase_items as $item)
+                                        <option value="{{$item->item_code}}">{{$item->item_code}} | {{$item->item_description}} | {{$item->quantity}} |
+                                            {{$item->unit_meas_lookup_code}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                         </td>
                         <td>
-                            <input type="text" class="form-control" placeholder="Nama Barang" name="barang[0][txtNamaBarang]" required>
+                            <div class="form-group">
+                            <input type="text" class="form-control" id="barang" placeholder="Nama Barang" name="barang[0][txtNamaBarang]" required disabled>
+                            </div>
                         </td>
                         <td><input type="number" class="form-control" placeholder="Jumlah" name="barang[0][intJumlah]" required></td>
                         <td>
-                            <select name="barang[0][muom_id]" class="form-control">
+                            <input type="text" name="barang[0][muom_id]" id="satuan" class="form-control" placeholder="Satuan" required disabled>
+                            {{-- <select name="barang[0][muom_id]" class="form-control">
                                 @forelse ($uoms as $uom)
                                     <option value="{{$uom->id}}">{{$uom->txtUom}}</option>
                                 @empty
                                     <option>Tidak ada data</option>
                                 @endforelse
-                            </select>
+                            </select> --}}
                         </td>
                         <td><input type="text" class="form-control" placeholder="Keterangan" name="barang[0][txtKeterangan]"></td>
                         <td><button class="btn btn-primary" id="dynamic-ar" type="button">Tambah</button></td>

@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\PurchaseOrder;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -17,5 +18,7 @@ class DatabaseSeeder extends Seeder
         $this->call(DepartmentSeeder::class);
         $this->call(UserSeeder::class);
         $this->call(SettingSeeder::class);
+        $this->call(PurchaseSeeder::class);
+        $this->call(PurchaseOrder::class);
     }
 }
