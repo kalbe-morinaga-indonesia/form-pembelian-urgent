@@ -21,9 +21,9 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="txtNomorPo">Nomor PO</label>
-                                <input type="text" class="form-control @error('txtNomorPo') is-invalid  @enderror"
+                                <input type="text" id="txtNomorPo" class="form-control @error('txtNomorPo') is-invalid  @enderror"
                                     name="txtNomorPo" id="txtNomorPo" placeholder="Masukkan Nomor PO"
-                                    value="{{ old('txtNomorPo') }}" required>
+                                    value="{{ old('txtNomorPo') }}" required readonly>
                                 @error('txtNomorPo')
                                 <div class="text-danger">{{ $message }}</div>
                                 @enderror
@@ -32,12 +32,16 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="txtNamaSupplier">Nama Supplier</label>
-                                <input type="text" class="form-control @error('txtNamaSupplier') is-invalid  @enderror"
-                                    name="txtNamaSupplier" id="txtNamaSupplier" placeholder="Masukkan Nama Supplier"
-                                    value="{{ old('txtNamaSupplier') }}" required>
-                                @error('txtNamaSupplier')
-                                <div class="text-danger">{{ $message }}</div>
-                                @enderror
+                                <select name="txtNamaSupplier" onchange="myItem(event)" id="item_code" class="select2bs4 form-control @error('txtNamaSupplier') is-invalid  @enderror"
+                                    required>
+                                    <option>Pilih Supplier</option>
+                                    @foreach ($purchase_orders as $order)
+                                        <option value="{{$order->supplier_name}}">{{$order->supplier_name}}</option>
+                                    @endforeach
+                                    @error('txtNamaSupplier')
+                                    <div class="text-danger">{{ $message }}</div>
+                                    @enderror
+                                </select>
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -87,7 +91,7 @@
                             class="form-control">
                         {{$inputBarang->intJumlah}}
                     </td>
-                    <td>{{$inputBarang->uom->txtUom}}</td>
+                    <td>{{$inputBarang->satuan}}</td>
                     <td>{{$inputBarang->txtKeterangan}}</td>
                     <td>{{$inputBarang->purchase->dtmTanggalKebutuhan}}</td>
                     <td>
@@ -191,6 +195,14 @@
     //     rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
     //     return prefix == undefined ? rupiah : (rupiah ? ' ' + rupiah : '');
     // }
+
+    function myItem(event){
+        @foreach ($purchase_orders as $orders)
+            if(event.target.value === "{{$orders->supplier_name}}"){
+                document.getElementById("txtNomorPo").value = "{{$orders->po_number}}"
+            }
+        @endforeach
+    }
 
 </script>
 @endpush

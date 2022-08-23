@@ -141,11 +141,11 @@ Route::group(
                 ->name('purchase-requests.show-approve');
             Route::get('purchase-requests/list-po/{purchase:txtSlug}', 'showList')
                 ->name('purchase-requests.show-list');
-            Route::get('purchase-requests/list-po/{purchase:txtSlug}/{input:txtNomorPO}', 'showListPo')
+            Route::get('purchase-requests/list-po/{purchase:txtSlug}/{input:id}', 'showListPo')
             ->name('purchase-requests.show-list-po');
-            Route::get('purchase-requests/{purchase:txtSlug}/{input:txtNomorPO}/cetak_po', 'cetakPo')
+            Route::get('purchase-requests/{purchase:txtSlug}/{input:id}/cetak_po', 'cetakPo')
             ->name('purchase-requests.cetakpo');
-            Route::put('purchase-requests/list-po/{purchase:txtSlug}/{input:txtNomorPO}', 'approvePo')
+            Route::put('purchase-requests/list-po/{purchase:txtSlug}/{input:id}', 'approvePo')
             ->name('purchase-requests.approve-po');
             Route::put('purchase-requests/approve/{purchase:txtSlug}', 'approve')
                 ->name('purchase-requests.approve');

@@ -739,31 +739,31 @@
             </tr>
             <tr>
                 <td>Vendor Name</td>
-                <td colspan="4">: FESTO, PT</td>
+                <td colspan="4">: {{$supplier->supplier_name}}</td>
                 <td>PO Number</td>
                 <td colspan="4">: {{$input->txtNomorPO}}</td>
             </tr>
             <tr>
                 <td>Vendor Address</td>
-                <td colspan="4">: JL. Sultan Iskandar Muda 68 JAKARTA SELATAN</td>
+                <td colspan="4">: {{$supplier->supplier_address}}</td>
                 <td>PO Revision Number</td>
                 <td colspan="4">: 0</td>
             </tr>
             <tr>
                 <td>Vendor Contact Name</td>
-                <td colspan="4">: Tommy Subagja</td>
+                <td colspan="4">: {{$supplier->supplier_contact_name}}</td>
                 <td>Date</td>
                 <td colspan="4">: 10-MAR-22</td>
             </tr>
             <tr>
                 <td>Vendor Phone</td>
-                <td colspan="4">: 021-27507900</td>
+                <td colspan="4">: {{$supplier->supplier_phone}}</td>
                 <td>Payment</td>
-                <td colspan="4">: 30 Days</td>
+                <td colspan="4">: {{$supplier->name}}</td>
             </tr>
             <tr>
                 <td>Vendor Email</td>
-                <td colspan="4">: tommy.subagja@festo.com</td>
+                <td colspan="4">: {{$supplier->supplier_email}}</td>
                 <td></td>
                 <td colspan="4"></td>
             </tr>
@@ -786,7 +786,7 @@
                 <td>{{$barang->mbarang->txtNamaBarang}}</td>
                 <td>{{$barang->mbarang->txtItemCode}}</td>
                 <td>{{$barang->mbarang->intJumlah}}</td>
-                <td>{{$barang->mbarang->uom->txtUom}}</td>
+                <td>{{$barang->mbarang->satuan}}</td>
                 <td>@currency($barang->intHarga)</td>
                 <td>@currency($barang->intSubTotal)</td>
                 <td></td>
@@ -804,9 +804,7 @@
                 <td>
                     <p class="font-weight-bold m-0">Note : </p>
                     <ol>
-                        <li>Please mention our PO number in your <br> delivery order and Invoice.</li>
-                        <li>Delivery Franco our warehouse</li>
-                        <li>Please attached CoA/SDS/MSDS/food grade <br> certificate/JSA for chemical/oil&gases goods/service work or related document support.</li>
+                        <li>{{$supplier->note}}</li>
                     </ol>
                 </td>
                 <td class="font-weight-bold" width="15%">

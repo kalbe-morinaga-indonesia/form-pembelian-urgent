@@ -91,7 +91,7 @@
                                 <td>{{ $barang->mbarang->txtItemCode }}</td>
                                 <td>{{ $barang->mbarang->txtNamaBarang }}</td>
                                 <td>{{ $barang->mbarang->intJumlah }}</td>
-                                <td>{{ $barang->mbarang->uom->txtUom }}</td>
+                                <td>{{ $barang->mbarang->satuan }}</td>
                                 <td>@currency($barang->intHarga)</td>
                                 <td>{{ $barang->dtmTanggalKedatangan }}</td>
                                 <td>{{ $barang->mbarang->txtKeterangan }}</td>
@@ -107,7 +107,7 @@
                     </table>
                 </div>
                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                    <form action="{{route('purchase-requests.approve-po',['purchase' => $purchase->txtSlug,'input' => $input->txtNomorPO])}}" method="POST">
+                    <form action="{{route('purchase-requests.approve-po',['purchase' => $purchase->txtSlug,'input' => $input->id])}}" method="POST">
                         @method('put')
                         @csrf
                         @if ($input->txtStatus == "approved by pu spv")

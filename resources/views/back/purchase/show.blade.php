@@ -94,7 +94,7 @@
                                     <h6 class="mb-0 text-nowrap">{{ $barang->intJumlah }}</h6>
                                 </td>
                                 <td class="align-middle text-center">
-                                    <h6 class="mb-0 text-nowrap">{{ $barang->uom->txtUom }}</h6>
+                                    <h6 class="mb-0 text-nowrap">{{ $barang->satuan }}</h6>
                                 </td>
                                 <td class="align-middle text-center">
                                     <h6 class="mb-0 text-nowrap">{{ $barang->txtKeterangan }}</h6>

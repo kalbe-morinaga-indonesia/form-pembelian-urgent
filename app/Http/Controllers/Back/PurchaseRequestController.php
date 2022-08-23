@@ -19,6 +19,7 @@ use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\PurchaseRequest;
+use App\Models\PurchaseOrder;
 use App\Models\PurchaseRequest as ModelsPurchaseRequest;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -88,6 +89,7 @@ class PurchaseRequestController extends Controller
     public function createInput(Request $request)
     {
         $input = $request->all();
+        $purchase_orders = PurchaseOrder::get();
         if ($request->input('noInput')) {
             $input['noInput'] = $request->input('noInput');
             $total = count($input['noInput']);
@@ -95,7 +97,8 @@ class PurchaseRequestController extends Controller
             return view('back.purchase.input.create', [
                 'title' => "Input Data",
                 'inputBarangs' => $inputBarangs,
-                'count' => $inputBarangs->count()
+                'count' => $inputBarangs->count(),
+                'purchase_orders' => $purchase_orders
             ]);
         } else {
             return redirect()->back()->with('message', 'Tidak ada item yang dipilih');
@@ -137,7 +140,7 @@ class PurchaseRequestController extends Controller
                 $dataBarang->txtItemCode = $value['txtItemCode'];
                 $dataBarang->txtNamaBarang = $value['txtNamaBarang'];
                 $dataBarang->intJumlah = $value['intJumlah'];
-                $dataBarang->muom_id = $value['muom_id'];
+                $dataBarang->satuan = $value['satuan'];
                 $dataBarang->txtKeterangan = $value['txtKeterangan'];
                 $dataBarang->txtInsertedBy = Auth()->user()->txtNama;
                 $dataBarang->txtUpdatedBy = Auth()->user()->txtNama;
@@ -165,7 +168,7 @@ class PurchaseRequestController extends Controller
                 $dataBarang->txtItemCode = $value['txtItemCode'];
                 $dataBarang->txtNamaBarang = $value['txtNamaBarang'];
                 $dataBarang->intJumlah = $value['intJumlah'];
-                $dataBarang->muom_id = $value['muom_id'];
+                $dataBarang->satuan = $value['satuan'];
                 $dataBarang->txtKeterangan = $value['txtKeterangan'];
                 $dataBarang->txtInsertedBy = Auth()->user()->txtNama;
                 $dataBarang->txtUpdatedBy = Auth()->user()->txtNama;
@@ -291,7 +294,7 @@ class PurchaseRequestController extends Controller
     {
         $inputs = Input::where('txtNomorPO', $input->txtNomorPO)->get();
         $settingVat = Setting::pluck('intVat')->first();
-
+        $supplier = PurchaseOrder::where('po_number', $input->txtNomorPO)->first();
         $subTotal = 0;
         foreach ($inputs as $total) {
             $subTotal += $total->intSubTotal;
@@ -302,7 +305,8 @@ class PurchaseRequestController extends Controller
                 'inputs' => $inputs,
                 'input' => $input,
                 'subTotal' => $subTotal,
-                'settingVat' => $settingVat
+                'settingVat' => $settingVat,
+                'supplier' => $supplier
             ])->setPaper('a4', 'landscape')->setWarnings(false);
             return $pdf->stream();
         } else {
@@ -374,9 +378,11 @@ class PurchaseRequestController extends Controller
 
     public function edit(Purchase $purchase)
     {
+        $purchase_items = ModelsPurchaseRequest::get();
         return view('back.purchase.edit', [
             'title' => 'Purchase Request',
-            'purchase' => $purchase
+            'purchase' => $purchase,
+            'purchase_items' => $purchase_items
         ]);
     }
 
@@ -406,7 +412,7 @@ class PurchaseRequestController extends Controller
                 $dataBarang->txtItemCode = $value['txtItemCode'];
                 $dataBarang->txtNamaBarang = $value['txtNamaBarang'];
                 $dataBarang->intJumlah = $value['intJumlah'];
-                $dataBarang->muom_id = $value['muom_id'];
+                $dataBarang->satuan = $value['satuan'];
                 $dataBarang->txtKeterangan = $value['txtKeterangan'];
                 $dataBarang->txtUpdatedBy = Auth()->user()->txtNama;
                 $dataBarang->save();
@@ -425,7 +431,7 @@ class PurchaseRequestController extends Controller
                 $dataBarang->txtItemCode = $value['txtItemCode'];
                 $dataBarang->txtNamaBarang = $value['txtNamaBarang'];
                 $dataBarang->intJumlah = $value['intJumlah'];
-                $dataBarang->muom_id = $value['muom_id'];
+                $dataBarang->satuan = $value['satuan'];
                 $dataBarang->txtKeterangan = $value['txtKeterangan'];
                 $dataBarang->txtUpdatedBy = Auth()->user()->txtNama;
                 $dataBarang->save();

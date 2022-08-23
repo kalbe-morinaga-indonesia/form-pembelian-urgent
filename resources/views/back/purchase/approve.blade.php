@@ -87,7 +87,7 @@
                                 <td>{{ $barang->mbarang->txtItemCode }}</td>
                                 <td>{{ $barang->mbarang->txtNamaBarang }}</td>
                                 <td>{{ $barang->mbarang->intJumlah }}</td>
-                                <td>{{ $barang->mbarang->uom->txtUom }}</td>
+                                <td>{{ $barang->mbarang->satuan }}</td>
                                 <td>@currency($barang->intHarga)</td>
                                 <td>{{ $barang->dtmTanggalKedatangan }}</td>
                                 <td>{{ $barang->mbarang->txtKeterangan }}</td>
@@ -124,7 +124,7 @@
                                 <td>{{ $barang->txtItemCode }}</td>
                                 <td>{{ $barang->txtNamaBarang }}</td>
                                 <td>{{ $barang->intJumlah }}</td>
-                                <td>{{ $barang->uom->txtUom }}</td>
+                                <td>{{ $barang->satuan }}</td>
                                 <td>
                                     @if ($barang->txtKeterangan)
                                     {{ $barang->txtKeterangan }}

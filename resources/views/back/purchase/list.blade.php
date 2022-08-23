@@ -53,10 +53,10 @@
                         <ul class="list-group">
                             @forelse ($inputs as $input)
                             <li class="list-group-item d-flex justify-content-between">
-                                <a href="{{route('purchase-requests.show-list-po',['purchase' => $purchase->txtSlug, 'input' => $input->txtNomorPO])}}">
-                                    {{$input->txtNomorPO}}
+                                <a href="{{route('purchase-requests.show-list-po',['purchase' => $purchase->txtSlug, 'input' => $input->id])}}">
+                                    {{str_replace("/","",$input->txtNomorPO)}}
                                 </a>
-                                <a href="{{route('purchase-requests.show-list-po',['purchase' => $purchase->txtSlug, 'input' => $input->txtNomorPO])}}">
+                                <a href="{{route('purchase-requests.show-list-po',['purchase' => $purchase->txtSlug, 'input' => $input->id])}}">
                                     <i class="fas fa-eye"></i>
                                 </a>
                             </li>
@@ -87,7 +87,7 @@
                             @forelse ($inputs as $input)
                             <li class="list-group-item">
                                 <a
-                                    href="{{route('purchase-requests.cetakpo',['purchase' => $purchase->txtSlug, 'input' => $input->txtNomorPO])}}" target="_blank">
+                                    href="{{route('purchase-requests.cetakpo',['purchase' => $purchase->txtSlug, 'input' => $input->id])}}" target="_blank">
                                     {{$input->txtNomorPO}}
                                 </a>
                             </li>

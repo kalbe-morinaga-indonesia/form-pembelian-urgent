@@ -19,7 +19,7 @@ class CreateMbarangsTable extends Migration
             $table->string('txtItemCode');
             $table->string('txtNamaBarang');
             $table->integer('intJumlah');
-            $table->foreignId('muom_id')->constrained()->onDelete('cascade');
+            $table->string('satuan');
             $table->string('txtKeterangan')->nullable();
             $table->string('txtInsertedBy');
             $table->string('txtUpdatedBy');
