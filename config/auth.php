@@ -42,7 +42,7 @@ return [
         // ],
         'web' => [
             'driver' => 'session',
-            'provider' => 'ldap',
+            'provider' => 'users',
         ],
     ],
 
