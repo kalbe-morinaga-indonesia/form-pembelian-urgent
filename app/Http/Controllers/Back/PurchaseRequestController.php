@@ -123,6 +123,7 @@ class PurchaseRequestController extends Controller
             $fileModal->txtSlug = Str::slug($no_dok);
             $fileModal->txtNoDok = $no_dok;
             $fileModal->txtNoPurchaseRequest = $request->txtNoPurchaseRequest;
+            // Tanggal - Bulan - Tahun
             $fileModal->dtmTanggalKebutuhan = $request->dtmTanggalKebutuhan;
             $fileModal->txtFile = json_encode($fileData);
             $fileModal->txtReason = $request->txtReason;

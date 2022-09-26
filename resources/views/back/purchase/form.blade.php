@@ -19,7 +19,7 @@
     <div class="col-md-4">
         <div class="form-group">
             <label for="dtmTanggalKebutuhan">Need By Date</label>
-            <input type="date" name="dtmTanggalKebutuhan" id="dtmTanggalKebutuhan" class="form-control @error('dtmTanggalKebutuhan') is-invalid @enderror" value="{{ old('dtmTanggalKebutuhan') ?? $purchase->dtmTanggalKebutuhan }}">
+            <input type="datetime-local" name="dtmTanggalKebutuhan" id="dtmTanggalKebutuhan" class="form-control @error('dtmTanggalKebutuhan') is-invalid @enderror" value="{{ old('dtmTanggalKebutuhan') ?? $purchase->dtmTanggalKebutuhan }}">
             @error('dtmTanggalKebutuhan')
             <div class="text-danger">{{ $message }}</div>
             @enderror

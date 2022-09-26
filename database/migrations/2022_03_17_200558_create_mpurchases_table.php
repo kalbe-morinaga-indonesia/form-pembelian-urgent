@@ -20,7 +20,7 @@ class CreateMpurchasesTable extends Migration
             $table->string('txtSlug');
             $table->string('txtNoDok');
             $table->string('txtNoPurchaseRequest');
-            $table->date('dtmTanggalKebutuhan');
+            $table->dateTime('dtmTanggalKebutuhan');
             $table->string('txtFile')->nullable();
             $table->string('txtReason');
             $table->integer('total')->default(0);
