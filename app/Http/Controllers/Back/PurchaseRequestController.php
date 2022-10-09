@@ -192,6 +192,7 @@ class PurchaseRequestController extends Controller
                 'intHarga' => $request->intHarga[$key],
                 'intSubTotal' => $request->intSubTotal[$key],
                 'dtmTanggalKedatangan' => $request->dtmTanggalKedatangan,
+                'txtDescription' => $request->txtDescription,
                 'txtInsertedBy' => Auth()->user()->txtNama,
                 'txtUpdatedBy' => Auth()->user()->txtNama
             ]);

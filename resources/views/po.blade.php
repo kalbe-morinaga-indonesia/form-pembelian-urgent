@@ -753,7 +753,7 @@
                 <td>Vendor Contact Name</td>
                 <td colspan="4">: {{$supplier->supplier_contact_name}}</td>
                 <td>Date</td>
-                <td colspan="4">: 10-MAR-22</td>
+                <td colspan="4">: {{ date("d-M-Y", strtotime($purchase->dtmUpdatedBy)) }}</td>
             </tr>
             <tr>
                 <td>Vendor Phone</td>
@@ -802,9 +802,12 @@
                     <p class="font-weight-bold m-0">{{$purchase->mdepartment->txtNamaDept}}</p>
                 </td>
                 <td>
-                    <p class="font-weight-bold m-0">Note : </p>
+                    <p class="font-weight-bold m-0">Note : - {{$purchase->mdepartment->txtNamaDept}}</p>
+                    {{-- <p>{{$input->txtDescription}}</p> --}}
                     <ol>
-                        <li>{{$supplier->note}}</li>
+                        <li>Please mention our PO number in your delivery order and invoice</li>
+                        <li>Delivery Franco our warehouse</li>
+                        <li>Please attached CoA/SDS/MSDS/food grade certificate/JSA for chemical/oil&gases goods/service work or related document support.</li>
                     </ol>
                 </td>
                 <td class="font-weight-bold" width="15%">
