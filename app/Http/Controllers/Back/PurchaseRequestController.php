@@ -262,7 +262,7 @@ class PurchaseRequestController extends Controller
     }
 
     public function showListPo(Purchase $purchase, Input $input){
-        $inputs = Input::where('txtNomorPO',$input->txtNomorPO)->get();
+        $inputs = Input::where('txtNomorPO',$input->txtNomorPO)->where('mpurchase_id',$input->mpurchase_id)->get();
 
         $subTotal = 0;
         foreach($inputs as $total){
@@ -324,7 +324,7 @@ class PurchaseRequestController extends Controller
                     'status' => "approved by pu spv",
                     'txtUpdatedBy' => Auth()->user()->txtNama,
                 ]);
-            } else {
+            } else if($request->submit == "no") {
                 Purchase::where('id', $purchase->id)->update([
                     'status' => "rejected by pu spv",
                     'txtUpdatedBy' => Auth()->user()->txtNama,
@@ -369,7 +369,7 @@ class PurchaseRequestController extends Controller
                 ]);
                 Input::where('txtNomorPO', $input->txtNomorPO)->delete();
                 Purchase::where('id', $purchase->id)->update([
-                    'status' => "rejected by dept head",
+                    'status' => "rejected by pu spv",
                     'txtUpdatedBy' => Auth()->user()->txtNama,
                 ]);
             }
