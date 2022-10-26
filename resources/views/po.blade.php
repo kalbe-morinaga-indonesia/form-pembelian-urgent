@@ -802,7 +802,7 @@
                     <p class="font-weight-bold m-0">{{$purchase->mdepartment->txtNamaDept}}</p>
                 </td>
                 <td>
-                    <p class="font-weight-bold m-0">Note : - {{$purchase->mdepartment->txtNamaDept}}</p>
+                    <p class="font-weight-bold m-0">Note : - {{$input->txtDescription}}</p>
                     {{-- <p>{{$input->txtDescription}}</p> --}}
                     <ol>
                         <li>Please mention our PO number in your delivery order and invoice</li>
